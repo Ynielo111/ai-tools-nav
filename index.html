@@ -271,6 +271,7 @@ var PRICING_CLASS = { "免费":"tag-free", "付费":"tag-paid", "免费增值":"
 var currentView = 'home';
 var currentCategory = null;
 var currentSearch = '';
+var _suppressHash = false;
 
 function init() {
   handleHash();
@@ -278,10 +279,19 @@ function init() {
 }
 
 function handleHash() {
+  if (_suppressHash) { _suppressHash = false; return; }
   var h = window.location.hash;
-  if (h.startsWith('#search=')) { currentSearch = decodeURIComponent(h.slice(8)); document.getElementById('searchInput').value = currentSearch; renderSearchResults(); }
-  else if (DATA.categories.some(function(c) { return '#' + c.id === h; })) { var catId = h.slice(1); currentCategory = catId; renderCategory(catId); }
-  else { currentCategory = null; renderHome(); }
+  if (h.startsWith('#search=')) {
+    currentSearch = decodeURIComponent(h.slice(8));
+    currentCategory = null;
+    renderSearchResults();
+  } else if (DATA.categories.some(function(c) { return '#' + c.id === h; })) {
+    var catId = h.slice(1); currentCategory = catId; currentSearch = '';
+    renderCategory(catId);
+  } else {
+    currentCategory = null; currentSearch = '';
+    renderHome();
+  }
 }
 
 function showHome() { window.location.hash = ''; }
@@ -397,6 +407,7 @@ function renderSearchResults() {
   var q = currentSearch;
   if (!q) { renderHome(); return; }
   updateMeta(null);
+  _suppressHash = true;
   window.location.hash = 'search=' + encodeURIComponent(q);
 
   var filtered = DATA.tools.filter(function(t) {
