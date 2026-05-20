@@ -309,7 +309,8 @@ function adHtml(index) {
 function renderHome() {
   currentView = 'home'; currentCategory = null; currentSearch = '';
   updateMeta(null);
-  document.getElementById('searchInput').value = '';
+  var si = document.getElementById('searchInput');
+  if (si) si.value = '';
   var stats = DATA.tools.length;
   var html = '';
 
@@ -347,7 +348,8 @@ function renderCategory(catId) {
   if (!cat) { renderHome(); return; }
   currentView = 'category'; currentCategory = catId; currentSearch = '';
   updateMeta(cat);
-  document.getElementById('searchInput').value = '';
+  var si = document.getElementById('searchInput');
+  if (si) si.value = '';
 
   var tools = DATA.tools.filter(function(t) { return t.category === catId; }).sort(function(a, b) { return b.rating - a.rating; });
   var top5 = tools.slice(0, 5);
