@@ -275,20 +275,13 @@ var currentSearch = '';
 function init() {
   handleHash();
   window.addEventListener('hashchange', handleHash);
-  document.getElementById('searchInput').addEventListener('input', function(e) {
-    currentSearch = e.target.value.toLowerCase().trim();
-    if (currentSearch) { renderSearchResults(); }
-    else if (currentCategory) { renderCategory(currentCategory); }
-    else { renderHome(); }
-  });
-  if (!window.location.hash || window.location.hash === '#') renderHome();
 }
 
 function handleHash() {
   var h = window.location.hash;
   if (h.startsWith('#search=')) { currentSearch = decodeURIComponent(h.slice(8)); document.getElementById('searchInput').value = currentSearch; renderSearchResults(); }
   else if (DATA.categories.some(function(c) { return '#' + c.id === h; })) { var catId = h.slice(1); currentCategory = catId; renderCategory(catId); }
-  else if (!h) { currentCategory = null; renderHome(); }
+  else { currentCategory = null; renderHome(); }
 }
 
 function showHome() { window.location.hash = ''; }
