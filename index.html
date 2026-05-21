@@ -12,6 +12,20 @@
 <meta property="og:url" content="https://ai-tools-nav-three.vercel.app">
 <link rel="canonical" href="https://ai-tools-nav-three.vercel.app">
 <meta name="robots" content="index, follow">
+<meta name="author" content="AI ToolNav">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "AI ToolNav - AI工具导航",
+  "description": "最全面的AI工具导航与排行榜",
+  "url": "https://ai-tools-nav-three.vercel.app",
+  "hasPart": [
+    {"@type": "WebPage", "name": "文章", "url": "https://ai-tools-nav-three.vercel.app/articles/"},
+    {"@type": "WebPage", "name": "对比", "url": "https://ai-tools-nav-three.vercel.app/compare/"}
+  ]
+}
+</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -118,6 +132,34 @@ body {
 .compare-table tr:last-child td { border-bottom:none; }
 .compare-table .td-name { font-weight:600; color:var(--text-primary); }
 .compare-table .td-review { font-style:italic; font-size:11px; }
+
+/* Sortable headers */
+.sort-btn { cursor:pointer; user-select:none; }
+.sort-btn:hover { opacity:0.8; }
+.expand-row { cursor:pointer; }
+.expand-row:hover .td-name { color:var(--accent-start); }
+.expanded-detail { display:none; }
+.expanded-detail.show { display:table-row; }
+.expanded-detail td { background:#f8fafc; padding:14px 20px; }
+.expanded-detail .exp-review { font-size:13px; color:var(--text-secondary); margin-bottom:8px; }
+.expanded-detail .exp-actions { display:flex; gap:12px; align-items:center; }
+.expanded-detail .exp-link { color:var(--accent-start); font-size:12px; text-decoration:none; }
+.expanded-detail .exp-link:hover { text-decoration:underline; }
+.compare-check { display:flex; align-items:center; gap:4px; font-size:11px; color:var(--text-muted); cursor:pointer; }
+.compare-check input { cursor:pointer; }
+.compare-bar { position:fixed; bottom:0; left:0; right:0; background:#fff; border-top:2px solid var(--accent-start); padding:12px 24px; display:none; justify-content:center; align-items:center; gap:16px; z-index:200; box-shadow:0 -4px 20px rgba(0,0,0,0.1); }
+.compare-bar.show { display:flex; }
+.compare-bar .cb-tools { display:flex; gap:8px; }
+.compare-bar .cb-tag { background:var(--accent-start); color:#fff; padding:4px 12px; border-radius:16px; font-size:12px; }
+.compare-bar .cb-btn { padding:8px 20px; border-radius:20px; background:linear-gradient(135deg,var(--accent-start),var(--accent-end)); color:#fff; border:none; font-size:13px; font-weight:600; cursor:pointer; }
+.compare-bar .cb-btn:disabled { opacity:0.4; cursor:not-allowed; }
+.article-entry { max-width:1200px; margin:0 auto 24px; padding:0 24px; }
+.article-entry-scroll { display:flex; gap:10px; overflow-x:auto; padding-bottom:4px; }
+.article-entry-scroll::-webkit-scrollbar { height:4px; }
+.article-entry-scroll::-webkit-scrollbar-thumb { background:#e2e8f0; border-radius:2px; }
+.article-entry a.ae-card { flex-shrink:0; background:#fff; border:1px solid #e8ecf1; padding:12px 18px; border-radius:12px; text-decoration:none; color:inherit; white-space:nowrap; transition:all 0.2s; }
+.article-entry a.ae-card:hover { border-color:var(--accent-start); box-shadow:var(--shadow-md); }
+.article-entry a.ae-more { flex-shrink:0; background:linear-gradient(135deg,var(--accent-start),var(--accent-end)); color:#fff; padding:12px 18px; border-radius:12px; text-decoration:none; font-size:13px; font-weight:600; white-space:nowrap; }
 
 /* Back button */
 .back-btn { display:inline-flex; align-items:center; gap:4px; color:var(--accent-start); font-size:13px; text-decoration:none; margin-bottom:16px; cursor:pointer; }
@@ -337,7 +379,10 @@ function renderHome() {
   var html = '';
 
   // Hero
-  html += '<section class="hero"><h1>🤖 AI工具导航与排行榜</h1><p>收录 ' + stats + ' 款精选AI工具，提供真实评分、使用点评与横向对比<br>帮你找到最好用的AI工具，提升工作与创作效率</p><div class="hero-stats"><div class="hero-stat"><div class="num">' + stats + '</div><div class="label">精选工具</div></div><div class="hero-stat"><div class="num">8</div><div class="label">分类覆盖</div></div><div class="hero-stat"><div class="num">100%</div><div class="label">人工评测</div></div></div></section>';
+  html += '<section class="hero"><h1>🤖 AI工具导航与排行榜</h1><p>收录 ' + stats + ' 款精选AI工具，提供真实评分、使用点评与横向对比<br>帮你找到最好用的AI工具，提升工作与创作效率</p><div class="hero-stats"><div class="hero-stat"><div class="num">' + stats + '</div><div class="label">精选工具</div></div><div class="hero-stat"><div class="num">8</div><div class="label">分类覆盖</div></div><div class="hero-stat"><div class="num">100%</div><div class="label">人工评测</div></div><div class="hero-stat"><div class="num">50</div><div class="label">深度文章</div></div></div></section>';
+
+      // Article entry
+      html += '<div class="article-entry"><div class="article-entry-scroll"><a href="/articles/" class="ae-more">📝 全部文章</a><a href="/articles/chatgpt-vs-claude-vs-gemini.html" class="ae-card"><span style="font-size:11px;">🔬</span> ChatGPT vs Claude vs Gemini</a><a href="/articles/best-ai-coding-tools.html" class="ae-card"><span style="font-size:11px;">💡</span> 程序员必备AI编程工具</a><a href="/articles/free-ai-tools.html" class="ae-card"><span style="font-size:11px;">💰</span> 完全免费的AI工具有哪些</a><a href="/articles/deepseek-vs-chatgpt.html" class="ae-card"><span style="font-size:11px;">🔬</span> DeepSeek vs ChatGPT</a><a href="/articles/ai-tools-beginner-guide.html" class="ae-card"><span style="font-size:11px;">💡</span> AI工具新手入门指南</a><a href="/articles/best-value-ai-tools.html" class="ae-card"><span style="font-size:11px;">💰</span> 性价比最高的AI工具</a></div></div>'';
 
   // Search
   html += '<div class="search-box"><span class="search-icon">🔍</span><input type="text" id="searchInput" placeholder="搜索 AI 工具、分类、关键词..."></div>';
@@ -360,47 +405,24 @@ function renderHome() {
 
   // Ad
   html += adHtml(0);
-  document.getElementById('mainContent').innerHTML = html;
-  rebindSearch();
-  rebindCategoryLinks();
-}
+  // Comparison Table with sorting
+      var compareSortKey = 'rating', compareSortAsc = false;
+      var currentTools = tools.slice();
+      function sortCompareTable(key) {
+        if (compareSortKey === key) compareSortAsc = !compareSortAsc;
+        else { compareSortKey = key; compareSortAsc = false; }
+        if (key === 'rating') currentTools.sort(function(a,b){ return compareSortAsc ? a.rating-b.rating : b.rating-a.rating; });
+        else if (key === 'price') { var o={'免费':0,'免费增值':1,'付费':2}; currentTools.sort(function(a,b){ return compareSortAsc ? o[a.pricing]-o[b.pricing] : o[b.pricing]-o[a.pricing]; }); }
+        else if (key === 'name') currentTools.sort(function(a,b){ return compareSortAsc ? b.name.localeCompare(a.name,'zh') : a.name.localeCompare(b.name,'zh'); });
+        document.getElementById('compareTbody').innerHTML = renderCompareRows(currentTools);
+      }
+      function renderCompareRows(tl) {
+        return tl.map(function(t, i) {
+          return '<tr class="expand-row" onclick="var d=document.getElementById(\'expRow\'+i);d.classList.toggle(\'show\');" style="cursor:pointer;"><td class="td-name">' + t.icon + ' ' + t.name + '</td><td>' + starHtml(t.rating) + '</td><td>' + pricingTag(t.pricing) + '</td><td>' + t.audience + '</td><td class="td-review">' + t.review + '</td></tr><tr class="expanded-detail" id="expRow'+i+'"><td colspan="5"><div class="exp-review">💡 ' + t.review + '</div><div class="exp-actions"><a href="' + t.url + '" target="_blank" rel="noopener" class="exp-link">访问官网 →</a><label class="compare-check" onclick="event.stopPropagation()"><input type="checkbox" onchange="toggleCompare(\'' + t.id + '\', this.checked)"> 加入对比</label></div></td></tr>';
+        }).join('');
+      }
+      html += '<section class="compare-section"><div class="section-title">📊 ' + cat.name + '横向对比表</div><div class="section-subtitle">点击表头排序，点击行展开详情，勾选工具加入对比</div><div style="overflow-x:auto;"><table class="compare-table"><thead><tr><th>工具 <span class="sort-btn" onclick="sortCompareTable(\'name\')">⇅</span></th><th>评分 <span class="sort-btn" onclick="sortCompareTable(\'rating\')">⇅</span></th><th>价格 <span class="sort-btn" onclick="sortCompareTable(\'price\')">⇅</span></th><th>适合人群</th><th>一句话点评</th></tr></thead><tbody id="compareTbody">' + renderCompareRows(tools) + '</tbody></table></div></section>';
 
-function renderCategory(catId) {
-  var cat = DATA.categories.find(function(c) { return c.id === catId; });
-  if (!cat) { renderHome(); return; }
-  currentView = 'category'; currentCategory = catId; currentSearch = '';
-  updateMeta(cat);
-  var si = document.getElementById('searchInput');
-  if (si) si.value = '';
-
-  var tools = DATA.tools.filter(function(t) { return t.category === catId; }).sort(function(a, b) { return b.rating - a.rating; });
-  var top5 = tools.slice(0, 5);
-
-  var html = '';
-  html += '<a href="/" class="back-btn" onclick="showHome();return false;">← 返回首页</a>';
-
-  // Category info
-  html += '<div class="cat-info"><h2>' + cat.icon + ' ' + cat.name + '工具推荐</h2><p>' + cat.desc + '</p></div>';
-
-  // Search box
-  html += '<div class="search-box"><span class="search-icon">🔍</span><input type="text" id="searchInput" placeholder="在 ' + cat.name + ' 分类中搜索..."></div>';
-
-  // Top 5 Ranking
-  html += '<section><div class="section-title">🏆 ' + cat.name + ' Top 5 排行榜</div><div class="section-subtitle">本分类评分最高的5款工具，按综合评分排序</div><div class="ranking-list">';
-  top5.forEach(function(t, i) {
-    html += '<a href="' + t.url + '" target="_blank" rel="noopener" class="ranking-item"><div class="rank-num">' + (i + 1) + '</div><span class="rank-icon">' + t.icon + '</span><div class="rank-info"><div class="rank-name">' + t.name + '</div><div class="rank-desc">' + t.desc + '</div><div class="rank-review">💬 ' + t.review + '</div><div class="rank-tags">' + pricingTag(t.pricing) + t.tags.map(function(tg) { return '<span class="tag">' + tg + '</span>'; }).join('') + '</div></div><div class="rank-stars">' + starHtml(t.rating) + '</div><div class="rank-audience">适合<br>' + t.audience + '</div></a>';
-  });
-  html += '</div></section>';
-
-  // Ad
-  html += adHtml(0);
-
-  // Comparison Table
-  html += '<section class="compare-section"><div class="section-title">📊 ' + cat.name + '横向对比表</div><div class="section-subtitle">一键对比所有收录的' + cat.name + '，帮你做出最佳选择</div><div style="overflow-x:auto;"><table class="compare-table"><thead><tr><th>工具</th><th>评分</th><th>价格</th><th>适合人群</th><th>一句话点评</th></tr></thead><tbody>';
-  tools.forEach(function(t) {
-    html += '<tr><td class="td-name"><a href="' + t.url + '" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">' + t.icon + ' ' + t.name + '</a></td><td>' + starHtml(t.rating) + '</td><td>' + pricingTag(t.pricing) + '</td><td>' + t.audience + '</td><td class="td-review">' + t.review + '</td></tr>';
-  });
-  html += '</tbody></table></div></section>';
 
   // Remaining tools
   if (tools.length > 5) {
@@ -462,7 +484,71 @@ function rebindCategoryLinks() {
   });
 }
 
+var compareSelected = [];
+
+function toggleCompare(id, checked) {
+  if (checked) {
+    if (compareSelected.length >= 4) { alert('最多选择4个工具进行对比'); return; }
+    compareSelected.push(id);
+  } else {
+    compareSelected = compareSelected.filter(function(x) { return x !== id; });
+  }
+  updateCompareBar();
+}
+function updateCompareBar() {
+  var bar = document.getElementById('compareBar');
+  if (compareSelected.length >= 2) {
+    bar.classList.add('show');
+    var tags = '';
+    compareSelected.forEach(function(id) {
+      var t = DATA.tools.find(function(x) { return x.id === id; });
+      if (t) tags += '<span class="cb-tag">' + t.icon + ' ' + t.name + '</span>';
+    });
+    document.getElementById('cbTools').innerHTML = tags;
+  } else {
+    bar.classList.remove('show');
+  }
+}
+function goCompare() {
+  if (compareSelected.length < 2) return;
+  var sorted = compareSelected.slice().sort();
+  var key = sorted.join(',');
+  var comparePages = {
+    'chatgpt,claude,gemini': '/articles/chatgpt-vs-claude-vs-gemini.html',
+    'chatgpt,claude': '/articles/chatgpt-vs-claude-vs-gemini.html',
+    'deepseek,chatgpt': '/articles/deepseek-vs-chatgpt.html',
+    'kimi,tongyi': '/articles/kimi-vs-tongyi.html',
+    'dalle3,midjourney,stable-diffusion': '/articles/midjourney-vs-dalle-vs-sd.html',
+    'cursor,github-copilot,windsurf': '/articles/github-copilot-vs-cursor-vs-windsurf.html',
+    'pika,runway,sora': '/articles/sora-vs-runway-vs-pika.html',
+    'elevenlabs,suno': '/articles/suno-vs-elevenlabs.html',
+    'beautiful-ai,gamma,tome': '/articles/gamma-vs-beautiful-vs-tome.html',
+    'feishu,microsoft-copilot,notion': '/articles/notion-vs-feishu-vs-copilot.html',
+    'grammarly,jasper,notion-ai': '/articles/jasper-vs-notion-ai-vs-grammarly.html',
+    'claude-code,cursor': '/articles/claude-code-vs-cursor.html',
+    'dify,coze,langchain': '/articles/dify-vs-coze-vs-langchain.html',
+    'heygen,synthesia': '/articles/heygen-vs-synthesia.html',
+    'leonardo,midjourney': '/articles/leonardo-vs-midjourney.html',
+    'canva-ai,remove-bg': '/articles/canva-vs-remove-bg.html',
+    'capcut,descript': '/articles/capcut-vs-descript.html',
+    'huggingface,replicate': '/articles/huggingface-vs-replicate.html',
+  };
+  var page = comparePages[key];
+  if (page) {
+    window.location.href = page;
+  } else {
+    alert('该组合暂无专属对比文章，请浏览 /compare/ 选择工具或查看 /articles/ 了解相关对比。');
+  }
+}
 init();
 </script>
+<div class="compare-bar" id="compareBar">
+  <span style="font-size:13px;color:var(--text-secondary);white-space:nowrap;">已选对比：</span>
+  <div class="cb-tools" id="cbTools"></div>
+  <button class="cb-btn" onclick="goCompare()">开始对比</button>
+</div>
+<footer class="footer" style="border-top:none;">
+  <p style="font-size:11px;color:var(--text-muted);"><a href="/articles/" style="color:var(--accent-start);text-decoration:none;">📝 全部文章</a> · <a href="/compare/" style="color:var(--accent-start);text-decoration:none;">🔬 工具对比</a> · <a href="/sitemap.xml" style="color:var(--accent-start);text-decoration:none;">站点地图</a></p>
+</footer>
 </body>
 </html>

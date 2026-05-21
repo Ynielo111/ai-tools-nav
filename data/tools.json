@@ -1,0 +1,494 @@
+{
+  "categories": [
+    { "id": "llm", "name": "大语言模型", "icon": "🤖" },
+    { "id": "image", "name": "AI 绘画", "icon": "🎨" },
+    { "id": "code", "name": "AI 编程", "icon": "💻" },
+    { "id": "video", "name": "AI 视频", "icon": "🎬" },
+    { "id": "writing", "name": "AI 写作", "icon": "✍️" },
+    { "id": "audio", "name": "AI 音频", "icon": "🎵" },
+    { "id": "office", "name": "AI 办公", "icon": "📊" },
+    { "id": "platform", "name": "开发平台", "icon": "🔧" }
+  ],
+  "tools": [
+    {
+      "id": "chatgpt", "name": "ChatGPT", "icon": "🤖", "category": "llm",
+      "desc": "OpenAI旗舰对话助手，支持GPT-4o多模态交互，全球用户量最大的AI工具",
+      "url": "https://chat.openai.com",
+      "tags": ["对话","写作","编程","推理"],
+      "rating": 5, "review": "综合能力最强的AI助手，生态最完善",
+      "audience": "所有人", "pricing": "免费增值",
+      "pros": ["生态最完善", "多模态能力强", "插件丰富", "品牌认知度高"],
+      "cons": ["免费版功能受限", "高峰时段排队", "中国用户需特殊网络"]
+    },
+    {
+      "id": "claude", "name": "Claude", "icon": "💬", "category": "llm",
+      "desc": "Anthropic出品，安全优先的智能助手，超长上下文和代码理解能力突出",
+      "url": "https://claude.ai",
+      "tags": ["推理","编程","长文本","安全"],
+      "rating": 5, "review": "编程和长文档分析能力一流，Artifacts功能实用",
+      "audience": "专业人士", "pricing": "免费增值",
+      "pros": ["长上下文200K", "编程能力强", "安全护栏好", "Artifacts交互"],
+      "cons": ["部分地区不可用", "免费版有次数限制", "多模态不如GPT-4o"]
+    },
+    {
+      "id": "gemini", "name": "Gemini", "icon": "🧠", "category": "llm",
+      "desc": "Google多模态大模型，深度整合Google搜索、Gmail、地图等生态",
+      "url": "https://gemini.google.com",
+      "tags": ["多模态","搜索","翻译","Google"],
+      "rating": 4, "review": "Google生态整合是独特优势，多模态能力出色",
+      "audience": "所有人", "pricing": "免费增值",
+      "pros": ["Google生态整合", "多模态原生支持", "搜索能力强"],
+      "cons": ["部分国家不可用", "中文不如国产模型", "API价格偏高"]
+    },
+    {
+      "id": "deepseek", "name": "DeepSeek", "icon": "🐋", "category": "llm",
+      "desc": "国产高性能开源大模型，推理能力接近GPT-4，API价格仅为OpenAI的1/10",
+      "url": "https://chat.deepseek.com",
+      "tags": ["开源","编程","推理","性价比"],
+      "rating": 5, "review": "性价比之王，编程和推理能力接近国际一线",
+      "audience": "所有人", "pricing": "免费增值",
+      "pros": ["性价比极高", "推理能力强", "开源可部署", "中文优秀"],
+      "cons": ["多模态较弱", "生态不如OpenAI", "服务偶有波动"]
+    },
+    {
+      "id": "kimi", "name": "Kimi", "icon": "🌙", "category": "llm",
+      "desc": "月之暗面出品，支持200万字超长上下文，适合论文阅读和长文档分析",
+      "url": "https://kimi.moonshot.cn",
+      "tags": ["长文本","阅读","总结","中文"],
+      "rating": 4, "review": "长文本处理能力业界最强，论文党的好帮手",
+      "audience": "专业人士", "pricing": "免费增值",
+      "pros": ["200万字超长上下文", "论文阅读神器", "中文理解好"],
+      "cons": ["通用对话不如ChatGPT", "国际知名度低", "功能相对单一"]
+    },
+    {
+      "id": "tongyi", "name": "通义千问", "icon": "☁️", "category": "llm",
+      "desc": "阿里云自研大模型，电商运营与中文办公场景表现突出",
+      "url": "https://tongyi.aliyun.com",
+      "tags": ["中文","办公","阿里生态","免费"],
+      "rating": 4, "review": "国内免费大模型中功能最全面的选择",
+      "audience": "所有人", "pricing": "免费",
+      "pros": ["完全免费", "阿里生态整合", "中文办公能力强"],
+      "cons": ["国际竞争力弱", "创意能力一般", "品牌辨识度低"]
+    },
+    {
+      "id": "midjourney", "name": "Midjourney", "icon": "🎨", "category": "image",
+      "desc": "顶级AI图像生成工具，艺术风格最丰富，设计社区活跃",
+      "url": "https://www.midjourney.com",
+      "tags": ["艺术","设计","高质感","创意"],
+      "rating": 5, "review": "出图质量天花板，艺术风格无人能及",
+      "audience": "专业人士", "pricing": "付费",
+      "pros": ["艺术质量最高", "风格控制精细", "社区活跃"],
+      "cons": ["需Discord使用", "学习曲线陡峭", "价格较高"]
+    },
+    {
+      "id": "dalle3", "name": "DALL·E 3", "icon": "🖼️", "category": "image",
+      "desc": "OpenAI图像生成，与ChatGPT原生集成，文字理解准确度高",
+      "url": "https://openai.com/dall-e-3",
+      "tags": ["对话生成","写实","易用","ChatGPT"],
+      "rating": 4, "review": "与ChatGPT联动是最大亮点，提示词理解最准",
+      "audience": "所有人", "pricing": "付费",
+      "pros": ["文字理解准确", "ChatGPT集成", "使用简单"],
+      "cons": ["风格不如MJ丰富", "分辨率有限", "需ChatGPT订阅"]
+    },
+    {
+      "id": "stable-diffusion", "name": "Stable Diffusion", "icon": "🌄", "category": "image",
+      "desc": "开源AI绘画模型，支持本地部署和自定义模型训练",
+      "url": "https://stability.ai",
+      "tags": ["开源","本地部署","可定制","免费"],
+      "rating": 4, "review": "自由度最高，技术党首选，社区模型生态丰富",
+      "audience": "专业人士", "pricing": "免费",
+      "pros": ["完全开源免费", "可本地部署", "模型可定制", "无审查"],
+      "cons": ["需要技术基础", "需要好显卡", "上手门槛高"]
+    },
+    {
+      "id": "leonardo", "name": "Leonardo.AI", "icon": "🎮", "category": "image",
+      "desc": "专注游戏资产的AI图像生成，预设风格模板丰富",
+      "url": "https://leonardo.ai",
+      "tags": ["游戏","资产","风格","批量"],
+      "rating": 4, "review": "游戏和影视概念设计的最佳选择",
+      "audience": "专业人士", "pricing": "免费增值",
+      "pros": ["游戏资产专业", "风格模板丰富", "批量生成"],
+      "cons": ["通用性不如MJ", "社区较小", "高级功能付费"]
+    },
+    {
+      "id": "canva-ai", "name": "Canva AI", "icon": "🎯", "category": "image",
+      "desc": "Canva内置AI设计套件，模板海量，零设计基础也能用",
+      "url": "https://www.canva.com",
+      "tags": ["设计","模板","营销","易用"],
+      "rating": 4, "review": "非设计师最友好的AI设计工具，模板即用",
+      "audience": "初学者", "pricing": "免费增值",
+      "pros": ["操作极简", "模板海量", "一站式设计"],
+      "cons": ["AI功能有限", "原创性受限", "高级版需付费"]
+    },
+    {
+      "id": "remove-bg", "name": "Remove.bg", "icon": "✂️", "category": "image",
+      "desc": "AI一键抠图去背景，速度快精度高，支持批量处理",
+      "url": "https://www.remove.bg",
+      "tags": ["抠图","背景","电商","快速"],
+      "rating": 4, "review": "抠图领域的事实标准，又快又准",
+      "audience": "所有人", "pricing": "免费增值",
+      "pros": ["抠图精准", "速度极快", "API可用"],
+      "cons": ["功能单一", "高分辨率付费", "批量有限制"]
+    },
+    {
+      "id": "github-copilot", "name": "GitHub Copilot", "icon": "🐙", "category": "code",
+      "desc": "GitHub出品，深度集成VS Code和JetBrains，代码补全的行业标杆",
+      "url": "https://github.com/features/copilot",
+      "tags": ["补全","IDE","微软","企业"],
+      "rating": 5, "review": "IDE集成的天花板，代码补全准确率最高",
+      "audience": "专业人士", "pricing": "付费",
+      "pros": ["IDE集成最深", "补全准确率高", "企业级支持"],
+      "cons": ["需付费", "仅限IDE内", "对话功能不如Cursor"]
+    },
+    {
+      "id": "cursor", "name": "Cursor", "icon": "🖱️", "category": "code",
+      "desc": "AI原生代码编辑器，基于VS Code但加入了对话式编程体验",
+      "url": "https://cursor.sh",
+      "tags": ["编辑器","对话","重构","全文件"],
+      "rating": 5, "review": "目前最好用的AI IDE，多文件编辑能力一骑绝尘",
+      "audience": "专业人士", "pricing": "免费增值",
+      "pros": ["多文件编辑", "对话式编程", "基于VS Code"],
+      "cons": ["免费版有限制", "闭源", "偶尔不稳定"]
+    },
+    {
+      "id": "windsurf", "name": "Windsurf", "icon": "🌊", "category": "code",
+      "desc": "Codeium出品的免费AI IDE，支持多文件编辑和Agent模式",
+      "url": "https://codeium.com/windsurf",
+      "tags": ["免费","多文件","Agent","快速"],
+      "rating": 4, "review": "免费替代Cursor的最佳选择，功能接近",
+      "audience": "所有人", "pricing": "免费",
+      "pros": ["完全免费", "功能接近Cursor", "Agent模式"],
+      "cons": ["品牌较新", "社区较小", "插件生态弱"]
+    },
+    {
+      "id": "claude-code", "name": "Claude Code", "icon": "⌨️", "category": "code",
+      "desc": "Anthropic终端AI编程代理，命令行直接操控整个代码库",
+      "url": "https://claude.ai/code",
+      "tags": ["终端","Agent","自动化","CLI"],
+      "rating": 5, "review": "终端编程Agent最强选手，复杂重构一把好手",
+      "audience": "专业人士", "pricing": "付费",
+      "pros": ["终端原生", "全仓库操作", "自主决策强"],
+      "cons": ["需CLI使用", "按量付费", "学习曲线"]
+    },
+    {
+      "id": "v0", "name": "v0.dev", "icon": "🔼", "category": "code",
+      "desc": "Vercel出品AI前端生成工具，截图/描述即可生成React组件",
+      "url": "https://v0.dev",
+      "tags": ["前端","UI","React","快速"],
+      "rating": 4, "review": "前端原型速度最快的工具，截图转代码很实用",
+      "audience": "所有人", "pricing": "免费增值",
+      "pros": ["前端生成快", "截图转代码", "Vercel生态"],
+      "cons": ["仅限前端", "生成代码需审查", "功能较窄"]
+    },
+    {
+      "id": "bolt", "name": "Bolt.new", "icon": "⚡", "category": "code",
+      "desc": "浏览器内全栈AI开发，写描述即可生成完整Web应用并一键部署",
+      "url": "https://bolt.new",
+      "tags": ["全栈","即时","Web","零配置"],
+      "rating": 4, "review": "产品原型验证的最佳工具，全栈开发零门槛",
+      "audience": "初学者", "pricing": "免费增值",
+      "pros": ["全栈开发", "零配置", "一键部署"],
+      "cons": ["复杂项目受限", "性能一般", "生成代码质量中等"]
+    },
+    {
+      "id": "sora", "name": "Sora", "icon": "🎬", "category": "video",
+      "desc": "OpenAI文本/图片转视频模型，画质和物理一致性领先",
+      "url": "https://openai.com/sora",
+      "tags": ["文生视频","高画质","创意"],
+      "rating": 5, "review": "视频生成的技术天花板，物理世界理解最强",
+      "audience": "专业人士", "pricing": "付费",
+      "pros": ["画质最好", "物理一致性高", "品牌可信"],
+      "cons": ["价格高", "可用性不稳", "时长有限"]
+    },
+    {
+      "id": "runway", "name": "Runway", "icon": "🎥", "category": "video",
+      "desc": "专业级AI视频编辑与生成平台，影视行业广泛使用",
+      "url": "https://runwayml.com",
+      "tags": ["编辑","特效","专业","影视"],
+      "rating": 4, "review": "影视专业人士的AI工具箱，功能最全面",
+      "audience": "专业人士", "pricing": "付费",
+      "pros": ["功能最全面", "影视级质量", "持续更新"],
+      "cons": ["学习曲线陡", "价格较高", "部分功能不稳定"]
+    },
+    {
+      "id": "pika", "name": "Pika", "icon": "🦊", "category": "video",
+      "desc": "轻量AI视频生成工具，界面简洁操作容易上手",
+      "url": "https://pika.art",
+      "tags": ["简单","快速","创意","入门"],
+      "rating": 4, "review": "最易上手的AI视频工具，适合快速创意验证",
+      "audience": "初学者", "pricing": "免费增值",
+      "pros": ["极易上手", "创意模板多", "免费额度够用"],
+      "cons": ["画质不如Sora", "时长较短", "功能较基础"]
+    },
+    {
+      "id": "heygen", "name": "HeyGen", "icon": "👤", "category": "video",
+      "desc": "AI数字人视频生成平台，口型同步自然，支持多语言",
+      "url": "https://www.heygen.com",
+      "tags": ["数字人","口播","营销","多语言"],
+      "rating": 4, "review": "数字人播报效果最自然的平台",
+      "audience": "企业", "pricing": "付费",
+      "pros": ["数字人自然", "多语言支持", "企业级品质"],
+      "cons": ["价格高", "定制需额外付费", "免费版水印"]
+    },
+    {
+      "id": "capcut", "name": "CapCut", "icon": "✂️", "category": "video",
+      "desc": "字节跳动旗下AI视频剪辑工具，AI字幕和模板功能强大",
+      "url": "https://www.capcut.com",
+      "tags": ["剪辑","字幕","模板","免费"],
+      "rating": 4, "review": "短视频创作者必备，AI字幕准确率极高",
+      "audience": "所有人", "pricing": "免费",
+      "pros": ["完全免费", "AI字幕准确", "模板丰富"],
+      "cons": ["专业功能弱", "字节数据隐私顾虑", "国际版差异"]
+    },
+    {
+      "id": "synthesia", "name": "Synthesia", "icon": "🎙️", "category": "video",
+      "desc": "企业级AI虚拟主播视频平台，支持140+语言和头像定制",
+      "url": "https://www.synthesia.io",
+      "tags": ["虚拟人","企业","多语言","培训"],
+      "rating": 4, "review": "企业培训视频的最佳方案，省去拍摄成本",
+      "audience": "企业", "pricing": "付费",
+      "pros": ["140+语言", "企业合规", "头像定制"],
+      "cons": ["价格昂贵", "创意受限", "不适合创意视频"]
+    },
+    {
+      "id": "jasper", "name": "Jasper", "icon": "✍️", "category": "writing",
+      "desc": "老牌AI营销文案平台，品牌声音定制和SEO优化功能成熟",
+      "url": "https://www.jasper.ai",
+      "tags": ["营销","文案","品牌","SEO"],
+      "rating": 4, "review": "营销团队的AI写作主力，品牌调性保持最好",
+      "audience": "企业", "pricing": "付费",
+      "pros": ["品牌声音定制", "SEO优化好", "营销模板多"],
+      "cons": ["价格较高", "中文支持弱", "个人用户偏贵"]
+    },
+    {
+      "id": "notion-ai", "name": "Notion AI", "icon": "📋", "category": "writing",
+      "desc": "Notion内置AI写作助手，与知识库深度整合",
+      "url": "https://www.notion.so/product/ai",
+      "tags": ["笔记","知识库","协作","全能"],
+      "rating": 4, "review": "笔记+AI的完美结合，工作流最自然",
+      "audience": "所有人", "pricing": "付费",
+      "pros": ["工作流自然", "知识库融合", "团队协作"],
+      "cons": ["AI需额外付费", "写作能力中等", "依赖Notion生态"]
+    },
+    {
+      "id": "grammarly", "name": "Grammarly", "icon": "✅", "category": "writing",
+      "desc": "全球最流行的AI英语语法纠正与润色工具，浏览器/桌面全覆盖",
+      "url": "https://www.grammarly.com",
+      "tags": ["语法","润色","英语","全平台"],
+      "rating": 5, "review": "英语写作刚需工具，几乎没有替代品",
+      "audience": "所有人", "pricing": "免费增值",
+      "pros": ["语法检查最准", "全平台覆盖", "浏览器插件方便"],
+      "cons": ["仅限英语", "高级版贵", "隐私顾虑"]
+    },
+    {
+      "id": "perplexity", "name": "Perplexity", "icon": "🔎", "category": "writing",
+      "desc": "AI搜索引擎+写作助手，自动引用来源适合学术和研究",
+      "url": "https://www.perplexity.ai",
+      "tags": ["搜索","引用","研究","实时"],
+      "rating": 4, "review": "AI搜索+写作的混合体，研究利器",
+      "audience": "专业人士", "pricing": "免费增值",
+      "pros": ["自动引用来源", "实时搜索", "学术友好"],
+      "cons": ["写作功能有限", "中文搜索弱", "Pro版贵"]
+    },
+    {
+      "id": "quillbot", "name": "QuillBot", "icon": "🔄", "category": "writing",
+      "desc": "专业AI改写润色工具，支持多种改写模式和摘要生成",
+      "url": "https://quillbot.com",
+      "tags": ["改写","摘要","学术","多模式"],
+      "rating": 4, "review": "学术论文改写的最佳工具，降重效果好",
+      "audience": "专业人士", "pricing": "免费增值",
+      "pros": ["改写质量高", "降重效果好", "多种模式"],
+      "cons": ["仅限英语", "高级版贵", "摘要功能一般"]
+    },
+    {
+      "id": "hunyuan-writing", "name": "腾讯混元写作", "icon": "🐧", "category": "writing",
+      "desc": "腾讯AI写作助手，中文场景优化，办公文档和翻译出色",
+      "url": "https://hunyuan.tencent.com",
+      "tags": ["中文","办公","翻译","免费"],
+      "rating": 3, "review": "国内免费中文写作工具的稳健选择",
+      "audience": "所有人", "pricing": "免费",
+      "pros": ["免费使用", "腾讯生态", "中文优化"],
+      "cons": ["功能较基础", "创意能力弱", "知名度低"]
+    },
+    {
+      "id": "suno", "name": "Suno", "icon": "🎵", "category": "audio",
+      "desc": "AI音乐生成器，输入歌词和风格即可一键生成完整歌曲",
+      "url": "https://suno.ai",
+      "tags": ["音乐","作曲","歌词","创作"],
+      "rating": 5, "review": "AI音乐生成的现象级产品，作曲质量惊人",
+      "audience": "所有人", "pricing": "免费增值",
+      "pros": ["作曲质量高", "操作极简", "风格多样"],
+      "cons": ["商用授权复杂", "免费版有限制", "中文歌质量一般"]
+    },
+    {
+      "id": "elevenlabs", "name": "ElevenLabs", "icon": "🗣️", "category": "audio",
+      "desc": "顶级AI语音合成与声音克隆平台，29种语言支持",
+      "url": "https://elevenlabs.io",
+      "tags": ["语音","克隆","多语言","自然"],
+      "rating": 5, "review": "语音合成的天花板，声音克隆效果以假乱真",
+      "audience": "专业人士", "pricing": "免费增值",
+      "pros": ["声音最自然", "克隆逼真", "29种语言"],
+      "cons": ["免费额度少", "伦理风险", "中文优化一般"]
+    },
+    {
+      "id": "murf", "name": "Murf", "icon": "🎤", "category": "audio",
+      "desc": "专业AI配音旁白工具，适合课程录制和有声内容制作",
+      "url": "https://murf.ai",
+      "tags": ["配音","旁白","课程","专业"],
+      "rating": 4, "review": "课程和视频配音的专业工具，音色库丰富",
+      "audience": "专业人士", "pricing": "付费",
+      "pros": ["音色库丰富", "专业配音品质", "课程制作好用"],
+      "cons": ["需付费", "中文音色少", "定制化有限"]
+    },
+    {
+      "id": "descript", "name": "Descript", "icon": "📝", "category": "audio",
+      "desc": "像编辑文档一样编辑音频/视频，AI转录和去口癖功能实用",
+      "url": "https://www.descript.com",
+      "tags": ["编辑","转录","播客","AI"],
+      "rating": 4, "review": "播客创作者的秘密武器，编辑效率提升10倍",
+      "audience": "专业人士", "pricing": "付费",
+      "pros": ["编辑方式革命性", "转录准确", "播客神器"],
+      "cons": ["价格较高", "学习曲线", "中文转录弱"]
+    },
+    {
+      "id": "audiobox", "name": "Audiobox", "icon": "📻", "category": "audio",
+      "desc": "Meta出品的AI音效与语音生成研究项目，音效生成能力强",
+      "url": "https://audiobox.metademolab.com",
+      "tags": ["音效","语音","Meta","免费"],
+      "rating": 3, "review": "音效生成的免费好工具，Meta出品质量有保证",
+      "audience": "所有人", "pricing": "免费",
+      "pros": ["完全免费", "Meta出品", "音效创新"],
+      "cons": ["研究项目不稳定", "功能有限", "商业化不明"]
+    },
+    {
+      "id": "jianying-audio", "name": "剪映音频", "icon": "🎧", "category": "audio",
+      "desc": "字节跳动AI配音与音频编辑，中文配音效果自然",
+      "url": "https://www.capcut.com",
+      "tags": ["配音","剪辑","中文","免费"],
+      "rating": 4, "review": "国内短视频创作者最常用的配音工具",
+      "audience": "所有人", "pricing": "免费",
+      "pros": ["中文配音自然", "完全免费", "与剪映集成"],
+      "cons": ["功能较基础", "音色选择少", "仅限中文"]
+    },
+    {
+      "id": "gamma", "name": "Gamma", "icon": "📊", "category": "office",
+      "desc": "AI演示文稿与文档一键生成，设计感强，效率远超PPT",
+      "url": "https://gamma.app",
+      "tags": ["PPT","文档","演示","设计"],
+      "rating": 5, "review": "做演示文稿效率最高的AI工具，设计无需手动调整",
+      "audience": "所有人", "pricing": "免费增值",
+      "pros": ["一键生成", "设计精美", "效率极高"],
+      "cons": ["定制化有限", "中文支持一般", "高级功能付费"]
+    },
+    {
+      "id": "microsoft-copilot", "name": "Microsoft Copilot", "icon": "🪟", "category": "office",
+      "desc": "Office全家桶内置AI助手，Word/Excel/PPT/Outlook全覆盖",
+      "url": "https://copilot.microsoft.com",
+      "tags": ["Office","办公","集成","企业"],
+      "rating": 4, "review": "Office用户的最佳选择，无缝集成生态",
+      "audience": "企业", "pricing": "付费",
+      "pros": ["Office深度集成", "企业级安全", "功能全面"],
+      "cons": ["需Microsoft 365订阅", "价格较高", "仅限Office生态"]
+    },
+    {
+      "id": "notion", "name": "Notion", "icon": "📋", "category": "office",
+      "desc": "AI增强的知识管理与团队协作平台，灵活度极高",
+      "url": "https://www.notion.so",
+      "tags": ["协作","知识库","AI","灵活"],
+      "rating": 5, "review": "知识管理领域无可争议的第一名",
+      "audience": "所有人", "pricing": "免费增值",
+      "pros": ["灵活度极高", "团队协作好", "AI功能集成"],
+      "cons": ["学习曲线", "搜索功能弱", "离线支持差"]
+    },
+    {
+      "id": "beautiful-ai", "name": "Beautiful.ai", "icon": "✨", "category": "office",
+      "desc": "AI智能排版演示文稿，自动调整设计布局",
+      "url": "https://www.beautiful.ai",
+      "tags": ["排版","智能","企业","设计"],
+      "rating": 4, "review": "追求设计感的商业PPT首选，排版自动优化",
+      "audience": "企业", "pricing": "付费",
+      "pros": ["自动排版精美", "品牌模板", "协作功能"],
+      "cons": ["模板数量有限", "导出受限", "价格中高"]
+    },
+    {
+      "id": "tome", "name": "Tome", "icon": "📖", "category": "office",
+      "desc": "AI驱动叙事型演示文稿，适合讲故事和产品演示",
+      "url": "https://tome.app",
+      "tags": ["故事","演示","产品","交互"],
+      "rating": 4, "review": "产品演示和故事讲述的最佳PPT替代品",
+      "audience": "所有人", "pricing": "免费增值",
+      "pros": ["叙事性强", "交互式体验", "产品演示佳"],
+      "cons": ["不适合数据报告", "中文支持弱", "免费版受限"]
+    },
+    {
+      "id": "feishu", "name": "飞书智能伙伴", "icon": "🐦", "category": "office",
+      "desc": "飞书内置AI办公助手，覆盖会议纪要、文档协作、数据分析",
+      "url": "https://www.feishu.cn",
+      "tags": ["协作","会议","文档","中文"],
+      "rating": 4, "review": "国内团队协作AI功能的集大成者",
+      "audience": "企业", "pricing": "免费增值",
+      "pros": ["国内协作最强", "AI会议纪要好", "中文优化"],
+      "cons": ["仅限飞书生态", "国际版差异", "企业绑定"]
+    },
+    {
+      "id": "huggingface", "name": "Hugging Face", "icon": "🤗", "category": "platform",
+      "desc": "全球最大AI模型社区，数十万开源模型和数据集",
+      "url": "https://huggingface.co",
+      "tags": ["模型","开源","社区","数据"],
+      "rating": 5, "review": "AI开发者的GitHub，模型和数据集的首选平台",
+      "audience": "专业人士", "pricing": "免费增值",
+      "pros": ["模型最全", "社区活跃", "免费基础使用"],
+      "cons": ["需要技术背景", "企业版贵", "国内访问慢"]
+    },
+    {
+      "id": "replicate", "name": "Replicate", "icon": "🔄", "category": "platform",
+      "desc": "云端AI模型托管与API服务，一键部署开源模型",
+      "url": "https://replicate.com",
+      "tags": ["API","部署","模型","云端"],
+      "rating": 4, "review": "开源模型部署到云的最快方式",
+      "audience": "专业人士", "pricing": "付费",
+      "pros": ["一键部署", "按量付费", "模型丰富"],
+      "cons": ["冷启动慢", "费用累积快", "不如自建便宜"]
+    },
+    {
+      "id": "dify", "name": "Dify", "icon": "🔧", "category": "platform",
+      "desc": "开源LLMOps平台，可视化搭建AI应用，支持RAG和Agent",
+      "url": "https://dify.ai",
+      "tags": ["开源","编排","可视化","RAG"],
+      "rating": 5, "review": "搭建AI应用最友好的开源平台，功能全面",
+      "audience": "专业人士", "pricing": "免费增值",
+      "pros": ["开源免费", "可视化编排", "RAG内置"],
+      "cons": ["需自行部署", "社区尚小", "文档不完善"]
+    },
+    {
+      "id": "coze", "name": "Coze", "icon": "🤖", "category": "platform",
+      "desc": "字节跳动AI Bot搭建平台，零代码创建智能机器人",
+      "url": "https://www.coze.com",
+      "tags": ["零代码","Bot","插件","字节"],
+      "rating": 4, "review": "零基础搭建AI Bot的最佳选择，插件生态丰富",
+      "audience": "初学者", "pricing": "免费",
+      "pros": ["零代码", "插件丰富", "免费使用"],
+      "cons": ["定制化有限", "字节生态绑定", "高级场景受限"]
+    },
+    {
+      "id": "langchain", "name": "LangChain", "icon": "🦜", "category": "platform",
+      "desc": "最流行的LLM应用开发框架，链式调用和Agent开发标准",
+      "url": "https://www.langchain.com",
+      "tags": ["框架","开发","链式","标准"],
+      "rating": 4, "review": "LLM开发的事实标准框架，生态最成熟",
+      "audience": "专业人士", "pricing": "免费",
+      "pros": ["生态最成熟", "文档丰富", "社区庞大"],
+      "cons": ["学习曲线陡", "版本变化快", "过度抽象"]
+    },
+    {
+      "id": "pinecone", "name": "Pinecone", "icon": "🌲", "category": "platform",
+      "desc": "企业级AI向量数据库，为RAG应用提供高性能向量检索",
+      "url": "https://www.pinecone.io",
+      "tags": ["向量","检索","RAG","企业"],
+      "rating": 4, "review": "向量数据库的行业标杆，性能和稳定性最佳",
+      "audience": "企业", "pricing": "付费",
+      "pros": ["性能最佳", "企业级稳定", "Serverless"],
+      "cons": ["价格较高", "仅限向量存储", "免费版受限"]
+    }
+  ]
+}
