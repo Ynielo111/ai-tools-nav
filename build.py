@@ -162,11 +162,11 @@ def build_article_index(articles, tools_map):
     for a in articles:
         cards += (
             f'<a href="/articles/{a["id"]}.html" class="article-card" data-type="{a["type"]}" '
-            f'style="display:block;background:var(--card-bg);border:1px solid var(--card-border);'
-            f'border-radius:var(--radius);padding:18px 20px;text-decoration:none;color:inherit;'
-            f'transition:all 0.2s;margin-bottom:8px;">'
-            f'<span class="article-type type-{a["type"]}" style="margin-bottom:8px;">{type_label(a["type"])}</span>'
-            f'<div style="font-size:15px;font-weight:600;color:#1e293b;margin:6px 0 4px;">{a["title"]}</div>'
+            f'style="display:block;background:#fff;border:1px solid #e8ecf1;'
+            f'border-radius:14px;padding:22px 24px;text-decoration:none;color:#1e293b;'
+            f'transition:all 0.2s;margin-bottom:16px;">'
+            f'<span class="article-type type-{a["type"]}" style="margin-bottom:10px;">{type_label(a["type"])}</span>'
+            f'<div style="font-size:16px;font-weight:600;color:#1e293b;margin:8px 0 6px;line-height:1.4;">{a["title"]}</div>'
             f'<div style="font-size:12px;color:#94a3b8;">{a.get("reading_time","")} · {a.get("published","")}</div>'
             f'</a>'
         )
