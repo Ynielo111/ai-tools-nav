@@ -202,10 +202,10 @@ body {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hel
 .main {{ max-width:800px; margin:0 auto; padding:24px; }}
 .page-title {{ font-size:28px; font-weight:800; margin-bottom:8px; }}
 .page-desc {{ font-size:13px; color:var(--text-muted); margin-bottom:24px; }}
-.type-comparison {{ background:#ede9fe; color:#6d28d9; }}
+.type-comparison {{ background:#ede9fe; color:#5b21b6; }}
 .type-recommendation {{ background:#dbeafe; color:#1e40af; }}
 .type-pricing {{ background:#fef3c7; color:#92400e; }}
-.article-type {{ display:inline-block; padding:2px 10px; border-radius:12px; font-size:11px; font-weight:600; }}
+.article-type {{ display:inline-block; padding:4px 14px; border-radius:20px; font-size:12px; font-weight:600; }}
 .footer {{ text-align:center; padding:32px 24px; border-top:1px solid var(--card-border); margin-top:40px; }}
 .footer p {{ font-size:11px; color:var(--text-muted); }}
 .article-card:hover {{ transform:translateY(-1px); box-shadow:var(--shadow-md); border-color:var(--accent-start) !important; }}
