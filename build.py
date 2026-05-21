@@ -161,13 +161,10 @@ def build_article_index(articles, tools_map):
     cards = ''
     for a in articles:
         cards += (
-            f'<a href="/articles/{a["id"]}.html" class="article-card" data-type="{a["type"]}" '
-            f'style="display:block;background:#fff;border:1px solid #e8ecf1;'
-            f'border-radius:14px;padding:22px 24px;text-decoration:none;color:#1e293b;'
-            f'transition:all 0.2s;margin-bottom:16px;">'
-            f'<span class="article-type type-{a["type"]}" style="margin-bottom:10px;">{type_label(a["type"])}</span>'
-            f'<div style="font-size:16px;font-weight:600;color:#1e293b;margin:8px 0 6px;line-height:1.4;">{a["title"]}</div>'
-            f'<div style="font-size:12px;color:#94a3b8;">{a.get("reading_time","")} · {a.get("published","")}</div>'
+            f'<a href="/articles/{a["id"]}.html" class="article-card" data-type="{a["type"]}">'
+            f'<span class="article-badge type-{a["type"]}">{type_label(a["type"])}</span>'
+            f'<div class="article-title">{a["title"]}</div>'
+            f'<div class="article-meta">{a.get("reading_time","")} &middot; {a.get("published","")}</div>'
             f'</a>'
         )
 
@@ -208,7 +205,12 @@ body {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hel
 .article-type {{ display:inline-block; padding:4px 14px; border-radius:20px; font-size:12px; font-weight:600; }}
 .footer {{ text-align:center; padding:32px 24px; border-top:1px solid var(--card-border); margin-top:40px; }}
 .footer p {{ font-size:11px; color:var(--text-muted); }}
-.article-card:hover {{ transform:translateY(-1px); box-shadow:var(--shadow-md); border-color:var(--accent-start) !important; }}
+.article-card {{ display:block; background:#fff; border:1px solid #e8ecf1; border-radius:14px; padding:22px 24px; text-decoration:none; color:#1e293b; transition:all 0.2s; margin-bottom:16px; }}
+.article-card:hover {{ transform:translateY(-1px); box-shadow:0 4px 16px rgba(0,0,0,0.06); border-color:#6366f1; }}
+.article-badge {{ display:inline-block; padding:4px 14px; border-radius:20px; font-size:12px; font-weight:600; margin-bottom:10px; }}
+.article-title {{ font-size:16px; font-weight:600; color:#1e293b; margin:8px 0 6px; line-height:1.4; }}
+.article-meta {{ font-size:12px; color:#94a3b8; }}
+
 </style>
 </head>
 <body>
