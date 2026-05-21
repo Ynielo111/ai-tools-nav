@@ -3,7 +3,7 @@ Allow: /
 Allow: /articles/
 Allow: /compare/
 
-Sitemap: https://ai-tools-nav-three.vercel.app/sitemap.xml
+Sitemap: https://aitnav.com/sitemap.xml
 
 Disallow: /data/
 Disallow: /template/

@@ -3,7 +3,7 @@
 import json, os
 
 BASE = os.path.dirname(os.path.abspath(__file__))
-DOMAIN = "https://ai-tools-nav-three.vercel.app"
+DOMAIN = "https://aitnav.com"
 
 def load_json(path):
     with open(os.path.join(BASE, path), 'r', encoding='utf-8') as f:
