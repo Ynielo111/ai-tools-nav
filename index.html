@@ -405,23 +405,12 @@ function renderHome() {
 
   // Ad
   html += adHtml(0);
-  // Comparison Table with sorting
-      var compareSortKey = 'rating', compareSortAsc = false;
-      var currentTools = tools.slice();
-      function sortCompareTable(key) {
-        if (compareSortKey === key) compareSortAsc = !compareSortAsc;
-        else { compareSortKey = key; compareSortAsc = false; }
-        if (key === 'rating') currentTools.sort(function(a,b){ return compareSortAsc ? a.rating-b.rating : b.rating-a.rating; });
-        else if (key === 'price') { var o={'免费':0,'免费增值':1,'付费':2}; currentTools.sort(function(a,b){ return compareSortAsc ? o[a.pricing]-o[b.pricing] : o[b.pricing]-o[a.pricing]; }); }
-        else if (key === 'name') currentTools.sort(function(a,b){ return compareSortAsc ? b.name.localeCompare(a.name,'zh') : a.name.localeCompare(b.name,'zh'); });
-        document.getElementById('compareTbody').innerHTML = renderCompareRows(currentTools);
-      }
-      function renderCompareRows(tl) {
-        return tl.map(function(t, i) {
-          return '<tr class="expand-row" onclick="var d=document.getElementById(\'expRow\'+i);d.classList.toggle(\'show\');" style="cursor:pointer;"><td class="td-name">' + t.icon + ' ' + t.name + '</td><td>' + starHtml(t.rating) + '</td><td>' + pricingTag(t.pricing) + '</td><td>' + t.audience + '</td><td class="td-review">' + t.review + '</td></tr><tr class="expanded-detail" id="expRow'+i+'"><td colspan="5"><div class="exp-review">💡 ' + t.review + '</div><div class="exp-actions"><a href="' + t.url + '" target="_blank" rel="noopener" class="exp-link">访问官网 →</a><label class="compare-check" onclick="event.stopPropagation()"><input type="checkbox" onchange="toggleCompare(\'' + t.id + '\', this.checked)"> 加入对比</label></div></td></tr>';
-        }).join('');
-      }
-      html += '<section class="compare-section"><div class="section-title">📊 ' + cat.name + '横向对比表</div><div class="section-subtitle">点击表头排序，点击行展开详情，勾选工具加入对比</div><div style="overflow-x:auto;"><table class="compare-table"><thead><tr><th>工具 <span class="sort-btn" onclick="sortCompareTable(\'name\')">⇅</span></th><th>评分 <span class="sort-btn" onclick="sortCompareTable(\'rating\')">⇅</span></th><th>价格 <span class="sort-btn" onclick="sortCompareTable(\'price\')">⇅</span></th><th>适合人群</th><th>一句话点评</th></tr></thead><tbody id="compareTbody">' + renderCompareRows(tools) + '</tbody></table></div></section>';
+  // Comparison Table (simple version)
+      html += '<section class="compare-section"><div class="section-title">📊 ' + cat.name + '横向对比表</div><div class="section-subtitle">一键对比所有收录的' + cat.name + '，帮你做出最佳选择</div><div style="overflow-x:auto;"><table class="compare-table"><thead><tr><th>工具</th><th>评分</th><th>价格</th><th>适合人群</th><th>一句话点评</th></tr></thead><tbody>';
+      tools.forEach(function(t) {
+        html += '<tr><td class="td-name"><a href="' + t.url + '" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">' + t.icon + ' ' + t.name + '</a></td><td>' + starHtml(t.rating) + '</td><td>' + pricingTag(t.pricing) + '</td><td>' + t.audience + '</td><td class="td-review">' + t.review + '</td></tr>';
+      });
+      html += '</tbody></table></div></section>';
 
 
   // Remaining tools
