@@ -177,6 +177,7 @@ def build_article_index(articles, tools_map):
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 <meta name="google-site-verification" content="VpHmBjp4J_z2x-rAtb7swV1jeCyoCpOuCQbC9Yfrkgw" />
+<link rel="icon" type="image/svg+xml" href="/logo.svg">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6233913596766498" crossorigin="anonymous"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NQTV1YBBLK"></script>
 <script>
@@ -270,6 +271,7 @@ def build_compare_page(tools_data):
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 <meta name="google-site-verification" content="VpHmBjp4J_z2x-rAtb7swV1jeCyoCpOuCQbC9Yfrkgw" />
+<link rel="icon" type="image/svg+xml" href="/logo.svg">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6233913596766498" crossorigin="anonymous"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NQTV1YBBLK"></script>
 <script>
