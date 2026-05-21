@@ -226,14 +226,14 @@ body {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hel
   <div class="article-list" style="max-width:800px;margin:0 auto;">{cards}</div>
 </main>
 <footer class="footer">
-  <p>&copy; 2026 AI ToolNav · 收录最新AI工具 · 全部文章共50篇</p>
+  <p>&copy; 2026 AI ToolNav &middot; <a href="/privacy.html" style="color:var(--accent-start);text-decoration:none;">隐私政策</a> &middot; <a href="/about.html" style="color:var(--accent-start);text-decoration:none;">关于我们</a></p>
 </footer>
 </body>
 </html>'''
     return html
 
 def build_sitemap(articles):
-    urls = [f'{DOMAIN}/', f'{DOMAIN}/articles/', f'{DOMAIN}/compare/']
+    urls = [f'{DOMAIN}/', f'{DOMAIN}/articles/', f'{DOMAIN}/compare/', f'{DOMAIN}/privacy.html', f'{DOMAIN}/about.html']
     for a in articles:
         urls.append(f'{DOMAIN}/articles/{a["id"]}.html')
     xml = '<?xml version="1.0" encoding="UTF-8"?>\n'
@@ -334,7 +334,7 @@ body {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hel
   <div id="toolSections"></div>
 </main>
 <footer class="footer">
-  <p>&copy; 2026 AI ToolNav · 48款AI工具 · 助你做出最佳选择</p>
+  <p>&copy; 2026 AI ToolNav &middot; <a href="/privacy.html" style="color:var(--accent-start);text-decoration:none;">隐私政策</a> &middot; <a href="/about.html" style="color:var(--accent-start);text-decoration:none;">关于我们</a></p>
 </footer>
 
 <script>

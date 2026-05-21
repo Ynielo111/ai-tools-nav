@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Allow: /articles/
+Allow: /compare/
+
+Sitemap: https://ai-tools-nav-three.vercel.app/sitemap.xml
+
+Disallow: /data/
+Disallow: /template/
