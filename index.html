@@ -41,38 +41,49 @@
 </script>
 <style>
 :root {
-  --bg: #f8fafc;
-  --card-bg: #ffffff;
-  --card-border: #e8ecf1;
-  --text-primary: #1e293b;
-  --text-secondary: #64748b;
-  --text-muted: #94a3b8;
-  --accent-start: #6366f1;
-  --accent-end: #8b5cf6;
-  --tag-bg: #f1f5f9;
-  --ad-bg-start: #fef3c7;
-  --ad-bg-end: #fde68a;
-  --ad-border: #f59e0b;
-  --star-color: #f59e0b;
-  --green: #10b981;
-  --red: #ef4444;
+  --bg: #0a0a1a;
+  --card-bg: rgba(255,255,255,0.06);
+  --card-border: rgba(255,255,255,0.10);
+  --text-primary: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --accent-start: #818cf8;
+  --accent-end: #a78bfa;
+  --glow-1: rgba(168,85,247,0.30);
+  --glow-2: rgba(59,130,246,0.25);
+  --glow-3: rgba(6,182,212,0.20);
+  --tag-bg: rgba(255,255,255,0.08);
+  --ad-bg-start: rgba(251,191,36,0.15);
+  --ad-bg-end: rgba(245,158,11,0.10);
+  --ad-border: rgba(251,191,36,0.3);
+  --star-color: #fbbf24;
+  --green: #34d399;
+  --red: #f87171;
   --radius: 14px;
-  --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
-  --shadow-md: 0 4px 16px rgba(0,0,0,0.06);
-  --shadow-lg: 0 8px 30px rgba(0,0,0,0.08);
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.2);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.3);
+  --shadow-lg: 0 8px 30px rgba(0,0,0,0.4);
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
   background: var(--bg); color: var(--text-primary); line-height: 1.6; min-height: 100vh;
+  position:relative; z-index:0;
 }
-.header { background:#fff; border-bottom:1px solid var(--card-border); position:sticky; top:0; z-index:100; }
+body::before { content:''; position:fixed; inset:0; z-index:0; pointer-events:none;
+  background:radial-gradient(circle at 20% 40%, var(--glow-1) 0%, transparent 50%),
+            radial-gradient(circle at 70% 15%, var(--glow-2) 0%, transparent 50%),
+            radial-gradient(circle at 85% 80%, var(--glow-3) 0%, transparent 50%);
+  filter:blur(60px); animation:meshDrift 16s ease-in-out infinite alternate; }
+@media (prefers-reduced-motion:reduce) { body::before { animation:none; } }
+@keyframes meshDrift { 0% { transform:translate(0,0) scale(1); } 50% { opacity:0.8; } 100% { transform:translate(-3%,2%) scale(1.08); } }
+.header { background:rgba(10,10,26,0.85); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); border-bottom:1px solid var(--card-border); position:sticky; top:0; z-index:100; }
 .header-inner { max-width:1200px; margin:0 auto; padding:0 24px; height:56px; display:flex; align-items:center; justify-content:space-between; }
 .logo { font-size:20px; font-weight:700; color:var(--text-primary); text-decoration:none; }
 .nav { display:flex; gap:20px; }
 .nav a { font-size:13px; color:var(--text-secondary); text-decoration:none; transition:color 0.2s; }
 .nav a:hover { color:var(--accent-start); }
-.main { max-width:1200px; margin:0 auto; padding:24px; }
+.main { max-width:1200px; margin:0 auto; padding:24px; position:relative; z-index:1; }
 
 /* Hero */
 .hero { text-align:center; padding:40px 20px 32px; }
@@ -84,8 +95,8 @@ body {
 .hero-stat .label { font-size:11px; color:var(--text-muted); }
 
 /* Search */
-.search-box { display:flex; align-items:center; background:#fff; border:1px solid #e2e8f0; border-radius:14px; padding:0 20px; box-shadow:var(--shadow-md); max-width:640px; margin:0 auto 24px; transition:box-shadow 0.2s; }
-.search-box:focus-within { box-shadow:0 4px 20px rgba(99,102,241,0.15); border-color:#c7d2fe; }
+.search-box { display:flex; align-items:center; background:var(--card-bg); border:1px solid var(--card-border); border-radius:14px; padding:0 20px; box-shadow:var(--shadow-md); max-width:640px; margin:0 auto 24px; transition:box-shadow 0.2s; backdrop-filter:blur(8px); }
+.search-box:focus-within { box-shadow:0 4px 20px rgba(129,140,248,0.15); border-color:var(--accent-start); }
 .search-icon { font-size:16px; margin-right:10px; flex-shrink:0; }
 #searchInput { flex:1; border:none; outline:none; padding:14px 0; font-size:14px; background:transparent; color:var(--text-primary); }
 #searchInput::placeholder { color:var(--text-muted); }
@@ -117,9 +128,9 @@ body {
 .rank-review { font-size:11px; color:var(--text-secondary); margin-top:2px; font-style:italic; }
 .rank-tags { display:flex; gap:4px; margin-top:4px; flex-wrap:wrap; }
 .rank-tags .tag { background:var(--tag-bg); padding:2px 8px; border-radius:4px; font-size:10px; color:var(--text-secondary); }
-.tag-free { background:#d1fae5!important; color:#065f46!important; }
-.tag-paid { background:#fee2e2!important; color:#991b1b!important; }
-.tag-freemium { background:#dbeafe!important; color:#1e40af!important; }
+.tag-free { background:rgba(52,211,153,0.2)!important; color:#34d399!important; }
+.tag-paid { background:rgba(248,113,113,0.2)!important; color:#fca5a5!important; }
+.tag-freemium { background:rgba(96,165,250,0.2)!important; color:#93c5fd!important; }
 .rank-stars { color:var(--star-color); font-size:13px; flex-shrink:0; letter-spacing:1px; }
 .rank-audience { font-size:10px; color:var(--text-muted); flex-shrink:0; text-align:right; line-height:1.3; }
 
@@ -143,7 +154,7 @@ body {
 .ad-banner a { color:inherit; text-decoration:none; display:block; }
 
 /* Category info */
-.cat-info { background:linear-gradient(135deg,#eef2ff,#faf5ff); border-radius:var(--radius); padding:20px 24px; margin-bottom:24px; }
+.cat-info { background:rgba(129,140,248,0.08); border-radius:var(--radius); padding:20px 24px; margin-bottom:24px; border:1px solid var(--card-border); backdrop-filter:blur(8px); }
 .cat-info h2 { font-size:22px; font-weight:700; margin-bottom:6px; }
 .cat-info p { font-size:13px; color:var(--text-secondary); line-height:1.6; }
 
@@ -155,7 +166,7 @@ body {
 
 /* Card Grid (fallback for search results) */
 .card-grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:12px; margin-bottom:40px; }
-.tool-card { background:#fff; border:1px solid var(--card-border); border-radius:var(--radius); padding:18px; box-shadow:var(--shadow-sm); cursor:pointer; transition:transform 0.2s, box-shadow 0.2s; display:block; text-decoration:none; color:inherit; }
+.tool-card { background:var(--card-bg); border:1px solid var(--card-border); border-radius:var(--radius); padding:18px; box-shadow:var(--shadow-sm); cursor:pointer; transition:transform 0.2s, box-shadow 0.2s, border-color 0.2s; display:block; text-decoration:none; color:inherit; backdrop-filter:blur(8px); }
 .tool-card:hover { transform:translateY(-2px); box-shadow:var(--shadow-lg); }
 .tool-card .icon { font-size:28px; margin-bottom:8px; display:block; }
 .tool-card .name { font-size:14px; font-weight:600; color:var(--text-primary); margin-bottom:4px; }
@@ -354,7 +365,7 @@ function renderHome() {
   html += '<section class="hero"><h1>🤖 AI工具导航与排行榜</h1><p>收录 ' + stats + ' 款精选AI工具，提供真实评分、使用点评与横向对比<br>帮你找到最好用的AI工具，提升工作与创作效率</p><div class="hero-stats"><div class="hero-stat"><div class="num">' + stats + '</div><div class="label">精选工具</div></div><div class="hero-stat"><div class="num">8</div><div class="label">分类覆盖</div></div><div class="hero-stat"><div class="num">100%</div><div class="label">人工评测</div></div><div class="hero-stat"><div class="num">50</div><div class="label">深度文章</div></div></div></section>';
 
   // Search
-  html += '<div style="max-width:1200px;margin:0 auto 24px;padding:0 24px;"><div style="display:flex;gap:10px;overflow-x:auto;"><a href="/articles/" style="flex-shrink:0;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;padding:12px 18px;border-radius:12px;text-decoration:none;font-size:13px;font-weight:600;white-space:nowrap;">全部文章</a><a href="/articles/chatgpt-vs-claude-vs-gemini.html" style="flex-shrink:0;background:#fff;border:1px solid #e8ecf1;padding:12px 18px;border-radius:12px;text-decoration:none;color:#1e293b;white-space:nowrap;font-size:13px;">ChatGPT vs Claude</a><a href="/articles/best-ai-coding-tools.html" style="flex-shrink:0;background:#fff;border:1px solid #e8ecf1;padding:12px 18px;border-radius:12px;text-decoration:none;color:#1e293b;white-space:nowrap;font-size:13px;">AI编程工具</a><a href="/articles/deepseek-vs-chatgpt.html" style="flex-shrink:0;background:#fff;border:1px solid #e8ecf1;padding:12px 18px;border-radius:12px;text-decoration:none;color:#1e293b;white-space:nowrap;font-size:13px;">DeepSeek vs ChatGPT</a></div></div>';
+  html += '<div style="max-width:1200px;margin:0 auto 24px;padding:0 24px;"><div style="display:flex;gap:10px;overflow-x:auto;"><a href="/articles/" style="flex-shrink:0;background:linear-gradient(135deg,var(--accent-start),var(--accent-end));color:#fff;padding:12px 18px;border-radius:12px;text-decoration:none;font-size:13px;font-weight:600;white-space:nowrap;">全部文章</a><a href="/articles/chatgpt-vs-claude-vs-gemini.html" style="flex-shrink:0;background:var(--card-bg);border:1px solid var(--card-border);backdrop-filter:blur(8px);padding:12px 18px;border-radius:12px;text-decoration:none;color:var(--text-primary);white-space:nowrap;font-size:13px;">ChatGPT vs Claude</a><a href="/articles/best-ai-coding-tools.html" style="flex-shrink:0;background:var(--card-bg);border:1px solid var(--card-border);backdrop-filter:blur(8px);padding:12px 18px;border-radius:12px;text-decoration:none;color:var(--text-primary);white-space:nowrap;font-size:13px;">AI编程工具</a><a href="/articles/deepseek-vs-chatgpt.html" style="flex-shrink:0;background:var(--card-bg);border:1px solid var(--card-border);backdrop-filter:blur(8px);padding:12px 18px;border-radius:12px;text-decoration:none;color:var(--text-primary);white-space:nowrap;font-size:13px;">DeepSeek vs ChatGPT</a></div></div>';
 
       html += '<div class="search-box"><span class="search-icon">🔍</span><input type="text" id="searchInput" placeholder="搜索 AI 工具、分类、关键词..."></div>';
 

@@ -20,21 +20,29 @@
 <link rel="icon" type="image/svg+xml" href="/logo.svg">
 <link rel="canonical" href="https://aitnav.com/terms.html">
 <style>
-:root { --bg: #f8fafc; --card-bg: #ffffff; --card-border: #e8ecf1; --text-primary: #1e293b; --text-secondary: #64748b; --text-muted: #94a3b8; --accent-start: #6366f1; --accent-end: #8b5cf6; --radius: 14px; }
+:root {
+  --bg: #0a0a1a; --card-bg: rgba(255,255,255,0.06); --card-border: rgba(255,255,255,0.10);
+  --text-primary: #e2e8f0; --text-secondary: #94a3b8; --text-muted: #64748b;
+  --accent-start: #818cf8; --accent-end: #a78bfa;
+  --glow-1: rgba(168,85,247,0.30); --glow-2: rgba(59,130,246,0.25); --glow-3: rgba(6,182,212,0.20);
+  --radius: 14px;
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif; background: var(--bg); color: var(--text-primary); line-height: 1.8; }
-.header { background:#fff; border-bottom:1px solid var(--card-border); position:sticky; top:0; z-index:100; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif; background: var(--bg); color: var(--text-primary); position:relative; z-index:0; line-height: 1.8; }body::before { content:''; position:fixed; inset:0; z-index:0; pointer-events:none; background:radial-gradient(circle at 20% 40%, var(--glow-1) 0%, transparent 50%), radial-gradient(circle at 70% 15%, var(--glow-2) 0%, transparent 50%), radial-gradient(circle at 85% 80%, var(--glow-3) 0%, transparent 50%); filter:blur(60px); animation:meshDrift 16s ease-in-out infinite alternate; }
+@media (prefers-reduced-motion:reduce) { body::before { animation:none; } }
+@keyframes meshDrift { 0% { transform:translate(0,0) scale(1); } 50% { opacity:0.8; } 100% { transform:translate(-3%,2%) scale(1.08); } }
+
+.header { background:rgba(10,10,26,0.85); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); border-bottom:1px solid var(--card-border); position:sticky; top:0; z-index:100; }
 .header-inner { max-width:1200px; margin:0 auto; padding:0 24px; height:56px; display:flex; align-items:center; justify-content:space-between; }
 .logo { font-size:20px; font-weight:700; color:var(--text-primary); text-decoration:none; }
 .nav { display:flex; gap:20px; }
 .nav a { font-size:13px; color:var(--text-secondary); text-decoration:none; }
 .nav a:hover { color:var(--accent-start); }
-.main { max-width:800px; margin:0 auto; padding:32px 24px; }
+.main { position:relative; z-index:1; max-width:800px; margin:0 auto; padding:32px 24px; }
 h1 { font-size:28px; font-weight:800; margin-bottom:24px; }
 h2 { font-size:20px; font-weight:700; margin:28px 0 12px; }
 p, li { font-size:14px; color:var(--text-secondary); margin-bottom:8px; }
 ul { padding-left:24px; margin-bottom:12px; }
-.footer { text-align:center; padding:32px 24px; border-top:1px solid var(--card-border); }
+.footer { position:relative; z-index:1; text-align:center; padding:32px 24px; border-top:1px solid var(--card-border); }
 .footer p { font-size:11px; color:var(--text-muted); }
 .footer a { color:var(--accent-start); text-decoration:none; }
 </style>
