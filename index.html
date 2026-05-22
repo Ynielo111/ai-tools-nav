@@ -13,6 +13,7 @@
   gtag('config', 'G-NQTV1YBBLK');
 </script>
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 <title>AI ToolNav — AI工具导航 | AI工具排行 | 最好用的AI工具推荐 2026</title>
@@ -490,6 +491,75 @@ function rebindCategoryLinks() {
 }
 
 init();
+</script>
+<script>
+(function(){
+  var container = document.createElement('div');
+  container.id = 'shader-bg';
+  container.style.cssText = 'position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;';
+  // Insert right after body open
+  document.body.insertBefore(container, document.body.firstChild);
+
+  var camera = new THREE.Camera();
+  camera.position.z = 1;
+
+  var scene = new THREE.Scene();
+  var geometry = new THREE.PlaneGeometry(2, 2);
+
+  var uniforms = {
+    time: { value: 1.0 },
+    resolution: { value: new THREE.Vector2() }
+  };
+
+  var material = new THREE.ShaderMaterial({
+    uniforms: uniforms,
+    vertexShader: 'void main(){gl_Position=vec4(position,1.0);}',
+    fragmentShader: [
+      '#define TWO_PI 6.2831853072',
+      '#define PI 3.14159265359',
+      'precision highp float;',
+      'uniform vec2 resolution;',
+      'uniform float time;',
+      'void main(void){',
+      '  vec2 uv=(gl_FragCoord.xy*2.0-resolution.xy)/min(resolution.x,resolution.y);',
+      '  float t=time*0.05;',
+      '  float lw=0.002;',
+      '  vec3 color=vec3(0.0);',
+      '  for(int j=0;j<3;j++){',
+      '    for(int i=0;i<5;i++){',
+      '      color[j]+=lw*float(i*i)/abs(fract(t-0.01*float(j)+float(i)*0.01)*5.0-length(uv)+mod(uv.x+uv.y,0.2));',
+      '    }',
+      '  }',
+      '  gl_FragColor=vec4(color[0],color[1],color[2],1.0);',
+      '}'
+    ].join('\n')
+  });
+
+  var mesh = new THREE.Mesh(geometry, material);
+  scene.add(mesh);
+
+  var renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  container.appendChild(renderer.domElement);
+
+  function resize(){
+    var w = container.clientWidth;
+    var h = container.clientHeight;
+    renderer.setSize(w, h);
+    uniforms.resolution.value.x = renderer.domElement.width;
+    uniforms.resolution.value.y = renderer.domElement.height;
+  }
+
+  resize();
+  window.addEventListener('resize', resize);
+
+  function animate(){
+    requestAnimationFrame(animate);
+    uniforms.time.value += 0.05;
+    renderer.render(scene, camera);
+  }
+  animate();
+})();
 </script>
 </body>
 </html>
