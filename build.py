@@ -146,7 +146,7 @@ def build_article_index(articles, tools_map):
     .af-btn.active { background:linear-gradient(135deg,var(--accent-start),var(--accent-end)); color:#fff; border-color:transparent; }
     </style>
     <script>
-    (function(){
+    document.addEventListener('DOMContentLoaded', function(){
       const cards = document.querySelectorAll('.article-card');
       const counts = { all: cards.length };
       cards.forEach(c => { const t = c.dataset.type; counts[t] = (counts[t]||0)+1; });
@@ -162,7 +162,7 @@ def build_article_index(articles, tools_map):
           });
         });
       });
-    })();
+    });
     </script>'''
 
     cards = ''
