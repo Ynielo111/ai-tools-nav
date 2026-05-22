@@ -133,18 +133,12 @@ def render_article(article, tools_map, articles_map):
 
 def build_article_index(articles, tools_map):
     """Generate articles/index.html — article listing page"""
-    # Compute actual counts
-    total = len(articles)
-    comp_count = sum(1 for a in articles if a['type'] == 'comparison')
-    rec_count = sum(1 for a in articles if a['type'] == 'recommendation')
-    price_count = sum(1 for a in articles if a['type'] == 'pricing')
-
     type_filter_js = '''
     <div class="article-filter" style="max-width:800px;margin:0 auto 24px;display:flex;gap:8px;flex-wrap:wrap;">
-      <button class="af-btn active" data-type="all">全部 (__TOTAL__)</button>
-      <button class="af-btn" data-type="comparison">横向对比 (__COMP__)</button>
-      <button class="af-btn" data-type="recommendation">场景推荐 (__REC__)</button>
-      <button class="af-btn" data-type="pricing">价格指南 (__PRICE__)</button>
+      <button class="af-btn active" data-type="all">全部</button>
+      <button class="af-btn" data-type="comparison">横向对比</button>
+      <button class="af-btn" data-type="recommendation">场景推荐</button>
+      <button class="af-btn" data-type="pricing">价格指南</button>
     </div>
     <style>
     .af-btn { padding:6px 14px; border-radius:20px; font-size:12px; border:1px solid #e2e8f0; background:#fff; color:#64748b; cursor:pointer; transition:all 0.2s; }
@@ -152,17 +146,24 @@ def build_article_index(articles, tools_map):
     .af-btn.active { background:linear-gradient(135deg,#6366f1,#8b5cf6); color:#fff; border-color:transparent; }
     </style>
     <script>
-    document.querySelectorAll('.af-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.af-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
+    (function(){
+      const cards = document.querySelectorAll('.article-card');
+      const counts = { all: cards.length };
+      cards.forEach(c => { const t = c.dataset.type; counts[t] = (counts[t]||0)+1; });
+      document.querySelectorAll('.af-btn').forEach(btn => {
         const t = btn.dataset.type;
-        document.querySelectorAll('.article-card').forEach(card => {
-          card.style.display = (t==='all' || card.dataset.type===t) ? '' : 'none';
+        const n = counts[t]||0;
+        btn.textContent += ' (' + n + ')';
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.af-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          document.querySelectorAll('.article-card').forEach(card => {
+            card.style.display = (t==='all' || card.dataset.type===t) ? '' : 'none';
+          });
         });
       });
-    });
-    </script>'''.replace('__TOTAL__', str(total)).replace('__COMP__', str(comp_count)).replace('__REC__', str(rec_count)).replace('__PRICE__', str(price_count))
+    })();
+    </script>'''
 
     cards = ''
     for a in articles:
