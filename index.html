@@ -200,10 +200,12 @@ body::before { content:''; position:fixed; inset:0; z-index:0; pointer-events:no
 #splash h1 {
   font-size:clamp(40px, 10vw, 80px); font-weight:600; color:#fff;
   letter-spacing:-2px; margin:0; line-height:1;
+  position:relative; z-index:10; pointer-events:none;
 }
 #splash .hint {
   position:absolute; bottom:32px; font-size:12px; color:rgba(255,255,255,0.3);
   animation:hintBounce 2s ease-in-out infinite; letter-spacing:1px;
+  z-index:10; pointer-events:none;
 }
 @keyframes hintBounce {
   0%,100% { transform:translateY(0); opacity:0.3; }
@@ -389,7 +391,7 @@ function renderHome() {
   var html = '';
 
   // Hero
-  html += '<section class="hero"><h1>🤖 AI工具导航与排行榜</h1><p>收录 ' + stats + ' 款精选AI工具，提供真实评分、使用点评与横向对比<br>帮你找到最好用的AI工具，提升工作与创作效率</p><div class="hero-stats"><div class="hero-stat"><div class="num">' + stats + '</div><div class="label">精选工具</div></div><div class="hero-stat"><div class="num">8</div><div class="label">分类覆盖</div></div><div class="hero-stat"><div class="num">100%</div><div class="label">人工评测</div></div><div class="hero-stat"><div class="num">50</div><div class="label">深度文章</div></div></div></section>';
+  html += '<section class="hero"><h1>🤖 AI工具导航与排行榜</h1><p>收录 ' + stats + ' 款精选AI工具，提供真实评分、使用点评与横向对比<br>帮你找到最好用的AI工具，提升工作与创作效率</p><div class="hero-stats"><div class="hero-stat"><div class="num">' + stats + '</div><div class="label">精选工具</div></div><div class="hero-stat"><div class="num">8</div><div class="label">分类覆盖</div></div><div class="hero-stat"><div class="num">100%</div><div class="label">人工评测</div></div><div class="hero-stat"><div class="num">' + ARTICLES.length + '</div><div class="label">深度文章</div></div></div></section>';
 
   // Search
   html += // Dynamic article quick links
