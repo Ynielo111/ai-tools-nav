@@ -532,14 +532,8 @@ init();
 // Splash screen click-to-enter
 (function(){
   var splash = document.getElementById('splash');
-  // Skip splash if already visited this session
-  if (sessionStorage.getItem('splash_done')) {
-    splash.classList.add('hide');
-    return;
-  }
   splash.addEventListener('click', function(){
     splash.classList.add('hide');
-    sessionStorage.setItem('splash_done', '1');
   });
 })();
 </script>
