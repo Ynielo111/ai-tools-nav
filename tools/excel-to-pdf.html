@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Excel 转 PDF — AI ToolNav</title>
+<meta name="description" content="免费在线Excel转PDF工具，上传.xlsx文件即可在浏览器中预览并导出为PDF，文件不上传服务器，安全快捷。">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<style>
+:root{--bg:#0a0a1a;--card-bg:rgba(255,255,255,0.06);--card-border:rgba(255,255,255,0.10);--text-primary:#e2e8f0;--text-secondary:#94a3b8;--text-muted:#64748b;--accent-start:#818cf8;--accent-end:#a78bfa;--radius:14px;--shadow-md:0 4px 16px rgba(0,0,0,0.3);--shadow-lg:0 8px 30px rgba(0,0,0,0.4);--green:#34d399;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans SC",sans-serif;background:var(--bg);color:var(--text-primary);line-height:1.6;min-height:100vh;position:relative;z-index:0;}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(circle at 20% 40%,rgba(168,85,247,0.30) 0%,transparent 50%),radial-gradient(circle at 70% 15%,rgba(59,130,246,0.25) 0%,transparent 50%),radial-gradient(circle at 85% 80%,rgba(6,182,212,0.20) 0%,transparent 50%);filter:blur(60px);}
+.header{background:rgba(10,10,26,0.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--card-border);position:sticky;top:0;z-index:100;}
+.header-inner{max-width:1000px;margin:0 auto;padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-size:20px;font-weight:700;color:var(--text-primary);text-decoration:none;}
+.nav{display:flex;gap:20px;}
+.nav a{font-size:13px;color:var(--text-secondary);text-decoration:none;transition:color 0.2s;}
+.nav a:hover{color:var(--accent-start);}
+.main{max-width:800px;margin:0 auto;padding:32px 24px;position:relative;z-index:1;}
+.back-btn{display:inline-flex;align-items:center;gap:4px;color:var(--accent-start);font-size:13px;text-decoration:none;margin-bottom:20px;}
+.back-btn:hover{text-decoration:underline;}
+
+.tool-header{text-align:center;margin-bottom:28px;}
+.tool-header .tool-icon{font-size:48px;margin-bottom:8px;}
+.tool-header h1{font-size:26px;font-weight:800;color:var(--text-primary);margin-bottom:4px;}
+.tool-header p{font-size:13px;color:var(--text-muted);}
+
+.upload-zone{background:var(--card-bg);border:2px dashed var(--card-border);border-radius:16px;padding:60px 20px;text-align:center;cursor:pointer;transition:all 0.2s;margin-bottom:20px;}
+.upload-zone:hover,.upload-zone.drag-over{border-color:var(--accent-start);background:rgba(129,140,248,0.06);}
+.upload-zone .uz-icon{font-size:48px;margin-bottom:12px;}
+.upload-zone .uz-text{font-size:15px;color:var(--text-primary);margin-bottom:4px;font-weight:600;}
+.upload-zone .uz-hint{font-size:12px;color:var(--text-muted);}
+.upload-zone input[type=file]{display:none;}
+
+.status-bar{display:none;background:var(--card-bg);border:1px solid var(--card-border);border-radius:12px;padding:14px 20px;margin-bottom:20px;align-items:center;gap:10px;}
+.status-bar.show{display:flex;}
+.status-bar .sb-icon{font-size:20px;}
+.status-bar .sb-text{flex:1;font-size:13px;color:var(--text-secondary);}
+.status-bar.success{border-color:var(--green);background:rgba(52,211,153,0.08);}
+
+.sheet-tabs{display:none;gap:4px;flex-wrap:wrap;margin-bottom:12px;}
+.sheet-tabs.show{display:flex;}
+.sheet-tab{padding:6px 14px;background:var(--card-bg);border:1px solid var(--card-border);border-radius:8px;font-size:12px;color:var(--text-secondary);cursor:pointer;transition:all 0.2s;}
+.sheet-tab.active{background:linear-gradient(135deg,var(--accent-start),var(--accent-end));color:#fff;border-color:transparent;}
+
+.preview-section{display:none;margin-bottom:20px;}
+.preview-section.show{display:block;}
+.preview-section h2{font-size:16px;font-weight:600;margin-bottom:12px;}
+.table-wrapper{overflow-x:auto;max-height:460px;border-radius:12px;box-shadow:var(--shadow-md);}
+.preview-table{border-collapse:collapse;width:100%;font-size:12px;background:#fff;color:#1a1a2e;}
+.preview-table td,.preview-table th{border:1px solid #ddd;padding:6px 10px;white-space:nowrap;text-align:left;}
+.preview-table th{background:#f0f0f0;font-weight:600;position:sticky;top:0;z-index:1;}
+
+.btn-row{display:flex;gap:10px;justify-content:center;margin-bottom:20px;flex-wrap:wrap;}
+.btn-row.hide{display:none;}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:12px 28px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;border:none;transition:opacity 0.2s;}
+.btn:hover{opacity:0.9;}
+.btn-primary{background:linear-gradient(135deg,var(--accent-start),var(--accent-end));color:#fff;}
+.btn-secondary{background:var(--card-bg);border:1px solid var(--card-border);color:var(--text-primary);}
+
+.tips{background:rgba(129,140,248,0.06);border:1px solid var(--card-border);border-radius:12px;padding:16px 20px;margin-top:28px;}
+.tips h3{font-size:13px;font-weight:600;color:var(--text-secondary);margin-bottom:8px;}
+.tips ul{font-size:12px;color:var(--text-muted);list-style:none;line-height:1.8;}
+.tips ul li::before{content:'💡 ';}
+
+.privacy-note{text-align:center;margin-top:24px;padding:12px;background:rgba(52,211,153,0.08);border:1px solid rgba(52,211,153,0.15);border-radius:10px;}
+.privacy-note p{font-size:12px;color:var(--text-secondary);margin:0;}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <a href="/" class="logo">AI ToolNav</a>
+    <nav class="nav">
+      <a href="/">首页</a>
+      <a href="/tools/">在线工具</a>
+      <a href="/articles/">文章</a>
+    </nav>
+  </div>
+</header>
+
+<main class="main">
+  <a href="/tools/" class="back-btn">← 返回工具列表</a>
+
+  <div class="tool-header">
+    <div class="tool-icon">📊</div>
+    <h1>Excel 转 PDF</h1>
+    <p>上传 .xlsx 文件，预览数据后导出为 PDF</p>
+  </div>
+
+  <div class="upload-zone" id="uploadZone">
+    <div class="uz-icon">📂</div>
+    <div class="uz-text">点击上传或拖拽 Excel 文件</div>
+    <div class="uz-hint">支持 .xlsx 格式 · 文件不上传服务器</div>
+    <input type="file" id="fileInput" accept=".xlsx">
+  </div>
+
+  <div class="status-bar" id="statusBar">
+    <span class="sb-icon" id="statusIcon">⏳</span>
+    <span class="sb-text" id="statusText"></span>
+  </div>
+
+  <div class="sheet-tabs" id="sheetTabs"></div>
+
+  <div class="btn-row hide" id="btnRow">
+    <button class="btn btn-primary" id="btnExport">🖨️ 导出为 PDF</button>
+    <button class="btn btn-secondary" id="btnReset">🔄 重新上传</button>
+  </div>
+
+  <div class="preview-section" id="previewSection">
+    <h2>📋 数据预览</h2>
+    <div class="table-wrapper">
+      <table class="preview-table" id="previewTable"></table>
+    </div>
+  </div>
+
+  <div class="tips">
+    <h3>使用提示</h3>
+    <ul>
+      <li>支持 .xlsx 格式（Excel 2007 及以上）</li>
+      <li>多工作表文件可切换查看</li>
+      <li>导出 PDF：点击按钮后在打印对话框中选择"另存为 PDF"</li>
+      <li>建议设置纸张方向为"横向"以获得最佳效果</li>
+    </ul>
+  </div>
+
+  <div class="privacy-note">
+    <p>🔒 Excel 文件在浏览器本地处理，不会上传到任何服务器</p>
+  </div>
+</main>
+
+<script>
+var workbook = null;
+
+var uploadZone = document.getElementById('uploadZone');
+var fileInput = document.getElementById('fileInput');
+
+uploadZone.addEventListener('click', function(){ fileInput.click(); });
+uploadZone.addEventListener('dragover', function(e){ e.preventDefault(); uploadZone.classList.add('drag-over'); });
+uploadZone.addEventListener('dragleave', function(){ uploadZone.classList.remove('drag-over'); });
+uploadZone.addEventListener('drop', function(e){
+  e.preventDefault(); uploadZone.classList.remove('drag-over');
+  var f = e.dataTransfer.files[0];
+  if (f) processFile(f);
+});
+fileInput.addEventListener('change', function(){
+  var f = fileInput.files[0];
+  if (f) processFile(f);
+});
+
+function processFile(file) {
+  if (!file.name.endsWith('.xlsx')) {
+    showStatus('❌', '请上传 .xlsx 格式的文件', false);
+    return;
+  }
+  showStatus('⏳', '正在读取文件...', false);
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      var data = new Uint8Array(e.target.result);
+      workbook = XLSX.read(data, {type:'array'});
+      var sheets = workbook.SheetNames;
+      showStatus('✅', '已加载：' + file.name + '（' + sheets.length + ' 个工作表）', true);
+      uploadZone.style.display = 'none';
+      renderSheetTabs(sheets);
+      switchSheet(sheets[0]);
+      document.getElementById('btnRow').classList.remove('hide');
+    } catch(err) {
+      showStatus('❌', '解析失败：' + err.message, false);
+    }
+  };
+  reader.onerror = function() {
+    showStatus('❌', '读取文件失败', false);
+  };
+  reader.readAsArrayBuffer(file);
+}
+
+function renderSheetTabs(names) {
+  var tabs = document.getElementById('sheetTabs');
+  tabs.innerHTML = names.map(function(n){
+    return '<button class="sheet-tab active" data-sheet="' + n + '" onclick="switchSheet(\'' + n.replace(/'/g, "\\'") + '\')">' + n + '</button>';
+  }).join('');
+  tabs.classList.add('show');
+}
+
+function switchSheet(name) {
+  document.querySelectorAll('.sheet-tab').forEach(function(t){
+    t.classList.toggle('active', t.getAttribute('data-sheet') === name);
+  });
+  var ws = workbook.Sheets[name];
+  var html = XLSX.utils.sheet_to_html(ws, {editable: false});
+  document.getElementById('previewTable').innerHTML = html;
+  document.getElementById('previewSection').classList.add('show');
+}
+
+function showStatus(icon, text, success) {
+  document.getElementById('statusIcon').textContent = icon;
+  document.getElementById('statusText').textContent = text;
+  var bar = document.getElementById('statusBar');
+  bar.classList.add('show');
+  if (success) bar.classList.add('success');
+  else bar.classList.remove('success');
+}
+
+document.getElementById('btnExport').addEventListener('click', function(){
+  window.print();
+});
+
+document.getElementById('btnReset').addEventListener('click', function(){
+  workbook = null;
+  document.getElementById('previewTable').innerHTML = '';
+  document.getElementById('previewSection').classList.remove('show');
+  document.getElementById('sheetTabs').classList.remove('show');
+  document.getElementById('sheetTabs').innerHTML = '';
+  document.getElementById('btnRow').classList.add('hide');
+  document.getElementById('statusBar').classList.remove('show', 'success');
+  uploadZone.style.display = 'block';
+  fileInput.value = '';
+});
+</script>
+
+</body>
+</html>

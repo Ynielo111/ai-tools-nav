@@ -259,7 +259,7 @@ body::before {{ content:''; position:fixed; inset:0; z-index:0; pointer-events:n
     return html
 
 def build_sitemap(articles):
-    urls = [f'{DOMAIN}/', f'{DOMAIN}/articles/', f'{DOMAIN}/compare/', f'{DOMAIN}/privacy.html', f'{DOMAIN}/terms.html', f'{DOMAIN}/about.html']
+    urls = [f'{DOMAIN}/', f'{DOMAIN}/articles/', f'{DOMAIN}/compare/', f'{DOMAIN}/privacy.html', f'{DOMAIN}/terms.html', f'{DOMAIN}/about.html', f'{DOMAIN}/tools/', f'{DOMAIN}/tools/word-to-pdf.html', f'{DOMAIN}/tools/pdf-tools.html', f'{DOMAIN}/tools/excel-to-pdf.html', f'{DOMAIN}/tools/cat-meme.html']
     for a in articles:
         urls.append(f'{DOMAIN}/articles/{a["id"]}.html')
     xml = '<?xml version="1.0" encoding="UTF-8"?>\n'

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>在线工具 — AI ToolNav</title>
+<meta name="description" content="免费在线工具集合：Word转PDF、PDF拆分合并、Excel转PDF、随机猫Meme。文件在浏览器本地处理，安全无忧。">
+<link rel="icon" type="image/svg+xml" href="/logo.svg">
+<style>
+:root {
+  --bg: #0a0a1a;
+  --card-bg: rgba(255,255,255,0.06);
+  --card-border: rgba(255,255,255,0.10);
+  --text-primary: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --accent-start: #818cf8;
+  --accent-end: #a78bfa;
+  --radius: 14px;
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.2);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.3);
+  --shadow-lg: 0 8px 30px rgba(0,0,0,0.4);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans SC",sans-serif;
+  background:var(--bg);color:var(--text-primary);line-height:1.6;min-height:100vh;
+  position:relative;z-index:0;
+}
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(circle at 20% 40%,rgba(168,85,247,0.30) 0%,transparent 50%),
+              radial-gradient(circle at 70% 15%,rgba(59,130,246,0.25) 0%,transparent 50%),
+              radial-gradient(circle at 85% 80%,rgba(6,182,212,0.20) 0%,transparent 50%);
+  filter:blur(60px);
+}
+
+.header{background:rgba(10,10,26,0.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--card-border);position:sticky;top:0;z-index:100;}
+.header-inner{max-width:1200px;margin:0 auto;padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-size:20px;font-weight:700;color:var(--text-primary);text-decoration:none;}
+.nav{display:flex;gap:20px;}
+.nav a{font-size:13px;color:var(--text-secondary);text-decoration:none;transition:color 0.2s;}
+.nav a:hover{color:var(--accent-start);}
+
+.main{max-width:1000px;margin:0 auto;padding:32px 24px;position:relative;z-index:1;}
+.back-btn{display:inline-flex;align-items:center;gap:4px;color:var(--accent-start);font-size:13px;text-decoration:none;margin-bottom:20px;}
+.back-btn:hover{text-decoration:underline;}
+.page-title{font-size:26px;font-weight:800;color:var(--text-primary);margin-bottom:4px;}
+.page-subtitle{font-size:13px;color:var(--text-muted);margin-bottom:24px;}
+
+/* Left-right split */
+.split-layout{display:flex;gap:20px;align-items:flex-start;}
+.tool-sidebar{flex:0 0 300px;display:flex;flex-direction:column;gap:6px;}
+.tool-sidebar-item{
+  display:flex;align-items:center;gap:12px;
+  background:var(--card-bg);border:1px solid var(--card-border);
+  border-radius:12px;padding:14px 16px;cursor:pointer;
+  transition:all 0.2s;text-decoration:none;color:inherit;
+}
+.tool-sidebar-item:hover{border-color:rgba(129,140,248,0.4);background:rgba(129,140,248,0.08);}
+.tool-sidebar-item.active{border-color:var(--accent-start);background:rgba(129,140,248,0.12);box-shadow:0 0 16px rgba(129,140,248,0.15);}
+.tool-sidebar-item .tool-s-icon{font-size:24px;flex-shrink:0;}
+.tool-sidebar-item .tool-s-info{flex:1;}
+.tool-sidebar-item .tool-s-name{font-size:14px;font-weight:600;color:var(--text-primary);}
+.tool-sidebar-item .tool-s-desc{font-size:11px;color:var(--text-muted);margin-top:1px;}
+
+.tool-preview{flex:1;display:flex;align-items:center;justify-content:center;min-height:360px;}
+.tool-preview-card{
+  background:var(--card-bg);border:1px solid var(--card-border);
+  border-radius:16px;padding:40px;text-align:center;
+  max-width:480px;width:100%;box-shadow:var(--shadow-md);
+}
+.tool-preview-card .tp-icon{font-size:56px;margin-bottom:16px;}
+.tool-preview-card .tp-name{font-size:22px;font-weight:700;color:var(--text-primary);margin-bottom:8px;}
+.tool-preview-card .tp-desc{font-size:13px;color:var(--text-secondary);line-height:1.6;margin-bottom:20px;}
+.tool-preview-card .tp-features{text-align:left;font-size:12px;color:var(--text-muted);margin-bottom:20px;line-height:1.8;list-style:none;padding:0;}
+.tool-preview-card .tp-btn{
+  display:inline-block;background:linear-gradient(135deg,var(--accent-start),var(--accent-end));
+  color:#fff;padding:12px 32px;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600;
+  transition:opacity 0.2s;
+}
+.tool-preview-card .tp-btn:hover{opacity:0.9;}
+
+.privacy-note{text-align:center;margin-top:32px;padding:16px;background:rgba(52,211,153,0.08);border:1px solid rgba(52,211,153,0.15);border-radius:10px;}
+.privacy-note p{font-size:12px;color:var(--text-secondary);margin:0;}
+
+.footer{text-align:center;padding:32px 24px;border-top:1px solid var(--card-border);margin-top:20px;}
+.footer p{font-size:11px;color:var(--text-muted);line-height:1.8;}
+
+@media(max-width:768px){
+  .split-layout{flex-direction:column;}
+  .tool-sidebar{flex:auto;width:100%;}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <a href="/" class="logo">AI ToolNav</a>
+    <nav class="nav">
+      <a href="/">首页</a>
+      <a href="/#llm">大模型</a>
+      <a href="/#image">AI绘画</a>
+      <a href="/#code">AI编程</a>
+      <a href="/articles/">文章</a>
+      <a href="/tools/" style="color:var(--accent-start);">在线工具</a>
+    </nav>
+  </div>
+</header>
+
+<main class="main">
+  <a href="/" class="back-btn">← 返回首页</a>
+  <h1 class="page-title">🔧 在线小工具</h1>
+  <p class="page-subtitle">免费实用的浏览器端工具，文件不上传服务器，隐私安全</p>
+
+  <div class="split-layout">
+    <div class="tool-sidebar" id="toolSidebar">
+      <a href="/tools/word-to-pdf.html" class="tool-sidebar-item active" data-tool="word-to-pdf" onmouseenter="previewTool(this)">
+        <span class="tool-s-icon">📄</span>
+        <div class="tool-s-info"><div class="tool-s-name">Word 转 PDF</div><div class="tool-s-desc">上传 .docx 导出 PDF</div></div>
+      </a>
+      <a href="/tools/pdf-tools.html" class="tool-sidebar-item" data-tool="pdf-tools" onmouseenter="previewTool(this)">
+        <span class="tool-s-icon">📑</span>
+        <div class="tool-s-info"><div class="tool-s-name">PDF 拆分/合并</div><div class="tool-s-desc">拆分页面或合并多个 PDF</div></div>
+      </a>
+      <a href="/tools/excel-to-pdf.html" class="tool-sidebar-item" data-tool="excel-to-pdf" onmouseenter="previewTool(this)">
+        <span class="tool-s-icon">📊</span>
+        <div class="tool-s-info"><div class="tool-s-name">Excel 转 PDF</div><div class="tool-s-desc">上传 .xlsx 导出 PDF</div></div>
+      </a>
+      <a href="/tools/cat-meme.html" class="tool-sidebar-item" data-tool="cat-meme" onmouseenter="previewTool(this)">
+        <span class="tool-s-icon">🐱</span>
+        <div class="tool-s-info"><div class="tool-s-name">随机猫 Meme</div><div class="tool-s-desc">随机猫咪图片，治愈一下</div></div>
+      </a>
+    </div>
+
+    <div class="tool-preview" id="toolPreview">
+      <div class="tool-preview-card" id="previewCard"></div>
+    </div>
+  </div>
+
+  <div class="privacy-note">
+    <p>🔒 所有工具均在浏览器本地运行，您的文件不会上传到任何服务器</p>
+  </div>
+</main>
+
+<footer class="footer">
+  <p>&copy; 2026 AI ToolNav · <a href="/privacy.html" style="color:inherit;">隐私政策</a> | <a href="/terms.html" style="color:inherit;">服务条款</a> | <a href="/about.html" style="color:inherit;">关于我们</a></p>
+</footer>
+
+<script>
+var TOOLS = {
+  'word-to-pdf':  { icon:'📄', name:'Word 转 PDF', desc:'上传 Word (.docx) 文档，在浏览器中预览并导出为 PDF 文件。使用 mammoth.js 解析文档，保留格式和排版。', features:['支持 .docx 格式','保留文字格式（加粗、标题、列表）','浏览器内处理，不上传文件','导出标准 PDF 文件'] },
+  'pdf-tools':    { icon:'📑', name:'PDF 拆分/合并', desc:'拆分：上传一个 PDF，选择需要的页面范围导出。合并：上传多个 PDF，拖拽排序后合并为一个文件。', features:['PDF 页面拆分提取','多 PDF 合并','页面排序','使用 pdf-lib 本地处理'] },
+  'excel-to-pdf': { icon:'📊', name:'Excel 转 PDF', desc:'上传 Excel (.xlsx) 表格，预览数据后导出为 PDF 文件。支持多个工作表切换查看。', features:['支持 .xlsx 格式','多工作表预览','表格数据展示','导出 PDF 文件'] },
+  'cat-meme':     { icon:'🐱', name:'随机猫 Meme', desc:'每次加载/点击随机展示一张猫咪图片。来自 Cataas API，可爱治愈。', features:['随机猫咪图片','一键刷新','支持下载','轻松有趣'] }
+};
+
+function previewTool(el) {
+  var key = el.getAttribute('data-tool');
+  var t = TOOLS[key];
+  if (!t) return;
+  // Update active state
+  document.querySelectorAll('.tool-sidebar-item').forEach(function(item){ item.classList.remove('active'); });
+  el.classList.add('active');
+  // Render preview
+  var card = document.getElementById('previewCard');
+  card.innerHTML =
+    '<div class="tp-icon">' + t.icon + '</div>' +
+    '<div class="tp-name">' + t.name + '</div>' +
+    '<div class="tp-desc">' + t.desc + '</div>' +
+    '<ul class="tp-features">' +
+      t.features.map(function(f){ return '<li>✅ ' + f + '</li>'; }).join('') +
+    '</ul>' +
+    '<a href="' + el.getAttribute('href') + '" class="tp-btn">开始使用</a>';
+}
+
+// Show first tool preview by default
+(function init(){
+  var first = document.querySelector('.tool-sidebar-item');
+  if (first) previewTool(first);
+})();
+</script>
+
+</body>
+</html>
