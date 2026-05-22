@@ -395,8 +395,7 @@ function renderHome() {
   html += '<section class="hero"><h1>🤖 AI工具导航与排行榜</h1><p>收录 ' + stats + ' 款精选AI工具，提供真实评分、使用点评与横向对比<br>帮你找到最好用的AI工具，提升工作与创作效率</p><div class="hero-stats"><div class="hero-stat"><div class="num">' + stats + '</div><div class="label">精选工具</div></div><div class="hero-stat"><div class="num">8</div><div class="label">分类覆盖</div></div><div class="hero-stat"><div class="num">100%</div><div class="label">人工评测</div></div><div class="hero-stat"><div class="num">' + ARTICLES.length + '</div><div class="label">深度文章</div></div></div></section>';
 
   // Search
-  html += // Dynamic article quick links
-  (function(){
+  html += (function(){
     var picks = ARTICLES.sort(function(){return 0.5-Math.random()}).slice(0,6);
     var links = ['<div style="max-width:1200px;margin:0 auto 24px;padding:0 24px;"><div style="display:flex;gap:10px;overflow-x:auto;">',
       '<a href="/articles/" style="flex-shrink:0;background:linear-gradient(135deg,var(--accent-start),var(--accent-end));color:#fff;padding:12px 18px;border-radius:12px;text-decoration:none;font-size:13px;font-weight:600;white-space:nowrap;">全部文章 (' + ARTICLES.length + ')</a>'];
@@ -404,8 +403,8 @@ function renderHome() {
       links.push('<a href="/articles/' + a.id + '.html" style="flex-shrink:0;background:var(--card-bg);border:1px solid var(--card-border);backdrop-filter:blur(8px);padding:12px 18px;border-radius:12px;text-decoration:none;color:var(--text-primary);white-space:nowrap;font-size:13px;">' + a.title.substring(0,20) + '</a>');
     });
     links.push('</div></div>');
-    html += links.join('');
-  })();;
+    return links.join('');
+  })();
 
       html += '<div class="search-box"><span class="search-icon">🔍</span><input type="text" id="searchInput" placeholder="搜索 AI 工具、分类、关键词..."></div>';
 
