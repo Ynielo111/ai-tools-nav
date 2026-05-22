@@ -189,9 +189,43 @@ body::before { content:''; position:fixed; inset:0; z-index:0; pointer-events:no
   .header-inner { padding:0 16px; } .main { padding:16px; }
   .hero-stats { gap:16px; }
 }
+/* Splash Screen */
+#splash {
+  position:fixed; inset:0; z-index:9999;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  background:rgba(10,10,26,0.92);
+  backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
+  cursor:pointer; transition:opacity 0.6s ease, visibility 0.6s ease;
+}
+#splash.hide { opacity:0; visibility:hidden; pointer-events:none; }
+#splash h1 {
+  font-size:clamp(36px, 8vw, 72px); font-weight:800; color:#e2e8f0;
+  letter-spacing:-1px; margin:0; animation:titlePulse 3s ease-in-out infinite;
+}
+#splash p {
+  font-size:clamp(14px, 2.5vw, 18px); color:#94a3b8; margin-top:16px;
+  letter-spacing:2px;
+}
+#splash .hint {
+  position:absolute; bottom:40px; font-size:13px; color:#64748b;
+  animation:hintBounce 2s ease-in-out infinite;
+}
+@keyframes titlePulse {
+  0%,100% { opacity:0.9; }
+  50% { opacity:1; }
+}
+@keyframes hintBounce {
+  0%,100% { transform:translateY(0); opacity:0.4; }
+  50% { transform:translateY(-6px); opacity:0.8; }
+}
 </style>
 </head>
 <body>
+<div id="splash">
+  <h1>AI ToolNav</h1>
+  <p>发现最好用的 AI 工具</p>
+  <span class="hint">轻触任意位置进入</span>
+</div>
 <header class="header">
   <div class="header-inner">
     <a href="/" class="logo" onclick="showHome();return false;">🤖 AI ToolNav</a>
@@ -491,6 +525,21 @@ function rebindCategoryLinks() {
 }
 
 init();
+</script>
+<script>
+// Splash screen click-to-enter
+(function(){
+  var splash = document.getElementById('splash');
+  // Skip splash if already visited this session
+  if (sessionStorage.getItem('splash_done')) {
+    splash.classList.add('hide');
+    return;
+  }
+  splash.addEventListener('click', function(){
+    splash.classList.add('hide');
+    sessionStorage.setItem('splash_done', '1');
+  });
+})();
 </script>
 <script>
 (function(){
