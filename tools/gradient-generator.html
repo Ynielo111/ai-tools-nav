@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CSS 渐变生成器 — AI ToolNav</title>
+<meta name="description" content="可视化CSS渐变生成器，拖拽调色实时预览，一键复制CSS代码。支持线性渐变和径向渐变。">
+<style>
+:root{--bg:#0a0a1a;--card-bg:rgba(255,255,255,0.06);--card-border:rgba(255,255,255,0.10);--text-primary:#e2e8f0;--text-secondary:#94a3b8;--text-muted:#64748b;--accent-start:#818cf8;--accent-end:#a78bfa;--radius:14px;--shadow-md:0 4px 16px rgba(0,0,0,0.3);--green:#34d399;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans SC",sans-serif;background:var(--bg);color:var(--text-primary);line-height:1.6;min-height:100vh;position:relative;z-index:0;}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(circle at 20% 40%,rgba(168,85,247,0.30) 0%,transparent 50%),radial-gradient(circle at 70% 15%,rgba(59,130,246,0.25) 0%,transparent 50%),radial-gradient(circle at 85% 80%,rgba(6,182,212,0.20) 0%,transparent 50%);filter:blur(60px);}
+.header{background:rgba(10,10,26,0.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--card-border);position:sticky;top:0;z-index:100;}
+.header-inner{max-width:1000px;margin:0 auto;padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-size:20px;font-weight:700;color:var(--text-primary);text-decoration:none;}
+.nav{display:flex;gap:20px;}
+.nav a{font-size:13px;color:var(--text-secondary);text-decoration:none;transition:color 0.2s;}
+.nav a:hover{color:var(--accent-start);}
+.main{max-width:800px;margin:0 auto;padding:32px 24px;position:relative;z-index:1;}
+.back-btn{display:inline-flex;align-items:center;gap:4px;color:var(--accent-start);font-size:13px;text-decoration:none;margin-bottom:20px;}
+.back-btn:hover{text-decoration:underline;}
+.tool-header{text-align:center;margin-bottom:28px;}
+.tool-header .tool-icon{font-size:48px;margin-bottom:8px;}
+.tool-header h1{font-size:26px;font-weight:800;color:var(--text-primary);margin-bottom:4px;}
+.tool-header p{font-size:13px;color:var(--text-muted);}
+
+.preview-box{width:100%;height:200px;border-radius:16px;margin-bottom:20px;box-shadow:var(--shadow-md);transition:background 0.3s;border:2px solid var(--card-border);}
+
+.controls{display:flex;flex-direction:column;gap:16px;margin-bottom:20px;}
+.control-row{display:flex;gap:12px;align-items:center;flex-wrap:wrap;}
+.control-row label{font-size:13px;color:var(--text-secondary);min-width:50px;}
+.control-row input[type=color]{width:44px;height:36px;border:2px solid var(--card-border);border-radius:8px;cursor:pointer;background:transparent;padding:2px;}
+.control-row input[type=range]{flex:1;min-width:100px;accent-color:var(--accent-start);}
+.control-row .val{font-size:12px;color:var(--text-muted);min-width:36px;text-align:right;}
+.control-row select{padding:8px 12px;background:var(--card-bg);border:1px solid var(--card-border);border-radius:8px;color:var(--text-primary);font-size:13px;}
+
+.css-output{background:var(--card-bg);border:1px solid var(--card-border);border-radius:12px;padding:16px 20px;margin-bottom:16px;position:relative;}
+.css-output code{font-size:13px;color:var(--green);word-break:break-all;display:block;padding-right:60px;}
+.css-output .copy-btn{position:absolute;right:12px;top:12px;padding:6px 14px;background:linear-gradient(135deg,var(--accent-start),var(--accent-end));color:#fff;border:none;border-radius:6px;font-size:11px;cursor:pointer;}
+.css-output .copy-btn:hover{opacity:0.9;}
+.css-output .copy-btn.copied{background:var(--green);}
+
+.presets{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;}
+.preset{width:36px;height:36px;border-radius:8px;cursor:pointer;border:2px solid transparent;transition:all 0.2s;}
+.preset:hover{border-color:#fff;transform:scale(1.1);}
+
+@media(max-width:600px){.preview-box{height:150px;}.control-row{flex-direction:column;align-items:stretch;}}
+</style>
+</head>
+<body>
+<header class="header">
+  <div class="header-inner">
+    <a href="/" class="logo">AI ToolNav</a>
+    <nav class="nav"><a href="/">首页</a><a href="/tools/">在线工具</a><a href="/articles/">文章</a></nav>
+  </div>
+</header>
+<main class="main">
+  <a href="/tools/" class="back-btn">← 返回工具列表</a>
+  <div class="tool-header"><div class="tool-icon">🎨</div><h1>CSS 渐变生成器</h1><p>可视化调色，一键复制 CSS 渐变代码</p></div>
+
+  <div class="presets" id="presets"></div>
+
+  <div class="preview-box" id="previewBox"></div>
+
+  <div class="controls">
+    <div class="control-row">
+      <label>类型</label>
+      <select id="gradType"><option value="linear">线性渐变</option><option value="radial">径向渐变</option></select>
+    </div>
+    <div class="control-row" id="angleRow">
+      <label>角度</label>
+      <input type="range" id="angle" min="0" max="360" value="135">
+      <span class="val" id="angleVal">135°</span>
+    </div>
+    <div class="control-row">
+      <label>颜色 1</label>
+      <input type="color" id="color1" value="#667eea">
+      <input type="range" id="stop1" min="0" max="100" value="0">
+      <span class="val" id="stop1Val">0%</span>
+    </div>
+    <div class="control-row">
+      <label>颜色 2</label>
+      <input type="color" id="color2" value="#764ba2">
+      <input type="range" id="stop2" min="0" max="100" value="100">
+      <span class="val" id="stop2Val">100%</span>
+    </div>
+  </div>
+
+  <div class="css-output">
+    <code id="cssCode"></code>
+    <button class="copy-btn" id="copyBtn" onclick="copyCSS()">📋 复制</button>
+  </div>
+</main>
+
+<script>
+var presetGradients = [
+  {name:'Sunset',c1:'#ff6b6b',c2:'#feca57'},
+  {name:'Ocean',c1:'#2193b0',c2:'#6dd5ed'},
+  {name:'Forest',c1:'#11998e',c2:'#38ef7d'},
+  {name:'Lavender',c1:'#667eea',c2:'#764ba2'},
+  {name:'Peach',c1:'#ee9ca7',c2:'#ffdde1'},
+  {name:'Midnight',c1:'#0f0c29',c2:'#302b63'},
+  {name:'Cherry',c1:'#eb3349',c2:'#f45c43'},
+  {name:'Mint',c1:'#00b09b',c2:'#96c93d'},
+  {name:'Sky',c1:'#4facfe',c2:'#00f2fe'},
+  {name:'Coral',c1:'#ff7e5f',c2:'#feb47b'},
+  {name:'Dusk',c1:'#2c3e50',c2:'#3498db'},
+  {name:'Berry',c1:'#8e2de2',c2:'#4a00e0'},
+];
+
+var previewBox = document.getElementById('previewBox');
+var cssCode = document.getElementById('cssCode');
+var color1 = document.getElementById('color1');
+var color2 = document.getElementById('color2');
+var stop1 = document.getElementById('stop1');
+var stop2 = document.getElementById('stop2');
+var angle = document.getElementById('angle');
+var gradType = document.getElementById('gradType');
+var angleRow = document.getElementById('angleRow');
+
+function updateGradient() {
+  var c1 = color1.value, c2 = color2.value;
+  var s1 = stop1.value, s2 = stop2.value;
+  var a = angle.value;
+  var type = gradType.value;
+
+  document.getElementById('angleVal').textContent = a + '°';
+  document.getElementById('stop1Val').textContent = s1 + '%';
+  document.getElementById('stop2Val').textContent = s2 + '%';
+
+  var cssVal;
+  if (type === 'linear') {
+    cssVal = 'linear-gradient(' + a + 'deg, ' + c1 + ' ' + s1 + '%, ' + c2 + ' ' + s2 + '%)';
+    angleRow.style.display = 'flex';
+  } else {
+    cssVal = 'radial-gradient(circle, ' + c1 + ' ' + s1 + '%, ' + c2 + ' ' + s2 + '%)';
+    angleRow.style.display = 'none';
+  }
+
+  previewBox.style.background = cssVal;
+  cssCode.textContent = 'background: ' + cssVal + ';';
+}
+
+function copyCSS() {
+  navigator.clipboard.writeText(cssCode.textContent).then(function(){
+    var btn = document.getElementById('copyBtn');
+    btn.textContent = '✅ 已复制';
+    btn.classList.add('copied');
+    setTimeout(function(){ btn.textContent = '📋 复制'; btn.classList.remove('copied'); }, 1500);
+  });
+}
+
+// Presets
+var presetsEl = document.getElementById('presets');
+presetGradients.forEach(function(p){
+  var div = document.createElement('div');
+  div.className = 'preset';
+  div.title = p.name;
+  div.style.background = 'linear-gradient(135deg, ' + p.c1 + ', ' + p.c2 + ')';
+  div.addEventListener('click', function(){
+    color1.value = p.c1; color2.value = p.c2;
+    stop1.value = 0; stop2.value = 100; angle.value = 135;
+    gradType.value = 'linear';
+    updateGradient();
+  });
+  presetsEl.appendChild(div);
+});
+
+[color1, color2, stop1, stop2, angle, gradType].forEach(function(el){
+  el.addEventListener('input', updateGradient);
+});
+
+updateGradient();
+</script>
+</body>
+</html>

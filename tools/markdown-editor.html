@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Markdown 编辑器 — AI ToolNav</title>
+<meta name="description" content="在线Markdown编辑器，左边编写右边实时预览，支持GitHub风格语法，一键导出HTML。">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.0/marked.min.js"></script>
+<style>
+:root{--bg:#0a0a1a;--card-bg:rgba(255,255,255,0.06);--card-border:rgba(255,255,255,0.10);--text-primary:#e2e8f0;--text-secondary:#94a3b8;--text-muted:#64748b;--accent-start:#818cf8;--accent-end:#a78bfa;--radius:14px;--shadow-md:0 4px 16px rgba(0,0,0,0.3);--green:#34d399;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans SC",sans-serif;background:var(--bg);color:var(--text-primary);line-height:1.6;min-height:100vh;position:relative;z-index:0;}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(circle at 20% 40%,rgba(168,85,247,0.30) 0%,transparent 50%),radial-gradient(circle at 70% 15%,rgba(59,130,246,0.25) 0%,transparent 50%),radial-gradient(circle at 85% 80%,rgba(6,182,212,0.20) 0%,transparent 50%);filter:blur(60px);}
+.header{background:rgba(10,10,26,0.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--card-border);position:sticky;top:0;z-index:100;}
+.header-inner{max-width:100%;margin:0 auto;padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-size:20px;font-weight:700;color:var(--text-primary);text-decoration:none;}
+.nav{display:flex;gap:20px;}
+.nav a{font-size:13px;color:var(--text-secondary);text-decoration:none;transition:color 0.2s;}
+.nav a:hover{color:var(--accent-start);}
+.main{max-width:100%;margin:0 auto;padding:16px 24px;position:relative;z-index:1;}
+.back-btn{display:inline-flex;align-items:center;gap:4px;color:var(--accent-start);font-size:13px;text-decoration:none;margin-bottom:12px;}
+.back-btn:hover{text-decoration:underline;}
+
+.toolbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px;}
+.toolbar h1{font-size:20px;font-weight:800;}
+.toolbar .btn-group{display:flex;gap:6px;}
+.btn{padding:7px 16px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;border:none;transition:all 0.2s;}
+.btn-primary{background:linear-gradient(135deg,var(--accent-start),var(--accent-end));color:#fff;}
+.btn-secondary{background:var(--card-bg);border:1px solid var(--card-border);color:var(--text-primary);}
+.btn:hover{opacity:0.9;}
+
+.editor-container{display:flex;gap:12px;height:calc(100vh - 160px);}
+.editor-pane{flex:1;display:flex;flex-direction:column;min-width:0;}
+.pane-label{font-size:11px;font-weight:600;color:var(--text-muted);text-transform:uppercase;margin-bottom:6px;letter-spacing:1px;}
+.editor-pane textarea{flex:1;width:100%;padding:16px;background:var(--card-bg);border:1px solid var(--card-border);border-radius:12px;color:var(--text-primary);font-family:'SF Mono','Fira Code','Consolas',monospace;font-size:13px;line-height:1.7;resize:none;outline:none;transition:border-color 0.2s;}
+.editor-pane textarea:focus{border-color:var(--accent-start);}
+.preview-pane{flex:1;overflow-y:auto;padding:16px 20px;background:var(--card-bg);border:1px solid var(--card-border);border-radius:12px;color:var(--text-primary);line-height:1.8;font-size:14px;min-width:0;}
+.preview-pane h1,.preview-pane h2,.preview-pane h3{color:var(--text-primary);margin:12px 0 8px;}
+.preview-pane h1{font-size:22px;border-bottom:1px solid var(--card-border);padding-bottom:8px;}
+.preview-pane h2{font-size:18px;}
+.preview-pane h3{font-size:15px;}
+.preview-pane p{margin-bottom:10px;}
+.preview-pane code{background:rgba(129,140,248,0.2);padding:2px 6px;border-radius:4px;font-size:12px;}
+.preview-pane pre{background:rgba(0,0,0,0.3);border:1px solid var(--card-border);border-radius:8px;padding:14px;overflow-x:auto;margin-bottom:12px;}
+.preview-pane pre code{background:transparent;padding:0;}
+.preview-pane ul,.preview-pane ol{padding-left:24px;margin-bottom:10px;}
+.preview-pane blockquote{border-left:3px solid var(--accent-start);padding-left:14px;color:var(--text-secondary);margin:10px 0;}
+.preview-pane table{border-collapse:collapse;width:100%;margin-bottom:12px;}
+.preview-pane table td,.preview-pane table th{border:1px solid var(--card-border);padding:6px 10px;font-size:13px;}
+.preview-pane table th{background:rgba(129,140,248,0.15);}
+.preview-pane a{color:var(--accent-start);}
+.preview-pane img{max-width:100%;border-radius:8px;}
+
+@media(max-width:768px){
+  .editor-container{flex-direction:column;height:auto;}
+  .editor-pane textarea{min-height:250px;}
+  .preview-pane{min-height:300px;}
+}
+</style>
+</head>
+<body>
+<header class="header">
+  <div class="header-inner">
+    <a href="/" class="logo">AI ToolNav</a>
+    <nav class="nav"><a href="/">首页</a><a href="/tools/">在线工具</a><a href="/articles/">文章</a></nav>
+  </div>
+</header>
+<main class="main">
+  <a href="/tools/" class="back-btn">← 返回工具列表</a>
+  <div class="toolbar">
+    <h1>📝 Markdown 编辑器</h1>
+    <div class="btn-group">
+      <button class="btn btn-secondary" onclick="insertSample()">📄 示例文档</button>
+      <button class="btn btn-secondary" onclick="clearAll()">🗑️ 清空</button>
+      <button class="btn btn-primary" onclick="exportHTML()">📥 导出 HTML</button>
+    </div>
+  </div>
+  <div class="editor-container">
+    <div class="editor-pane">
+      <div class="pane-label">✏️ 编辑</div>
+      <textarea id="editor" placeholder="# 开始编写 Markdown..."></textarea>
+    </div>
+    <div class="editor-pane">
+      <div class="pane-label">👁️ 预览</div>
+      <div class="preview-pane" id="preview"></div>
+    </div>
+  </div>
+</main>
+<script>
+var editor = document.getElementById('editor');
+var preview = document.getElementById('preview');
+
+marked.setOptions({breaks:true,gfm:true});
+
+editor.addEventListener('input', function(){
+  preview.innerHTML = marked.parse(editor.value);
+});
+
+var sample = '# Markdown 快速入门\n\n## 文本格式\n**粗体** *斜体* ~~删除线~~ `代码`\n\n## 列表\n- 无序列表\n- 第二项\n  - 嵌套\n\n1. 有序列表\n2. 第二项\n\n## 代码块\n```python\nprint("Hello, World!")\n```\n\n## 引用\n> 这是一段引用文字\n\n## 表格\n| 工具 | 评分 |\n|------|------|\n| ChatGPT | ⭐⭐⭐⭐⭐ |\n| Claude | ⭐⭐⭐⭐⭐ |\n\n## 链接\n[AI ToolNav](https://aitnav.com)\n\n---\n*开始编辑吧！*';
+
+function insertSample(){ editor.value = sample; preview.innerHTML = marked.parse(sample); }
+function clearAll(){ editor.value = ''; preview.innerHTML = ''; }
+function exportHTML(){
+  var html = '<!DOCTYPE html><html><head><meta charset="UTF-8"><style>body{max-width:800px;margin:40px auto;padding:0 20px;font-family:-apple-system,sans-serif;line-height:1.8;color:#333;}pre{background:#f5f5f5;padding:16px;border-radius:8px;overflow-x:auto;}code{background:#f0f0f0;padding:2px 6px;border-radius:3px;}pre code{background:transparent;padding:0;}blockquote{border-left:3px solid #6366f1;padding-left:16px;color:#666;}table{border-collapse:collapse;}td,th{border:1px solid #ddd;padding:8px 12px;}img{max-width:100%;}</style></head><body>' + preview.innerHTML + '</body></html>';
+  var blob = new Blob([html],{type:'text/html'});
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'markdown-export.html';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  URL.revokeObjectURL(a.href);
+}
+
+insertSample();
+</script>
+</body>
+</html>

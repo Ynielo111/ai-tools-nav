@@ -128,6 +128,22 @@ body::before{
         <span class="tool-s-icon">📊</span>
         <div class="tool-s-info"><div class="tool-s-name">Excel 转 PDF</div><div class="tool-s-desc">上传 .xlsx 导出 PDF</div></div>
       </a>
+      <a href="/tools/image-compress.html" class="tool-sidebar-item" data-tool="image-compress" onmouseenter="previewTool(this)">
+        <span class="tool-s-icon">🗜️</span>
+        <div class="tool-s-info"><div class="tool-s-name">图片压缩</div><div class="tool-s-desc">压缩图片，对比前后大小</div></div>
+      </a>
+      <a href="/tools/gradient-generator.html" class="tool-sidebar-item" data-tool="gradient-generator" onmouseenter="previewTool(this)">
+        <span class="tool-s-icon">🎨</span>
+        <div class="tool-s-info"><div class="tool-s-name">CSS 渐变生成器</div><div class="tool-s-desc">可视化调色，复制 CSS 代码</div></div>
+      </a>
+      <a href="/tools/markdown-editor.html" class="tool-sidebar-item" data-tool="markdown-editor" onmouseenter="previewTool(this)">
+        <span class="tool-s-icon">📝</span>
+        <div class="tool-s-info"><div class="tool-s-name">Markdown 编辑器</div><div class="tool-s-desc">左边编写右边实时预览</div></div>
+      </a>
+      <a href="/tools/ambient-sound.html" class="tool-sidebar-item" data-tool="ambient-sound" onmouseenter="previewTool(this)">
+        <span class="tool-s-icon">🎵</span>
+        <div class="tool-s-info"><div class="tool-s-name">白噪音 / 环境音</div><div class="tool-s-desc">专注工作，放松身心</div></div>
+      </a>
       <a href="/tools/cat-meme.html" class="tool-sidebar-item" data-tool="cat-meme" onmouseenter="previewTool(this)">
         <span class="tool-s-icon">🐱</span>
         <div class="tool-s-info"><div class="tool-s-name">随机猫 Meme</div><div class="tool-s-desc">随机猫咪图片，治愈一下</div></div>
@@ -153,6 +169,10 @@ var TOOLS = {
   'word-to-pdf':  { icon:'📄', name:'Word 转 PDF', desc:'上传 Word (.docx) 文档，在浏览器中预览并导出为 PDF 文件。使用 mammoth.js 解析文档，保留格式和排版。', features:['支持 .docx 格式','保留文字格式（加粗、标题、列表）','浏览器内处理，不上传文件','导出标准 PDF 文件'] },
   'pdf-tools':    { icon:'📑', name:'PDF 拆分/合并', desc:'拆分：上传一个 PDF，选择需要的页面范围导出。合并：上传多个 PDF，拖拽排序后合并为一个文件。', features:['PDF 页面拆分提取','多 PDF 合并','页面排序','使用 pdf-lib 本地处理'] },
   'excel-to-pdf': { icon:'📊', name:'Excel 转 PDF', desc:'上传 Excel (.xlsx) 表格，预览数据后导出为 PDF 文件。支持多个工作表切换查看。', features:['支持 .xlsx 格式','多工作表预览','表格数据展示','导出 PDF 文件'] },
+  'image-compress': { icon:'🗜️', name:'图片压缩', desc:'上传图片，调整质量和格式，实时预览压缩效果，对比前后文件大小。纯浏览器端处理。', features:['支持 JPG/PNG/WebP','质量滑块调节','前后大小对比','浏览器本地处理'] },
+  'gradient-generator': { icon:'🎨', name:'CSS 渐变生成器', desc:'可视化选择颜色和角度，实时预览渐变效果，一键复制 CSS 代码。包含预设渐变色方案。', features:['线性/径向渐变','角度调节','预设配色方案','一键复制 CSS'] },
+  'markdown-editor': { icon:'📝', name:'Markdown 编辑器', desc:'左侧编写右侧实时预览，支持 GitHub 风格 Markdown 语法。可导出为 HTML 文件。', features:['实时预览','GFM语法支持','代码高亮','导出HTML'] },
+  'ambient-sound': { icon:'🎵', name:'白噪音 / 环境音', desc:'雨声、海浪、篝火、咖啡馆等自然白噪音，Web Audio 生成无需下载音频，帮助专注和放松。', features:['9种自然音效','定时关闭','音量调节','Web Audio 生成'] },
   'cat-meme':     { icon:'🐱', name:'随机猫 Meme', desc:'每次加载/点击随机展示一张猫咪图片。来自 Cataas API，可爱治愈。', features:['随机猫咪图片','一键刷新','支持下载','轻松有趣'] }
 };
 

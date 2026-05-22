@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>白噪音/环境音 — AI ToolNav</title>
+<meta name="description" content="免费在线白噪音与环境音，包含雨声、海浪、篝火、咖啡馆等场景音效，帮助专注工作或放松入睡。">
+<style>
+:root{--bg:#0a0a1a;--card-bg:rgba(255,255,255,0.06);--card-border:rgba(255,255,255,0.10);--text-primary:#e2e8f0;--text-secondary:#94a3b8;--text-muted:#64748b;--accent-start:#818cf8;--accent-end:#a78bfa;--radius:14px;--shadow-md:0 4px 16px rgba(0,0,0,0.3);--green:#34d399;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans SC",sans-serif;background:var(--bg);color:var(--text-primary);line-height:1.6;min-height:100vh;position:relative;z-index:0;}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(circle at 20% 40%,rgba(168,85,247,0.30) 0%,transparent 50%),radial-gradient(circle at 70% 15%,rgba(59,130,246,0.25) 0%,transparent 50%),radial-gradient(circle at 85% 80%,rgba(6,182,212,0.20) 0%,transparent 50%);filter:blur(60px);}
+.header{background:rgba(10,10,26,0.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--card-border);position:sticky;top:0;z-index:100;}
+.header-inner{max-width:1000px;margin:0 auto;padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-size:20px;font-weight:700;color:var(--text-primary);text-decoration:none;}
+.nav{display:flex;gap:20px;}
+.nav a{font-size:13px;color:var(--text-secondary);text-decoration:none;transition:color 0.2s;}
+.nav a:hover{color:var(--accent-start);}
+.main{max-width:800px;margin:0 auto;padding:32px 24px;position:relative;z-index:1;}
+.back-btn{display:inline-flex;align-items:center;gap:4px;color:var(--accent-start);font-size:13px;text-decoration:none;margin-bottom:20px;}
+.back-btn:hover{text-decoration:underline;}
+.tool-header{text-align:center;margin-bottom:24px;}
+.tool-header .tool-icon{font-size:48px;margin-bottom:8px;}
+.tool-header h1{font-size:26px;font-weight:800;color:var(--text-primary);margin-bottom:4px;}
+.tool-header p{font-size:13px;color:var(--text-muted);}
+
+.sound-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px;}
+.sound-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:16px;padding:24px 16px;text-align:center;cursor:pointer;transition:all 0.3s;position:relative;overflow:hidden;}
+.sound-card:hover{border-color:var(--accent-start);transform:translateY(-2px);}
+.sound-card.playing{border-color:var(--accent-start);background:rgba(129,140,248,0.1);box-shadow:0 0 24px rgba(129,140,248,0.2);}
+.sound-card .s-icon{font-size:40px;margin-bottom:10px;display:block;transition:transform 0.3s;}
+.sound-card.playing .s-icon{animation:pulse 2s ease-in-out infinite;}
+@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.1);}}
+.sound-card .s-name{font-size:15px;font-weight:600;color:var(--text-primary);margin-bottom:2px;}
+.sound-card .s-tag{font-size:11px;color:var(--text-muted);}
+.sound-card .s-wave{display:none;height:3px;background:linear-gradient(90deg,var(--accent-start),var(--accent-end),var(--accent-start));border-radius:2px;margin-top:12px;background-size:200% 100%;animation:wave 1.5s linear infinite;}
+.sound-card.playing .s-wave{display:block;}
+@keyframes wave{0%{background-position:200% 0;}100%{background-position:-200% 0;}}
+
+.volume-control{display:flex;align-items:center;gap:12px;max-width:400px;margin:0 auto 24px;padding:14px 20px;background:var(--card-bg);border:1px solid var(--card-border);border-radius:12px;}
+.volume-control label{font-size:13px;color:var(--text-secondary);white-space:nowrap;}
+.volume-control input[type=range]{flex:1;accent-color:var(--accent-start);}
+
+.timer-row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:24px;}
+.timer-btn{padding:6px 16px;border-radius:20px;font-size:12px;background:var(--card-bg);border:1px solid var(--card-border);color:var(--text-secondary);cursor:pointer;transition:all 0.2s;}
+.timer-btn:hover{border-color:var(--accent-start);color:var(--accent-start);}
+.timer-btn.active{background:linear-gradient(135deg,var(--accent-start),var(--accent-end));color:#fff;border-color:transparent;}
+.timer-display{text-align:center;font-size:13px;color:var(--text-muted);margin-bottom:16px;}
+
+@media(max-width:600px){.sound-grid{grid-template-columns:repeat(2,1fr);}}
+</style>
+</head>
+<body>
+<header class="header">
+  <div class="header-inner">
+    <a href="/" class="logo">AI ToolNav</a>
+    <nav class="nav"><a href="/">首页</a><a href="/tools/">在线工具</a><a href="/articles/">文章</a></nav>
+  </div>
+</header>
+<main class="main">
+  <a href="/tools/" class="back-btn">← 返回工具列表</a>
+  <div class="tool-header"><div class="tool-icon">🎵</div><h1>白噪音 / 环境音</h1><p>专注工作、放松身心、帮助入睡</p></div>
+
+  <div class="volume-control">
+    <label>🔊 音量</label>
+    <input type="range" id="masterVolume" min="0" max="100" value="50">
+    <span style="font-size:12px;color:var(--text-muted);min-width:36px;" id="volumeVal">50%</span>
+  </div>
+
+  <div class="timer-row">
+    <button class="timer-btn active" data-min="0">不限时</button>
+    <button class="timer-btn" data-min="15">15分钟</button>
+    <button class="timer-btn" data-min="30">30分钟</button>
+    <button class="timer-btn" data-min="60">60分钟</button>
+  </div>
+  <div class="timer-display" id="timerDisplay"></div>
+
+  <div class="sound-grid" id="soundGrid"></div>
+</main>
+
+<script>
+var sounds = [
+  {id:'rain',name:'雨声',icon:'🌧️',tag:'助眠 · 放松',noise:'pink'},
+  {id:'ocean',name:'海浪',icon:'🌊',tag:'放松 · 冥想',noise:'brown'},
+  {id:'forest',name:'森林',icon:'🌲',tag:'自然 · 专注',noise:'pink'},
+  {id:'fire',name:'篝火',icon:'🔥',tag:'温暖 · 放松',noise:'white'},
+  {id:'cafe',name:'咖啡馆',icon:'☕',tag:'专注 · 工作',noise:'brown'},
+  {id:'fan',name:'风扇',icon:'🌀',tag:'白噪音 · 专注',noise:'white'},
+  {id:'stream',name:'溪流',icon:'💧',tag:'自然 · 助眠',noise:'pink'},
+  {id:'thunder',name:'雷雨',icon:'⛈️',tag:'沉浸 · 放松',noise:'brown'},
+  {id:'wind',name:'风声',icon:'🍃',tag:'自然 · 冥想',noise:'pink'},
+];
+
+var audioContext = null;
+var activeNodes = {};
+var masterGain = null;
+var timerInterval = null;
+var timerEnd = null;
+
+function initAudio(){
+  if (!audioContext) {
+    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    masterGain = audioContext.createGain();
+    masterGain.connect(audioContext.destination);
+  }
+  if (audioContext.state === 'suspended') audioContext.resume();
+}
+
+function createNoise(type){
+  var bufferSize = 2 * audioContext.sampleRate;
+  var buffer = audioContext.createBuffer(1, bufferSize, audioContext.sampleRate);
+  var data = buffer.getChannelData(0);
+  var b0=0,b1=0,b2=0,b3=0,b4=0,b5=0,b6=0;
+  for (var i=0;i<bufferSize;i++){
+    var white = Math.random() * 2 - 1;
+    if (type === 'white'){
+      data[i] = white;
+    } else if (type === 'pink'){
+      b0 = 0.99886*b0 + white*0.0555179;
+      b1 = 0.99332*b1 + white*0.0750759;
+      b2 = 0.96900*b2 + white*0.1538520;
+      b3 = 0.86650*b3 + white*0.3104856;
+      b4 = 0.55000*b4 + white*0.5329522;
+      b5 = -0.7616*b5 - white*0.0168980;
+      data[i] = (b0+b1+b2+b3+b4+b5+white*0.5362) * 0.11;
+      b6 = white*0.115926;
+    } else if (type === 'brown'){
+      data[i] = (b0 + white * 0.02) / 1.02;
+      b0 = data[i];
+      data[i] *= 3.5;
+    }
+    data[i] = Math.max(-1, Math.min(1, data[i]));
+  }
+  return buffer;
+}
+
+var grid = document.getElementById('soundGrid');
+sounds.forEach(function(s){
+  var card = document.createElement('div');
+  card.className = 'sound-card';
+  card.id = 'card-' + s.id;
+  card.innerHTML = '<span class="s-icon">'+s.icon+'</span><div class="s-name">'+s.name+'</div><div class="s-tag">'+s.tag+'</div><div class="s-wave"></div>';
+  card.addEventListener('click',function(){toggleSound(s,card);});
+  grid.appendChild(card);
+});
+
+function toggleSound(s, card){
+  initAudio();
+  if (activeNodes[s.id]){
+    stopSound(s.id);
+    card.classList.remove('playing');
+  } else {
+    startSound(s, card);
+    card.classList.add('playing');
+  }
+}
+
+function startSound(s, card){
+  var source = audioContext.createBufferSource();
+  var buffer = createNoise(s.noise);
+  source.buffer = buffer;
+  source.loop = true;
+
+  var filter = audioContext.createBiquadFilter();
+  filter.type = 'lowpass';
+
+  var gain = audioContext.createGain();
+  gain.gain.value = 0;
+
+  // Tune filter per sound
+  switch(s.id){
+    case 'rain': filter.frequency.value = 800; gain.gain.value = 0.5; break;
+    case 'ocean': filter.frequency.value = 400; gain.gain.value = 0.4; break;
+    case 'forest': filter.frequency.value = 2000; gain.gain.value = 0.3; break;
+    case 'fire': filter.frequency.value = 3000; gain.gain.value = 0.3; break;
+    case 'cafe': filter.frequency.value = 1500; gain.gain.value = 0.25; break;
+    case 'fan': filter.frequency.value = 200; gain.gain.value = 0.35; break;
+    case 'stream': filter.frequency.value = 1200; gain.gain.value = 0.3; break;
+    case 'thunder': filter.frequency.value = 300; gain.gain.value = 0.45; break;
+    case 'wind': filter.frequency.value = 600; gain.gain.value = 0.3; break;
+  }
+
+  source.connect(filter);
+  filter.connect(gain);
+  gain.connect(masterGain);
+  source.start(0);
+
+  activeNodes[s.id] = {source:source,filter:filter,gain:gain};
+  updateVolume();
+}
+
+function stopSound(id){
+  if (!activeNodes[id]) return;
+  try { activeNodes[id].source.stop(); } catch(e){}
+  activeNodes[id].source.disconnect();
+  activeNodes[id].filter.disconnect();
+  activeNodes[id].gain.disconnect();
+  delete activeNodes[id];
+}
+
+function stopAll(){
+  Object.keys(activeNodes).forEach(function(id){
+    stopSound(id);
+    var card = document.getElementById('card-'+id);
+    if (card) card.classList.remove('playing');
+  });
+}
+
+function updateVolume(){
+  var v = document.getElementById('masterVolume').value / 100;
+  document.getElementById('volumeVal').textContent = Math.round(v*100)+'%';
+  if (masterGain) masterGain.gain.value = v;
+}
+
+document.getElementById('masterVolume').addEventListener('input', updateVolume);
+
+// Timer
+document.querySelectorAll('.timer-btn').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('.timer-btn').forEach(function(b){b.classList.remove('active');});
+    btn.classList.add('active');
+    var min = parseInt(btn.dataset.min);
+    if (timerInterval) clearInterval(timerInterval);
+    document.getElementById('timerDisplay').textContent = '';
+    if (min > 0){
+      timerEnd = Date.now() + min * 60000;
+      updateTimer();
+      timerInterval = setInterval(updateTimer, 1000);
+    } else {
+      timerEnd = null;
+    }
+  });
+});
+
+function updateTimer(){
+  if (!timerEnd) return;
+  var left = Math.max(0, timerEnd - Date.now());
+  var m = Math.floor(left/60000);
+  var s = Math.floor((left%60000)/1000);
+  document.getElementById('timerDisplay').textContent = '⏱️ 剩余 '+m+'分'+String(s).padStart(2,'0')+'秒';
+  if (left <= 0){ stopAll(); document.getElementById('timerDisplay').textContent='⏱️ 时间到，已停止'; timerEnd=null; clearInterval(timerInterval); }
+}
+
+updateVolume();
+</script>
+</body>
+</html>

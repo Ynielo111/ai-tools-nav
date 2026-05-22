@@ -420,9 +420,13 @@ function renderHome() {
   // Online Tools Cards
   html += '<section><div class="section-title">🔧 在线小工具</div><div class="section-subtitle">免费实用的浏览器端工具，文件不上传服务器</div><div class="cat-grid">';
   var onlineTools = [
+    { name:"图片压缩", icon:"🗜️", desc:"上传图片，对比前后大小", url:"/tools/image-compress.html" },
     { name:"Word 转 PDF", icon:"📄", desc:"上传 Word 文档，一键导出 PDF", url:"/tools/word-to-pdf.html" },
     { name:"PDF 拆分/合并", icon:"📑", desc:"拆分或合并 PDF 文件", url:"/tools/pdf-tools.html" },
     { name:"Excel 转 PDF", icon:"📊", desc:"上传 Excel 表格，导出 PDF", url:"/tools/excel-to-pdf.html" },
+    { name:"CSS 渐变生成器", icon:"🎨", desc:"可视化调色，复制 CSS 代码", url:"/tools/gradient-generator.html" },
+    { name:"Markdown 编辑器", icon:"📝", desc:"实时预览，导出 HTML", url:"/tools/markdown-editor.html" },
+    { name:"白噪音/环境音", icon:"🎵", desc:"专注工作，放松身心", url:"/tools/ambient-sound.html" },
     { name:"随机猫 Meme", icon:"🐱", desc:"随机猫咪图片，治愈心情", url:"/tools/cat-meme.html" }
   ];
   onlineTools.forEach(function(t) {
