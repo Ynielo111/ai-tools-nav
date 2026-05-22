@@ -193,38 +193,28 @@ body::before { content:''; position:fixed; inset:0; z-index:0; pointer-events:no
 #splash {
   position:fixed; inset:0; z-index:9999;
   display:flex; flex-direction:column; align-items:center; justify-content:center;
-  background:rgba(10,10,26,0.92);
-  backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
-  cursor:pointer; transition:opacity 0.6s ease, visibility 0.6s ease;
+  background:#000;
+  cursor:pointer; transition:opacity 0.8s ease, visibility 0.8s ease;
 }
 #splash.hide { opacity:0; visibility:hidden; pointer-events:none; }
 #splash h1 {
-  font-size:clamp(36px, 8vw, 72px); font-weight:800; color:#e2e8f0;
-  letter-spacing:-1px; margin:0; animation:titlePulse 3s ease-in-out infinite;
-}
-#splash p {
-  font-size:clamp(14px, 2.5vw, 18px); color:#94a3b8; margin-top:16px;
-  letter-spacing:2px;
+  font-size:clamp(40px, 10vw, 80px); font-weight:600; color:#fff;
+  letter-spacing:-2px; margin:0; line-height:1;
 }
 #splash .hint {
-  position:absolute; bottom:40px; font-size:13px; color:#64748b;
-  animation:hintBounce 2s ease-in-out infinite;
-}
-@keyframes titlePulse {
-  0%,100% { opacity:0.9; }
-  50% { opacity:1; }
+  position:absolute; bottom:32px; font-size:12px; color:rgba(255,255,255,0.3);
+  animation:hintBounce 2s ease-in-out infinite; letter-spacing:1px;
 }
 @keyframes hintBounce {
-  0%,100% { transform:translateY(0); opacity:0.4; }
-  50% { transform:translateY(-6px); opacity:0.8; }
+  0%,100% { transform:translateY(0); opacity:0.3; }
+  50% { transform:translateY(-6px); opacity:0.7; }
 }
 </style>
 </head>
 <body>
 <div id="splash">
-  <h1>AI ToolNav</h1>
-  <p>发现最好用的 AI 工具</p>
-  <span class="hint">轻触任意位置进入</span>
+  <h1>Shader Animation</h1>
+  <span class="hint">轻触进入 AI ToolNav</span>
 </div>
 <header class="header">
   <div class="header-inner">
@@ -576,25 +566,22 @@ init();
     uniforms: uniforms,
     vertexShader: 'void main(){gl_Position=vec4(position,1.0);}',
     fragmentShader: [
+      '#define TWO_PI 6.2831853072',
+      '#define PI 3.14159265359',
       'precision highp float;',
       'uniform vec2 resolution;',
       'uniform float time;',
-      'float metaball(vec2 p,vec2 c,float r){return r/dot(p-c,p-c);}',
       'void main(void){',
       '  vec2 uv=(gl_FragCoord.xy*2.0-resolution.xy)/min(resolution.x,resolution.y);',
-      '  float t=time*0.4;',
-      '  vec2 m1=vec2(cos(t*0.7)*0.5,sin(t*0.6)*0.4);',
-      '  vec2 m2=vec2(cos(t*0.5+2.0)*0.5,sin(t*0.7+1.0)*0.35);',
-      '  vec2 m3=vec2(sin(t*0.8+1.5)*0.45,cos(t*0.5+3.0)*0.4);',
-      '  vec2 m4=vec2(sin(t*0.6+4.0)*0.35,cos(t*0.7+2.5)*0.45);',
-      '  float d=metaball(uv,m1,0.22)+metaball(uv,m2,0.18)+metaball(uv,m3,0.20)+metaball(uv,m4,0.16);',
-      '  float cyan=metaball(uv,m1,0.22)+metaball(uv,m3,0.20);',
-      '  float pink=metaball(uv,m2,0.18)+metaball(uv,m4,0.16);',
-      '  vec3 col=vec3(0.02,0.01,0.03);',
-      '  col+=vec3(0.15,0.45,0.55)*smoothstep(0.6,2.8,cyan);',
-      '  col+=vec3(0.50,0.12,0.30)*smoothstep(0.6,2.8,pink);',
-      '  col+=vec3(0.35,0.55,0.60)*smoothstep(1.5,5.0,d);',
-      '  gl_FragColor=vec4(col,1.0);',
+      '  float t=time*0.05;',
+      '  float lineWidth=0.002;',
+      '  vec3 color=vec3(0.0);',
+      '  for(int j=0;j<3;j++){',
+      '    for(int i=0;i<5;i++){',
+      '      color[j]+=lineWidth*float(i*i)/abs(fract(t-0.01*float(j)+float(i)*0.01)*5.0-length(uv)+mod(uv.x+uv.y,0.2));',
+      '    }',
+      '  }',
+      '  gl_FragColor=vec4(color[0],color[1],color[2],1.0);',
       '}'
     ].join('\n')
   });
