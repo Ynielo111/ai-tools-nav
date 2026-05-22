@@ -521,13 +521,13 @@ init();
       'void main(void){',
       '  vec2 uv=(gl_FragCoord.xy*2.0-resolution.xy)/min(resolution.x,resolution.y);',
       '  float t=time*0.03;',
-      '  vec3 color=vec3(0.02,0.01,0.04);',
+      '  vec3 color=vec3(0.04,0.01,0.00);',
       '  float d0=abs(fract(t)*5.0-length(uv)+mod(uv.x+uv.y,0.15));',
       '  float d1=abs(fract(t+0.01)*5.0-length(uv*0.9)+mod(uv.x-uv.y,0.12));',
       '  float d2=abs(fract(t+0.02)*5.0-length(uv*1.1)+mod(uv.y,0.18));',
-      '  color.r+=0.012/max(d0,0.001);',
+      '  color.r+=0.020/max(d0,0.001);',
       '  color.g+=0.008/max(d1,0.001);',
-      '  color.b+=0.015/max(d2,0.001);',
+      '  color.b+=0.002/max(d2,0.001);',
       '  gl_FragColor=vec4(color,1.0);',
       '}'
     ].join('\n')
