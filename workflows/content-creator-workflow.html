@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>自媒体内容创作AI工作流：从选题到变现的完整工具链 | AI ToolNav</title>
+<meta name="description" content="一套覆盖选题挖掘、脚本撰写、视频拍摄、AI剪辑、多平台分发的完整工作流。不是堆工具，而是告诉你每个环节该用什么、怎么衔接。">
+<meta name="keywords" content="自媒体AI工具,内容创作工作流,AI视频工具,AI写作工具,自媒体变现">
+<link rel="stylesheet" href="/css/style.css">
+<meta name="robots" content="index, follow">
+<style>
+  .workflow-step { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--radius-lg); padding: 28px; margin-bottom: 20px; backdrop-filter: blur(12px); position: relative; overflow: hidden; }
+  .workflow-step::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: linear-gradient(180deg, var(--accent-start), #f59e0b); border-radius: 0 4px 4px 0; }
+  .workflow-step-num { font-size: 12px; font-weight: 700; color: var(--accent-start); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; }
+  .workflow-step h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; color: #fff; }
+  .step-tools { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+  .step-tool { display: inline-flex; align-items: center; gap: 4px; background: rgba(129,140,248,0.15); border: 1px solid rgba(129,140,248,0.25); padding: 4px 12px; border-radius: 9999px; font-size: 12px; color: var(--accent-start); }
+  .step-detail { font-size: 13px; color: var(--text-secondary); line-height: 1.8; }
+  .step-tip { margin-top: 12px; padding: 12px 16px; background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.15); border-radius: 10px; font-size: 12px; color: var(--gold); }
+</style>
+</head>
+<body class="no-splash">
+<header class="header">
+  <div class="header-inner">
+    <a href="/" class="logo">AI ToolNav</a>
+    <nav class="nav"><a href="/">首页</a><a href="/categories/llm.html">大模型</a><a href="/categories/image.html">AI绘画</a><a href="/categories/code.html">AI编程</a><a href="/articles/">文章</a><a href="/tools/">在线工具</a></nav>
+  </div>
+</header>
+<main class="main">
+  <a href="/" class="back-btn">← 返回首页</a>
+  <div class="detail-header animate-fade-in">
+    <div class="detail-info">
+      <div class="feat-badge" style="margin-bottom:12px;"><span>🎬</span> 组合技 · 工作流</div>
+      <h1>自媒体内容创作AI工作流</h1>
+      <div class="detail-desc" style="font-size:15px;max-width:600px;">覆盖选题挖掘、脚本撰写、拍摄制作、AI剪辑、多平台分发和数据分析的完整链路——一个人就是一个内容团队。</div>
+      <p style="font-size:12px;color:var(--text-muted);margin-top:8px;">适用：短视频创作者、公众号作者、个人IP · 预计阅读 4 分钟</p>
+    </div>
+  </div>
+
+  <div class="workflow-step animate-fade-in delay-100">
+    <div class="workflow-step-num">Step 01</div>
+    <h3>选题挖掘：从"不知道发什么"到"选题库100+"</h3>
+    <div class="step-tools"><span class="step-tool">🔎 Perplexity</span><span class="step-tool">📋 Notion</span></div>
+    <div class="step-detail"><p>用 <strong>Perplexity</strong> 搜索"你的领域 + trending topics 2026"，AI会把热门话题和引用来源一并列出。同时去竞品账号看最近30天流量最高的3条内容，用 <strong>Notion</strong> 建一个选题库：标题/角度/预计流量/难度。保持选题库有20+备选——灵感焦虑的本质是选题库空了。</p></div>
+    <div class="step-tip">💡 好选题 = 热门话题 × 你的独特视角。Perplexity给你话题，你提供视角。</div>
+  </div>
+
+  <div class="workflow-step animate-fade-in delay-200">
+    <div class="workflow-step-num">Step 02</div>
+    <h3>脚本撰写：从空白文档到拍摄脚本</h3>
+    <div class="step-tools"><span class="step-tool">💬 Claude</span><span class="step-tool">✍️ Jasper</span></div>
+    <div class="step-detail"><p>把选题和你的观点告诉 <strong>Claude</strong>，让它以第一人称写口语化脚本——你提供观点和语气，AI提供结构和流畅度。需要营销感的标题和开头用 <strong>Jasper</strong>——它在 catchy hook 方面比Claude更强。关键是：AI写的脚本一定要读出声来修改，眼睛看着顺的文案嘴里读出来往往别扭。</p></div>
+    <div class="step-tip">💡 口语化脚本的秘诀：用Claude写初稿，然后自己读一遍录音，把"书面语"改成"口头语"。</div>
+  </div>
+
+  <div class="workflow-step animate-fade-in delay-300">
+    <div class="workflow-step-num">Step 03</div>
+    <h3>视觉素材：封面、配图、B-Roll</h3>
+    <div class="step-tools"><span class="step-tool">🎨 Midjourney</span><span class="step-tool">🎯 Canva AI</span><span class="step-tool">🎬 Runway</span></div>
+    <div class="step-detail"><p>封面图用 <strong>Midjourney</strong> 生成，16:9比例，风格保持统一（观众看到封面就知道是你）。需要大量模板化的社媒图片用 <strong>Canva AI</strong>——输入标题自动生成配图。B-Roll素材不够用 <strong>Runway</strong> 的文字转视频功能生成补充镜头。</p></div>
+    <div class="step-tip">💡 封面统一性 > 单张封面质量。Midjourney用--style参数锁定风格。</div>
+  </div>
+
+  <div class="workflow-step animate-fade-in delay-400">
+    <div class="workflow-step-num">Step 04</div>
+    <h3>剪辑与后期：AI提速10倍</h3>
+    <div class="step-tools"><span class="step-tool">✂️ CapCut</span><span class="step-tool">📝 Descript</span></div>
+    <div class="step-detail"><p><strong>Descript</strong> 的革命性在于：你像编辑Word文档一样编辑视频——删掉文字，对应画面和音频就自动删了。用它的AI去口癖功能自动识别并删除"嗯""啊""然后"。粗剪完成后导入 <strong>CapCut</strong> 加字幕（AI字幕准确率极高）、转场、BGM。整个流程从以前的半天压缩到1小时。</p></div>
+    <div class="step-tip">💡 Descript + CapCut 是短视频创作者效率最高的双工具组合。</div>
+  </div>
+
+  <div class="workflow-step animate-fade-in delay-500">
+    <div class="workflow-step-num">Step 05</div>
+    <h3>多平台分发与数据复盘</h3>
+    <div class="step-tools"><span class="step-tool">📊 Notion</span><span class="step-tool">💬 Claude</span></div>
+    <div class="step-detail"><p>每条内容发布后在 <strong>Notion</strong> 记录核心数据（播放量/互动率/转化）。每周五把数据丢给 <strong>Claude</strong> 分析——"这周哪几条表现好？为什么？下周应该多做哪类选题？"——让AI做你的内容策略顾问。</p></div>
+    <div class="step-tip">💡 大多数创作者不分析数据。你每周花15分钟用Claude分析，就能超过90%的同行。</div>
+  </div>
+
+  <section class="section" style="margin-top:32px;">
+    <div class="section-title">📋 更多工作流</div>
+    <div class="card-grid" style="margin-top:16px;">
+      <a href="/workflows/grad-thesis-workflow.html" class="tool-card"><span class="icon">🔬</span><div class="name">研究生论文AI工作流</div><div class="desc">选题→文献综述→实证分析→润色的完整方案</div></a>
+      <a href="/workflows/ai-coding-workflow.html" class="tool-card"><span class="icon">💻</span><div class="name">AI编程全流程工作流</div><div class="desc">从产品想法到部署上线，每个环节的AI搭档</div></a>
+    </div>
+  </section>
+</main>
+<footer class="footer"><p>© 2026 AI ToolNav · <a href="/privacy.html">隐私政策</a> | <a href="/terms.html">服务条款</a> | <a href="/about.html">关于我们</a> · 每日更新</p></footer>
+</body>
+</html>

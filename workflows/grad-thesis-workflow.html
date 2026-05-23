@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>研究生论文AI工作流：从选题到终稿的完整工具箱 | AI ToolNav</title>
+<meta name="description" content="一套覆盖选题、文献综述、实证分析、论文润色全流程的AI工具工作流。不堆砌工具列表，而是告诉你每一步用哪个、怎么用——适合研一、MBA和毕业论文写作。">
+<meta name="keywords" content="研究生论文AI工具,论文写作工作流,AI学术工具,文献综述AI,论文润色工具">
+<link rel="stylesheet" href="/css/style.css">
+<meta name="robots" content="index, follow">
+<style>
+  .workflow-step {
+    background: var(--card-bg); border: 1px solid var(--card-border);
+    border-radius: var(--radius-lg); padding: 28px; margin-bottom: 20px;
+    backdrop-filter: blur(12px); position: relative; overflow: hidden;
+  }
+  .workflow-step::before {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+    background: linear-gradient(180deg, var(--accent-start), var(--accent-end));
+    border-radius: 0 4px 4px 0;
+  }
+  .workflow-step-num {
+    font-size: 12px; font-weight: 700; color: var(--accent-start);
+    text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px;
+  }
+  .workflow-step h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; color: #fff; }
+  .workflow-step .step-tools { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+  .workflow-step .step-tool {
+    display: inline-flex; align-items: center; gap: 4px;
+    background: rgba(129,140,248,0.15); border: 1px solid rgba(129,140,248,0.25);
+    padding: 4px 12px; border-radius: 9999px; font-size: 12px; color: var(--accent-start);
+  }
+  .workflow-step .step-detail { font-size: 13px; color: var(--text-secondary); line-height: 1.8; }
+  .workflow-step .step-tip {
+    margin-top: 12px; padding: 12px 16px;
+    background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.15);
+    border-radius: 10px; font-size: 12px; color: var(--gold);
+  }
+  .pro-tip-box {
+    background: linear-gradient(135deg, rgba(245,158,11,0.1), rgba(251,191,36,0.05));
+    border: 1px solid rgba(245,158,11,0.2); border-radius: var(--radius-lg);
+    padding: 24px; margin: 24px 0;
+  }
+  .pro-tip-box h4 { color: var(--gold); margin-bottom: 8px; }
+  .pro-tip-box ul { list-style: none; font-size: 13px; color: var(--text-secondary); line-height: 1.8; }
+  .pro-tip-box li::before { content: '▪ '; color: var(--gold); }
+</style>
+</head>
+<body class="no-splash">
+<header class="header">
+  <div class="header-inner">
+    <a href="/" class="logo">AI ToolNav</a>
+    <nav class="nav">
+      <a href="/">首页</a>
+      <a href="/categories/llm.html">大模型</a>
+      <a href="/categories/image.html">AI绘画</a>
+      <a href="/categories/code.html">AI编程</a>
+      <a href="/articles/">文章</a>
+      <a href="/tools/">在线工具</a>
+    </nav>
+  </div>
+</header>
+
+<main class="main">
+  <a href="/" class="back-btn">← 返回首页</a>
+
+  <div class="detail-header animate-fade-in">
+    <div class="detail-info">
+      <div class="feat-badge" style="margin-bottom:12px;"><span>🔬</span> 组合技 · 工作流</div>
+      <h1>研究生论文AI工作流</h1>
+      <div class="detail-desc" style="font-size:15px;max-width:600px;">一套覆盖选题、文献综述、实证分析、论文润色全流程的AI工具方案。不堆工具列表，每一步告诉你用哪个、怎么用、避什么坑。</div>
+      <p style="font-size:12px;color:var(--text-muted);margin-top:8px;">适用：研一论文、MBA论文、本科毕业论文 · 预计阅读 5 分钟</p>
+    </div>
+  </div>
+
+  <!-- Step 1: 选题 -->
+  <div class="workflow-step animate-fade-in delay-100">
+    <div class="workflow-step-num">Step 01</div>
+    <h3>选题定位：从模糊方向到可执行的研究问题</h3>
+    <div class="step-tools">
+      <span class="step-tool">🔎 Perplexity</span>
+      <span class="step-tool">📋 Notion</span>
+    </div>
+    <div class="step-detail">
+      <p>导师给了方向但没说具体做什么？先用 <strong>Perplexity</strong> 搜"你的领域 + research gap 2024-2026"，它会自动引用文献来源。把有趣的题目扔到 <strong>Notion</strong> 里建一个"选题池"表格，列三列：题目/可行性/数据来源。一周后回来删掉80%，剩下的就是值得做的。</p>
+    </div>
+    <div class="step-tip">💡 关键原则：选题之所以难，不是因为没想法，而是因为想法太多。Perplexity帮你快速判断哪些想法已经被人做过了。</div>
+  </div>
+
+  <!-- Step 2: 文献综述 -->
+  <div class="workflow-step animate-fade-in delay-200">
+    <div class="workflow-step-num">Step 02</div>
+    <h3>文献综述：从100篇到20篇核心文献，再写到5000字综述</h3>
+    <div class="step-tools">
+      <span class="step-tool">🤖 Elicit</span>
+      <span class="step-tool">🌙 Kimi</span>
+      <span class="step-tool">✅ Grammarly</span>
+    </div>
+    <div class="step-detail">
+      <p>不要在 Google Scholar 上逐篇下载。用 <strong>Elicit</strong>（elicit.com）输入研究问题，它会自动给你一张表格：每篇文献的方法、样本量、主要发现——一目了然。筛选出20篇核心文献后，把PDF全部拖给 <strong>Kimi</strong>（支持200万字上下文），让它提炼"三派争论"和"研究空白"。动手写综述时，每写完一段用 <strong>Grammarly</strong> 检查学术英语表达。</p>
+    </div>
+    <div class="step-tip">💡 Elicit 的"提取研究特征"功能是文献综述的神器——你再也不需要一篇篇打开PDF看方法论了。</div>
+  </div>
+
+  <!-- Step 3: 数据与实证 -->
+  <div class="workflow-step animate-fade-in delay-300">
+    <div class="workflow-step-num">Step 03</div>
+    <h3>数据处理与实证分析：让AI帮你写代码、跑回归、debug</h3>
+    <div class="step-tools">
+      <span class="step-tool">⌨️ Claude Code</span>
+      <span class="step-tool">💬 Claude</span>
+      <span class="step-tool">🐙 GitHub Copilot</span>
+    </div>
+    <div class="step-detail">
+      <p>这是大多数文科研究生的噩梦——但AI恰好最擅长写代码。把你的数据和要跑的分析告诉 <strong>Claude</strong>（比如"我有面板数据，想做固定效应回归和稳健性检验"），它会给你完整的 Python/Stata 代码。复杂分析用 <strong>Claude Code</strong> 直接在项目文件夹里批量操作；日常写代码用 <strong>GitHub Copilot</strong> 在 VS Code 里实时补全。遇到报错直接把错误信息丢给Claude——它平均30秒定位bug。</p>
+    </div>
+    <div class="step-tip">💡 不要自己从零写代码。告诉AI"我想要什么结果"比告诉它"怎么写"更高效。你提供经济学逻辑，它提供代码实现。</div>
+  </div>
+
+  <!-- Step 4: 写作与润色 -->
+  <div class="workflow-step animate-fade-in delay-400">
+    <div class="workflow-step-num">Step 04</div>
+    <h3>写作润色与降重：从初稿到终稿的最后一步</h3>
+    <div class="step-tools">
+      <span class="step-tool">💬 Claude</span>
+      <span class="step-tool">🔄 QuillBot</span>
+      <span class="step-tool">✅ Grammarly</span>
+    </div>
+    <div class="step-detail">
+      <p>把实证结果和讨论大纲喂给 <strong>Claude</strong>，让它生成初稿框架——AI不会替代你的学术判断，但它能帮你把碎片思路组织成流畅段落。写完初稿后，用 <strong>QuillBot</strong> 的改写模式逐段降重（修改措辞但不改变学术含义），再用 <strong>Grammarly</strong> 做最后一遍语法检查。三段式处理法：Claude启框架 → QuillBot降重 → Grammarly收尾。</p>
+    </div>
+    <div class="step-tip">💡 降重的核心不是"换词"，而是"改写句子结构"。QuillBot的"学术模式"专门干这个。</div>
+  </div>
+
+  <!-- Step 5: 格式与排版 -->
+  <div class="workflow-step animate-fade-in delay-500">
+    <div class="workflow-step-num">Step 05</div>
+    <h3>格式规范与参考文献：没人想手动调格式</h3>
+    <div class="step-tools">
+      <span class="step-tool">📚 Zotero</span>
+      <span class="step-tool">📊 Gamma</span>
+    </div>
+    <div class="step-detail">
+      <p>用 <strong>Zotero</strong>（免费）管理所有参考文献，安装浏览器插件后一键保存文献信息，Word里装Zotero插件就能自动生成参考文献列表——格式自动匹配APA/Chicago/GB/T 7714。答辩PPT用 <strong>Gamma</strong> 生成初版，告诉它你的论文主题和章节结构，20秒出一个设计精美的初稿。</p>
+    </div>
+    <div class="step-tip">💡 现在就装Zotero浏览器插件。等你论文写完再手动整理参考文献，至少要花一个下午。</div>
+  </div>
+
+  <!-- Pro Tips -->
+  <div class="pro-tip-box animate-fade-in">
+    <h4>⭐ 一个研究生的避坑清单</h4>
+    <ul>
+      <li>不要用ChatGPT直接写论文正文——它编造的引用看起来很真但根本不存在</li>
+      <li>实证代码让AI写但必须自己理解——答辩时老师会问"为什么用这个模型"</li>
+      <li>Perplexity搜到的文献必须去CrossRef验证——AI搜索引擎的引用偶尔不准确</li>
+      <li>每周备份一次Notion和Zotero——数据丢了AI救不了你</li>
+      <li>Grammarly免费版就够用——研究生不需要付费版也能写出合格的英文论文</li>
+    </ul>
+  </div>
+
+  <section class="section">
+    <div class="section-title">🔗 本工作流涉及的工具</div>
+    <div class="card-grid" style="margin-top:16px;">
+      <a href="/tools/perplexity.html" class="tool-card">
+        <span class="icon">🔎</span>
+        <div class="name">Perplexity</div>
+        <div class="desc">AI搜索引擎，自动引用来源</div>
+        <div class="tags"><span class="tag tag-freemium">免费增值</span></div>
+      </a>
+      <a href="/tools/claude.html" class="tool-card">
+        <span class="icon">💬</span>
+        <div class="name">Claude</div>
+        <div class="desc">超长上下文，编程和长文档分析一流</div>
+        <div class="tags"><span class="tag tag-freemium">免费增值</span></div>
+      </a>
+      <a href="/tools/kimi.html" class="tool-card">
+        <span class="icon">🌙</span>
+        <div class="name">Kimi</div>
+        <div class="desc">200万字超长上下文，论文阅读利器</div>
+        <div class="tags"><span class="tag tag-freemium">免费增值</span></div>
+      </a>
+      <a href="/tools/grammarly.html" class="tool-card">
+        <span class="icon">✅</span>
+        <div class="name">Grammarly</div>
+        <div class="desc">英语语法纠正与学术润色</div>
+        <div class="tags"><span class="tag tag-freemium">免费增值</span></div>
+      </a>
+      <a href="/tools/quillbot.html" class="tool-card">
+        <span class="icon">🔄</span>
+        <div class="name">QuillBot</div>
+        <div class="desc">学术改写降重，多种模式</div>
+        <div class="tags"><span class="tag tag-freemium">免费增值</span></div>
+      </a>
+      <a href="/tools/gamma.html" class="tool-card">
+        <span class="icon">📊</span>
+        <div class="name">Gamma</div>
+        <div class="desc">AI演示文稿，做PPT效率最高</div>
+        <div class="tags"><span class="tag tag-freemium">免费增值</span></div>
+      </a>
+    </div>
+  </section>
+
+  <section class="section" style="margin-top:32px;">
+    <div class="section-title">📋 更多工作流</div>
+    <div class="card-grid" style="margin-top:16px;">
+      <a href="/workflows/content-creator-workflow.html" class="tool-card">
+        <span class="icon">🎬</span>
+        <div class="name">自媒体内容创作工作流</div>
+        <div class="desc">选题→脚本→拍摄→剪辑→发布的AI全链路</div>
+      </a>
+      <a href="/workflows/ai-coding-workflow.html" class="tool-card">
+        <span class="icon">💻</span>
+        <div class="name">AI编程全流程工作流</div>
+        <div class="desc">从产品想法到部署上线，每个环节的AI搭档</div>
+      </a>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <p>© 2026 AI ToolNav · <a href="/privacy.html">隐私政策</a> | <a href="/terms.html">服务条款</a> | <a href="/about.html">关于我们</a> · 每日更新</p>
+</footer>
+</body>
+</html>

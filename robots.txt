@@ -1,9 +1,6 @@
 User-agent: *
 Allow: /
-Allow: /articles/
-Allow: /compare/
-
-Sitemap: https://aitnav.com/sitemap.xml
-
 Disallow: /data/
 Disallow: /template/
+
+Sitemap: https://aitnav.com/sitemap.xml

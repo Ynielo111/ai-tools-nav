@@ -3,204 +3,248 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>在线工具 — AI ToolNav</title>
-<meta name="description" content="免费在线工具集合：Word转PDF、PDF拆分合并、Excel转PDF、随机猫Meme。文件在浏览器本地处理，安全无忧。">
-<link rel="icon" type="image/svg+xml" href="/logo.svg">
-<style>
-:root {
-  --bg: #0a0a1a;
-  --card-bg: rgba(255,255,255,0.06);
-  --card-border: rgba(255,255,255,0.10);
-  --text-primary: #e2e8f0;
-  --text-secondary: #94a3b8;
-  --text-muted: #64748b;
-  --accent-start: #818cf8;
-  --accent-end: #a78bfa;
-  --radius: 14px;
-  --shadow-sm: 0 2px 8px rgba(0,0,0,0.2);
-  --shadow-md: 0 4px 16px rgba(0,0,0,0.3);
-  --shadow-lg: 0 8px 30px rgba(0,0,0,0.4);
-}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-body{
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans SC",sans-serif;
-  background:var(--bg);color:var(--text-primary);line-height:1.6;min-height:100vh;
-  position:relative;z-index:0;
-}
-body::before{
-  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
-  background:radial-gradient(circle at 20% 40%,rgba(168,85,247,0.30) 0%,transparent 50%),
-              radial-gradient(circle at 70% 15%,rgba(59,130,246,0.25) 0%,transparent 50%),
-              radial-gradient(circle at 85% 80%,rgba(6,182,212,0.20) 0%,transparent 50%);
-  filter:blur(60px);
-}
-
-.header{background:rgba(10,10,26,0.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--card-border);position:sticky;top:0;z-index:100;}
-.header-inner{max-width:1200px;margin:0 auto;padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between;}
-.logo{font-size:20px;font-weight:700;color:var(--text-primary);text-decoration:none;}
-.nav{display:flex;gap:20px;}
-.nav a{font-size:13px;color:var(--text-secondary);text-decoration:none;transition:color 0.2s;}
-.nav a:hover{color:var(--accent-start);}
-
-.main{max-width:1000px;margin:0 auto;padding:32px 24px;position:relative;z-index:1;}
-.back-btn{display:inline-flex;align-items:center;gap:4px;color:var(--accent-start);font-size:13px;text-decoration:none;margin-bottom:20px;}
-.back-btn:hover{text-decoration:underline;}
-.page-title{font-size:26px;font-weight:800;color:var(--text-primary);margin-bottom:4px;}
-.page-subtitle{font-size:13px;color:var(--text-muted);margin-bottom:24px;}
-
-/* Left-right split */
-.split-layout{display:flex;gap:20px;align-items:flex-start;}
-.tool-sidebar{flex:0 0 300px;display:flex;flex-direction:column;gap:6px;}
-.tool-sidebar-item{
-  display:flex;align-items:center;gap:12px;
-  background:var(--card-bg);border:1px solid var(--card-border);
-  border-radius:12px;padding:14px 16px;cursor:pointer;
-  transition:all 0.2s;text-decoration:none;color:inherit;
-}
-.tool-sidebar-item:hover{border-color:rgba(129,140,248,0.4);background:rgba(129,140,248,0.08);}
-.tool-sidebar-item.active{border-color:var(--accent-start);background:rgba(129,140,248,0.12);box-shadow:0 0 16px rgba(129,140,248,0.15);}
-.tool-sidebar-item .tool-s-icon{font-size:24px;flex-shrink:0;}
-.tool-sidebar-item .tool-s-info{flex:1;}
-.tool-sidebar-item .tool-s-name{font-size:14px;font-weight:600;color:var(--text-primary);}
-.tool-sidebar-item .tool-s-desc{font-size:11px;color:var(--text-muted);margin-top:1px;}
-
-.tool-preview{flex:1;display:flex;align-items:center;justify-content:center;min-height:360px;}
-.tool-preview-card{
-  background:var(--card-bg);border:1px solid var(--card-border);
-  border-radius:16px;padding:40px;text-align:center;
-  max-width:480px;width:100%;box-shadow:var(--shadow-md);
-}
-.tool-preview-card .tp-icon{font-size:56px;margin-bottom:16px;}
-.tool-preview-card .tp-name{font-size:22px;font-weight:700;color:var(--text-primary);margin-bottom:8px;}
-.tool-preview-card .tp-desc{font-size:13px;color:var(--text-secondary);line-height:1.6;margin-bottom:20px;}
-.tool-preview-card .tp-features{text-align:left;font-size:12px;color:var(--text-muted);margin-bottom:20px;line-height:1.8;list-style:none;padding:0;}
-.tool-preview-card .tp-btn{
-  display:inline-block;background:linear-gradient(135deg,var(--accent-start),var(--accent-end));
-  color:#fff;padding:12px 32px;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600;
-  transition:opacity 0.2s;
-}
-.tool-preview-card .tp-btn:hover{opacity:0.9;}
-
-.privacy-note{text-align:center;margin-top:32px;padding:16px;background:rgba(52,211,153,0.08);border:1px solid rgba(52,211,153,0.15);border-radius:10px;}
-.privacy-note p{font-size:12px;color:var(--text-secondary);margin:0;}
-
-.footer{text-align:center;padding:32px 24px;border-top:1px solid var(--card-border);margin-top:20px;}
-.footer p{font-size:11px;color:var(--text-muted);line-height:1.8;}
-
-@media(max-width:768px){
-  .split-layout{flex-direction:column;}
-  .tool-sidebar{flex:auto;width:100%;}
-}
-</style>
+<title>AI工具排行榜 | 完整评分与对比 — AI ToolNav</title>
+<meta name="description" content="完整AI工具排行榜，收录48款精选AI工具，包含评分、价格、适用人群和详细点评。支持按分类筛选和横向对比。">
+<meta name="keywords" content="AI工具排行榜,AI工具排名,AI工具评分,最好用的AI工具">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="canonical" href="https://aitnav.com/tools/">
+<meta name="robots" content="index, follow">
 </head>
-<body>
-
+<body class="no-splash">
 <header class="header">
   <div class="header-inner">
     <a href="/" class="logo">AI ToolNav</a>
     <nav class="nav">
       <a href="/">首页</a>
-      <a href="/#llm">大模型</a>
-      <a href="/#image">AI绘画</a>
-      <a href="/#code">AI编程</a>
+      <a href="/categories/llm.html">大模型</a>
+      <a href="/categories/image.html">AI绘画</a>
+      <a href="/categories/code.html">AI编程</a>
       <a href="/articles/">文章</a>
-      <a href="/tools/" style="color:var(--accent-start);">在线工具</a>
+      <a href="/tools/">在线工具</a>
     </nav>
   </div>
 </header>
 
 <main class="main">
   <a href="/" class="back-btn">← 返回首页</a>
-  <h1 class="page-title">🔧 在线小工具</h1>
-  <p class="page-subtitle">免费实用的浏览器端工具，文件不上传服务器，隐私安全</p>
-
-  <div class="split-layout">
-    <div class="tool-sidebar" id="toolSidebar">
-      <a href="/tools/word-to-pdf.html" class="tool-sidebar-item active" data-tool="word-to-pdf" onmouseenter="previewTool(this)">
-        <span class="tool-s-icon">📄</span>
-        <div class="tool-s-info"><div class="tool-s-name">Word 转 PDF</div><div class="tool-s-desc">上传 .docx 导出 PDF</div></div>
-      </a>
-      <a href="/tools/pdf-tools.html" class="tool-sidebar-item" data-tool="pdf-tools" onmouseenter="previewTool(this)">
-        <span class="tool-s-icon">📑</span>
-        <div class="tool-s-info"><div class="tool-s-name">PDF 拆分/合并</div><div class="tool-s-desc">拆分页面或合并多个 PDF</div></div>
-      </a>
-      <a href="/tools/excel-to-pdf.html" class="tool-sidebar-item" data-tool="excel-to-pdf" onmouseenter="previewTool(this)">
-        <span class="tool-s-icon">📊</span>
-        <div class="tool-s-info"><div class="tool-s-name">Excel 转 PDF</div><div class="tool-s-desc">上传 .xlsx 导出 PDF</div></div>
-      </a>
-      <a href="/tools/image-compress.html" class="tool-sidebar-item" data-tool="image-compress" onmouseenter="previewTool(this)">
-        <span class="tool-s-icon">🗜️</span>
-        <div class="tool-s-info"><div class="tool-s-name">图片压缩</div><div class="tool-s-desc">压缩图片，对比前后大小</div></div>
-      </a>
-      <a href="/tools/gradient-generator.html" class="tool-sidebar-item" data-tool="gradient-generator" onmouseenter="previewTool(this)">
-        <span class="tool-s-icon">🎨</span>
-        <div class="tool-s-info"><div class="tool-s-name">CSS 渐变生成器</div><div class="tool-s-desc">可视化调色，复制 CSS 代码</div></div>
-      </a>
-      <a href="/tools/markdown-editor.html" class="tool-sidebar-item" data-tool="markdown-editor" onmouseenter="previewTool(this)">
-        <span class="tool-s-icon">📝</span>
-        <div class="tool-s-info"><div class="tool-s-name">Markdown 编辑器</div><div class="tool-s-desc">左边编写右边实时预览</div></div>
-      </a>
-      <a href="/tools/ambient-sound.html" class="tool-sidebar-item" data-tool="ambient-sound" onmouseenter="previewTool(this)">
-        <span class="tool-s-icon">🎵</span>
-        <div class="tool-s-info"><div class="tool-s-name">白噪音 / 环境音</div><div class="tool-s-desc">专注工作，放松身心</div></div>
-      </a>
-      <a href="/tools/cat-meme.html" class="tool-sidebar-item" data-tool="cat-meme" onmouseenter="previewTool(this)">
-        <span class="tool-s-icon">🐱</span>
-        <div class="tool-s-info"><div class="tool-s-name">随机猫 Meme</div><div class="tool-s-desc">随机猫咪图片，治愈一下</div></div>
-      </a>
-    </div>
-
-    <div class="tool-preview" id="toolPreview">
-      <div class="tool-preview-card" id="previewCard"></div>
-    </div>
+  <div class="hero-headline">
+    <h2 class="gradient-heading">完整 AI 工具排行榜</h2>
+    <p>48 款精选工具，综合评分排序</p>
   </div>
 
-  <div class="privacy-note">
-    <p>🔒 所有工具均在浏览器本地运行，您的文件不会上传到任何服务器</p>
-  </div>
+  <section class="section">
+    <div class="section-title">🏆 综合排名</div>
+    <div class="ranking-list"><a href="/tools/chatgpt.html" class="ranking-item">
+          <div class="rank-num gold">1</div>
+          <span class="rank-icon">🤖</span>
+          <div class="rank-info">
+            <div class="rank-name">ChatGPT</div>
+            <div class="rank-desc">OpenAI旗舰对话助手，支持GPT-4o多模态交互，全球用户量最大的AI工具</div>
+            <div class="rank-tags"><span class="tag tag-freemium">免费增值</span><span class="tag">对话</span><span class="tag">写作</span><span class="tag">编程</span><span class="tag">推理</span></div>
+          </div>
+          <div class="rank-stars">★★★★★</div>
+          <div class="rank-audience">适合<br>所有人</div>
+        </a><a href="/tools/claude.html" class="ranking-item">
+          <div class="rank-num silver">2</div>
+          <span class="rank-icon">💬</span>
+          <div class="rank-info">
+            <div class="rank-name">Claude</div>
+            <div class="rank-desc">Anthropic出品，安全优先的智能助手，超长上下文和代码理解能力突出</div>
+            <div class="rank-tags"><span class="tag tag-freemium">免费增值</span><span class="tag">推理</span><span class="tag">编程</span><span class="tag">长文本</span><span class="tag">安全</span></div>
+          </div>
+          <div class="rank-stars">★★★★★</div>
+          <div class="rank-audience">适合<br>专业人士</div>
+        </a><a href="/tools/deepseek.html" class="ranking-item">
+          <div class="rank-num bronze">3</div>
+          <span class="rank-icon">🐋</span>
+          <div class="rank-info">
+            <div class="rank-name">DeepSeek</div>
+            <div class="rank-desc">国产高性能开源大模型，推理能力接近GPT-4，API价格仅为OpenAI的1/10</div>
+            <div class="rank-tags"><span class="tag tag-freemium">免费增值</span><span class="tag">开源</span><span class="tag">编程</span><span class="tag">推理</span><span class="tag">性价比</span></div>
+          </div>
+          <div class="rank-stars">★★★★★</div>
+          <div class="rank-audience">适合<br>所有人</div>
+        </a><a href="/tools/midjourney.html" class="ranking-item">
+          <div class="rank-num ">4</div>
+          <span class="rank-icon">🎨</span>
+          <div class="rank-info">
+            <div class="rank-name">Midjourney</div>
+            <div class="rank-desc">顶级AI图像生成工具，艺术风格最丰富，设计社区活跃</div>
+            <div class="rank-tags"><span class="tag tag-paid">付费</span><span class="tag">艺术</span><span class="tag">设计</span><span class="tag">高质感</span><span class="tag">创意</span></div>
+          </div>
+          <div class="rank-stars">★★★★★</div>
+          <div class="rank-audience">适合<br>专业人士</div>
+        </a><a href="/tools/github-copilot.html" class="ranking-item">
+          <div class="rank-num ">5</div>
+          <span class="rank-icon">🐙</span>
+          <div class="rank-info">
+            <div class="rank-name">GitHub Copilot</div>
+            <div class="rank-desc">GitHub出品，深度集成VS Code和JetBrains，代码补全的行业标杆</div>
+            <div class="rank-tags"><span class="tag tag-paid">付费</span><span class="tag">补全</span><span class="tag">IDE</span><span class="tag">微软</span><span class="tag">企业</span></div>
+          </div>
+          <div class="rank-stars">★★★★★</div>
+          <div class="rank-audience">适合<br>专业人士</div>
+        </a><a href="/tools/cursor.html" class="ranking-item">
+          <div class="rank-num ">6</div>
+          <span class="rank-icon">🖱️</span>
+          <div class="rank-info">
+            <div class="rank-name">Cursor</div>
+            <div class="rank-desc">AI原生代码编辑器，基于VS Code但加入了对话式编程体验</div>
+            <div class="rank-tags"><span class="tag tag-freemium">免费增值</span><span class="tag">编辑器</span><span class="tag">对话</span><span class="tag">重构</span><span class="tag">全文件</span></div>
+          </div>
+          <div class="rank-stars">★★★★★</div>
+          <div class="rank-audience">适合<br>专业人士</div>
+        </a><a href="/tools/claude-code.html" class="ranking-item">
+          <div class="rank-num ">7</div>
+          <span class="rank-icon">⌨️</span>
+          <div class="rank-info">
+            <div class="rank-name">Claude Code</div>
+            <div class="rank-desc">Anthropic终端AI编程代理，命令行直接操控整个代码库</div>
+            <div class="rank-tags"><span class="tag tag-paid">付费</span><span class="tag">终端</span><span class="tag">Agent</span><span class="tag">自动化</span><span class="tag">CLI</span></div>
+          </div>
+          <div class="rank-stars">★★★★★</div>
+          <div class="rank-audience">适合<br>专业人士</div>
+        </a><a href="/tools/sora.html" class="ranking-item">
+          <div class="rank-num ">8</div>
+          <span class="rank-icon">🎬</span>
+          <div class="rank-info">
+            <div class="rank-name">Sora</div>
+            <div class="rank-desc">OpenAI文本/图片转视频模型，画质和物理一致性领先</div>
+            <div class="rank-tags"><span class="tag tag-paid">付费</span><span class="tag">文生视频</span><span class="tag">高画质</span><span class="tag">创意</span></div>
+          </div>
+          <div class="rank-stars">★★★★★</div>
+          <div class="rank-audience">适合<br>专业人士</div>
+        </a><a href="/tools/grammarly.html" class="ranking-item">
+          <div class="rank-num ">9</div>
+          <span class="rank-icon">✅</span>
+          <div class="rank-info">
+            <div class="rank-name">Grammarly</div>
+            <div class="rank-desc">全球最流行的AI英语语法纠正与润色工具，浏览器/桌面全覆盖</div>
+            <div class="rank-tags"><span class="tag tag-freemium">免费增值</span><span class="tag">语法</span><span class="tag">润色</span><span class="tag">英语</span><span class="tag">全平台</span></div>
+          </div>
+          <div class="rank-stars">★★★★★</div>
+          <div class="rank-audience">适合<br>所有人</div>
+        </a><a href="/tools/suno.html" class="ranking-item">
+          <div class="rank-num ">10</div>
+          <span class="rank-icon">🎵</span>
+          <div class="rank-info">
+            <div class="rank-name">Suno</div>
+            <div class="rank-desc">AI音乐生成器，输入歌词和风格即可一键生成完整歌曲</div>
+            <div class="rank-tags"><span class="tag tag-freemium">免费增值</span><span class="tag">音乐</span><span class="tag">作曲</span><span class="tag">歌词</span><span class="tag">创作</span></div>
+          </div>
+          <div class="rank-stars">★★★★★</div>
+          <div class="rank-audience">适合<br>所有人</div>
+        </a><a href="/tools/elevenlabs.html" class="ranking-item">
+          <div class="rank-num ">11</div>
+          <span class="rank-icon">🗣️</span>
+          <div class="rank-info">
+            <div class="rank-name">ElevenLabs</div>
+            <div class="rank-desc">顶级AI语音合成与声音克隆平台，29种语言支持</div>
+            <div class="rank-tags"><span class="tag tag-freemium">免费增值</span><span class="tag">语音</span><span class="tag">克隆</span><span class="tag">多语言</span><span class="tag">自然</span></div>
+          </div>
+          <div class="rank-stars">★★★★★</div>
+          <div class="rank-audience">适合<br>专业人士</div>
+        </a><a href="/tools/gamma.html" class="ranking-item">
+          <div class="rank-num ">12</div>
+          <span class="rank-icon">📊</span>
+          <div class="rank-info">
+            <div class="rank-name">Gamma</div>
+            <div class="rank-desc">AI演示文稿与文档一键生成，设计感强，效率远超PPT</div>
+            <div class="rank-tags"><span class="tag tag-freemium">免费增值</span><span class="tag">PPT</span><span class="tag">文档</span><span class="tag">演示</span><span class="tag">设计</span></div>
+          </div>
+          <div class="rank-stars">★★★★★</div>
+          <div class="rank-audience">适合<br>所有人</div>
+        </a><a href="/tools/notion.html" class="ranking-item">
+          <div class="rank-num ">13</div>
+          <span class="rank-icon">📋</span>
+          <div class="rank-info">
+            <div class="rank-name">Notion</div>
+            <div class="rank-desc">AI增强的知识管理与团队协作平台，灵活度极高</div>
+            <div class="rank-tags"><span class="tag tag-freemium">免费增值</span><span class="tag">协作</span><span class="tag">知识库</span><span class="tag">AI</span><span class="tag">灵活</span></div>
+          </div>
+          <div class="rank-stars">★★★★★</div>
+          <div class="rank-audience">适合<br>所有人</div>
+        </a><a href="/tools/hugging-face.html" class="ranking-item">
+          <div class="rank-num ">14</div>
+          <span class="rank-icon">🤗</span>
+          <div class="rank-info">
+            <div class="rank-name">Hugging Face</div>
+            <div class="rank-desc">全球最大AI模型社区，数十万开源模型和数据集</div>
+            <div class="rank-tags"><span class="tag tag-freemium">免费增值</span><span class="tag">模型</span><span class="tag">开源</span><span class="tag">社区</span><span class="tag">数据</span></div>
+          </div>
+          <div class="rank-stars">★★★★★</div>
+          <div class="rank-audience">适合<br>专业人士</div>
+        </a><a href="/tools/dify.html" class="ranking-item">
+          <div class="rank-num ">15</div>
+          <span class="rank-icon">🔧</span>
+          <div class="rank-info">
+            <div class="rank-name">Dify</div>
+            <div class="rank-desc">开源LLMOps平台，可视化搭建AI应用，支持RAG和Agent</div>
+            <div class="rank-tags"><span class="tag tag-freemium">免费增值</span><span class="tag">开源</span><span class="tag">编排</span><span class="tag">可视化</span><span class="tag">RAG</span></div>
+          </div>
+          <div class="rank-stars">★★★★★</div>
+          <div class="rank-audience">适合<br>专业人士</div>
+        </a><a href="/tools/gemini.html" class="ranking-item">
+          <div class="rank-num ">16</div>
+          <span class="rank-icon">🧠</span>
+          <div class="rank-info">
+            <div class="rank-name">Gemini</div>
+            <div class="rank-desc">Google多模态大模型，深度整合Google搜索、Gmail、地图等生态</div>
+            <div class="rank-tags"><span class="tag tag-freemium">免费增值</span><span class="tag">多模态</span><span class="tag">搜索</span><span class="tag">翻译</span><span class="tag">Google</span></div>
+          </div>
+          <div class="rank-stars">★★★★☆</div>
+          <div class="rank-audience">适合<br>所有人</div>
+        </a><a href="/tools/kimi.html" class="ranking-item">
+          <div class="rank-num ">17</div>
+          <span class="rank-icon">🌙</span>
+          <div class="rank-info">
+            <div class="rank-name">Kimi</div>
+            <div class="rank-desc">月之暗面出品，支持200万字超长上下文，适合论文阅读和长文档分析</div>
+            <div class="rank-tags"><span class="tag tag-freemium">免费增值</span><span class="tag">长文本</span><span class="tag">阅读</span><span class="tag">总结</span><span class="tag">中文</span></div>
+          </div>
+          <div class="rank-stars">★★★★☆</div>
+          <div class="rank-audience">适合<br>专业人士</div>
+        </a><a href="/tools/tongyi.html" class="ranking-item">
+          <div class="rank-num ">18</div>
+          <span class="rank-icon">☁️</span>
+          <div class="rank-info">
+            <div class="rank-name">通义千问</div>
+            <div class="rank-desc">阿里云自研大模型，电商运营与中文办公场景表现突出</div>
+            <div class="rank-tags"><span class="tag tag-free">免费</span><span class="tag">中文</span><span class="tag">办公</span><span class="tag">阿里生态</span><span class="tag">免费</span></div>
+          </div>
+          <div class="rank-stars">★★★★☆</div>
+          <div class="rank-audience">适合<br>所有人</div>
+        </a><a href="/tools/dall-e-3.html" class="ranking-item">
+          <div class="rank-num ">19</div>
+          <span class="rank-icon">🖼️</span>
+          <div class="rank-info">
+            <div class="rank-name">DALL·E 3</div>
+            <div class="rank-desc">OpenAI图像生成，与ChatGPT原生集成，文字理解准确度高</div>
+            <div class="rank-tags"><span class="tag tag-paid">付费</span><span class="tag">对话生成</span><span class="tag">写实</span><span class="tag">易用</span><span class="tag">ChatGPT</span></div>
+          </div>
+          <div class="rank-stars">★★★★☆</div>
+          <div class="rank-audience">适合<br>所有人</div>
+        </a><a href="/tools/stable-diffusion.html" class="ranking-item">
+          <div class="rank-num ">20</div>
+          <span class="rank-icon">🌄</span>
+          <div class="rank-info">
+            <div class="rank-name">Stable Diffusion</div>
+            <div class="rank-desc">开源AI绘画模型，支持本地部署和自定义模型训练</div>
+            <div class="rank-tags"><span class="tag tag-free">免费</span><span class="tag">开源</span><span class="tag">本地部署</span><span class="tag">可定制</span><span class="tag">免费</span></div>
+          </div>
+          <div class="rank-stars">★★★★☆</div>
+          <div class="rank-audience">适合<br>专业人士</div>
+        </a></div>
+  </section>
+
+  <section class="section">
+    <div class="section-title">📋 更多工具</div>
+    <div class="card-grid"><a href="/tools/leonardoai.html" class="tool-card"><span class="icon">🎮</span><div class="name">Leonardo.AI ★★★★☆</div><div class="desc">专注游戏资产的AI图像生成，预设风格模板丰富</div><div class="tags"><span class="tag tag-freemium">免费增值</span><span class="tag">游戏</span><span class="tag">资产</span><span class="tag">风格</span><span class="tag">批量</span></div></a><a href="/tools/canva-ai.html" class="tool-card"><span class="icon">🎯</span><div class="name">Canva AI ★★★★☆</div><div class="desc">Canva内置AI设计套件，模板海量，零设计基础也能用</div><div class="tags"><span class="tag tag-freemium">免费增值</span><span class="tag">设计</span><span class="tag">模板</span><span class="tag">营销</span><span class="tag">易用</span></div></a><a href="/tools/removebg.html" class="tool-card"><span class="icon">✂️</span><div class="name">Remove.bg ★★★★☆</div><div class="desc">AI一键抠图去背景，速度快精度高，支持批量处理</div><div class="tags"><span class="tag tag-freemium">免费增值</span><span class="tag">抠图</span><span class="tag">背景</span><span class="tag">电商</span><span class="tag">快速</span></div></a><a href="/tools/windsurf.html" class="tool-card"><span class="icon">🌊</span><div class="name">Windsurf ★★★★☆</div><div class="desc">Codeium出品的免费AI IDE，支持多文件编辑和Agent模式</div><div class="tags"><span class="tag tag-free">免费</span><span class="tag">免费</span><span class="tag">多文件</span><span class="tag">Agent</span><span class="tag">快速</span></div></a><a href="/tools/v0dev.html" class="tool-card"><span class="icon">🔼</span><div class="name">v0.dev ★★★★☆</div><div class="desc">Vercel出品AI前端生成工具，截图/描述即可生成React组件</div><div class="tags"><span class="tag tag-freemium">免费增值</span><span class="tag">前端</span><span class="tag">UI</span><span class="tag">React</span><span class="tag">快速</span></div></a><a href="/tools/boltnew.html" class="tool-card"><span class="icon">⚡</span><div class="name">Bolt.new ★★★★☆</div><div class="desc">浏览器内全栈AI开发，写描述即可生成完整Web应用并一键部署</div><div class="tags"><span class="tag tag-freemium">免费增值</span><span class="tag">全栈</span><span class="tag">即时</span><span class="tag">Web</span><span class="tag">零配置</span></div></a><a href="/tools/runway.html" class="tool-card"><span class="icon">🎥</span><div class="name">Runway ★★★★☆</div><div class="desc">专业级AI视频编辑与生成平台，影视行业广泛使用</div><div class="tags"><span class="tag tag-paid">付费</span><span class="tag">编辑</span><span class="tag">特效</span><span class="tag">专业</span><span class="tag">影视</span></div></a><a href="/tools/pika.html" class="tool-card"><span class="icon">🦊</span><div class="name">Pika ★★★★☆</div><div class="desc">轻量AI视频生成工具，界面简洁操作容易上手</div><div class="tags"><span class="tag tag-freemium">免费增值</span><span class="tag">简单</span><span class="tag">快速</span><span class="tag">创意</span><span class="tag">入门</span></div></a><a href="/tools/heygen.html" class="tool-card"><span class="icon">👤</span><div class="name">HeyGen ★★★★☆</div><div class="desc">AI数字人视频生成平台，口型同步自然，支持多语言</div><div class="tags"><span class="tag tag-paid">付费</span><span class="tag">数字人</span><span class="tag">口播</span><span class="tag">营销</span><span class="tag">多语言</span></div></a><a href="/tools/capcut.html" class="tool-card"><span class="icon">✂️</span><div class="name">CapCut ★★★★☆</div><div class="desc">字节跳动旗下AI视频剪辑工具，AI字幕和模板功能强大</div><div class="tags"><span class="tag tag-free">免费</span><span class="tag">剪辑</span><span class="tag">字幕</span><span class="tag">模板</span><span class="tag">免费</span></div></a><a href="/tools/synthesia.html" class="tool-card"><span class="icon">🎙️</span><div class="name">Synthesia ★★★★☆</div><div class="desc">企业级AI虚拟主播视频平台，支持140+语言和头像定制</div><div class="tags"><span class="tag tag-paid">付费</span><span class="tag">虚拟人</span><span class="tag">企业</span><span class="tag">多语言</span><span class="tag">培训</span></div></a><a href="/tools/jasper.html" class="tool-card"><span class="icon">✍️</span><div class="name">Jasper ★★★★☆</div><div class="desc">老牌AI营销文案平台，品牌声音定制和SEO优化功能成熟</div><div class="tags"><span class="tag tag-paid">付费</span><span class="tag">营销</span><span class="tag">文案</span><span class="tag">品牌</span><span class="tag">SEO</span></div></a><a href="/tools/notion-ai.html" class="tool-card"><span class="icon">📋</span><div class="name">Notion AI ★★★★☆</div><div class="desc">Notion内置AI写作助手，与知识库深度整合</div><div class="tags"><span class="tag tag-paid">付费</span><span class="tag">笔记</span><span class="tag">知识库</span><span class="tag">协作</span><span class="tag">全能</span></div></a><a href="/tools/perplexity.html" class="tool-card"><span class="icon">🔎</span><div class="name">Perplexity ★★★★☆</div><div class="desc">AI搜索引擎+写作助手，自动引用来源适合学术和研究</div><div class="tags"><span class="tag tag-freemium">免费增值</span><span class="tag">搜索</span><span class="tag">引用</span><span class="tag">研究</span><span class="tag">实时</span></div></a><a href="/tools/quillbot.html" class="tool-card"><span class="icon">🔄</span><div class="name">QuillBot ★★★★☆</div><div class="desc">专业AI改写润色工具，支持多种改写模式和摘要生成</div><div class="tags"><span class="tag tag-freemium">免费增值</span><span class="tag">改写</span><span class="tag">摘要</span><span class="tag">学术</span><span class="tag">多模式</span></div></a><a href="/tools/murf.html" class="tool-card"><span class="icon">🎤</span><div class="name">Murf ★★★★☆</div><div class="desc">专业AI配音旁白工具，适合课程录制和有声内容制作</div><div class="tags"><span class="tag tag-paid">付费</span><span class="tag">配音</span><span class="tag">旁白</span><span class="tag">课程</span><span class="tag">专业</span></div></a><a href="/tools/descript.html" class="tool-card"><span class="icon">📝</span><div class="name">Descript ★★★★☆</div><div class="desc">像编辑文档一样编辑音频/视频，AI转录和去口癖功能实用</div><div class="tags"><span class="tag tag-paid">付费</span><span class="tag">编辑</span><span class="tag">转录</span><span class="tag">播客</span><span class="tag">AI</span></div></a><a href="/tools/capcut-audio.html" class="tool-card"><span class="icon">🎧</span><div class="name">剪映音频 ★★★★☆</div><div class="desc">字节跳动AI配音与音频编辑，中文配音效果自然</div><div class="tags"><span class="tag tag-free">免费</span><span class="tag">配音</span><span class="tag">剪辑</span><span class="tag">中文</span><span class="tag">免费</span></div></a><a href="/tools/microsoft-copilot.html" class="tool-card"><span class="icon">🪟</span><div class="name">Microsoft Copilot ★★★★☆</div><div class="desc">Office全家桶内置AI助手，Word/Excel/PPT/Outlook全覆盖</div><div class="tags"><span class="tag tag-paid">付费</span><span class="tag">Office</span><span class="tag">办公</span><span class="tag">集成</span><span class="tag">企业</span></div></a><a href="/tools/beautifulai.html" class="tool-card"><span class="icon">✨</span><div class="name">Beautiful.ai ★★★★☆</div><div class="desc">AI智能排版演示文稿，自动调整设计布局</div><div class="tags"><span class="tag tag-paid">付费</span><span class="tag">排版</span><span class="tag">智能</span><span class="tag">企业</span><span class="tag">设计</span></div></a><a href="/tools/tome.html" class="tool-card"><span class="icon">📖</span><div class="name">Tome ★★★★☆</div><div class="desc">AI驱动叙事型演示文稿，适合讲故事和产品演示</div><div class="tags"><span class="tag tag-freemium">免费增值</span><span class="tag">故事</span><span class="tag">演示</span><span class="tag">产品</span><span class="tag">交互</span></div></a><a href="/tools/feishu.html" class="tool-card"><span class="icon">🐦</span><div class="name">飞书智能伙伴 ★★★★☆</div><div class="desc">飞书内置AI办公助手，覆盖会议纪要、文档协作、数据分析</div><div class="tags"><span class="tag tag-freemium">免费增值</span><span class="tag">协作</span><span class="tag">会议</span><span class="tag">文档</span><span class="tag">中文</span></div></a><a href="/tools/replicate.html" class="tool-card"><span class="icon">🔄</span><div class="name">Replicate ★★★★☆</div><div class="desc">云端AI模型托管与API服务，一键部署开源模型</div><div class="tags"><span class="tag tag-paid">付费</span><span class="tag">API</span><span class="tag">部署</span><span class="tag">模型</span><span class="tag">云端</span></div></a><a href="/tools/coze.html" class="tool-card"><span class="icon">🤖</span><div class="name">Coze ★★★★☆</div><div class="desc">字节跳动AI Bot搭建平台，零代码创建智能机器人</div><div class="tags"><span class="tag tag-free">免费</span><span class="tag">零代码</span><span class="tag">Bot</span><span class="tag">插件</span><span class="tag">字节</span></div></a><a href="/tools/langchain.html" class="tool-card"><span class="icon">🦜</span><div class="name">LangChain ★★★★☆</div><div class="desc">最流行的LLM应用开发框架，链式调用和Agent开发标准</div><div class="tags"><span class="tag tag-free">免费</span><span class="tag">框架</span><span class="tag">开发</span><span class="tag">链式</span><span class="tag">标准</span></div></a><a href="/tools/pinecone.html" class="tool-card"><span class="icon">🌲</span><div class="name">Pinecone ★★★★☆</div><div class="desc">企业级AI向量数据库，为RAG应用提供高性能向量检索</div><div class="tags"><span class="tag tag-paid">付费</span><span class="tag">向量</span><span class="tag">检索</span><span class="tag">RAG</span><span class="tag">企业</span></div></a><a href="/tools/hunyuan-writing.html" class="tool-card"><span class="icon">🐧</span><div class="name">腾讯混元写作 ★★★☆☆</div><div class="desc">腾讯AI写作助手，中文场景优化，办公文档和翻译出色</div><div class="tags"><span class="tag tag-free">免费</span><span class="tag">中文</span><span class="tag">办公</span><span class="tag">翻译</span><span class="tag">免费</span></div></a><a href="/tools/audiobox.html" class="tool-card"><span class="icon">📻</span><div class="name">Audiobox ★★★☆☆</div><div class="desc">Meta出品的AI音效与语音生成研究项目，音效生成能力强</div><div class="tags"><span class="tag tag-free">免费</span><span class="tag">音效</span><span class="tag">语音</span><span class="tag">Meta</span><span class="tag">免费</span></div></a></div>
+  </section>
 </main>
 
 <footer class="footer">
-  <p>&copy; 2026 AI ToolNav · <a href="/privacy.html" style="color:inherit;">隐私政策</a> | <a href="/terms.html" style="color:inherit;">服务条款</a> | <a href="/about.html" style="color:inherit;">关于我们</a></p>
+  <p>© 2026 AI ToolNav · <a href="/privacy.html">隐私政策</a> | <a href="/terms.html">服务条款</a> | <a href="/about.html">关于我们</a> · 每日更新</p>
 </footer>
-
-<script>
-var TOOLS = {
-  'word-to-pdf':  { icon:'📄', name:'Word 转 PDF', desc:'上传 Word (.docx) 文档，在浏览器中预览并导出为 PDF 文件。使用 mammoth.js 解析文档，保留格式和排版。', features:['支持 .docx 格式','保留文字格式（加粗、标题、列表）','浏览器内处理，不上传文件','导出标准 PDF 文件'] },
-  'pdf-tools':    { icon:'📑', name:'PDF 拆分/合并', desc:'拆分：上传一个 PDF，选择需要的页面范围导出。合并：上传多个 PDF，拖拽排序后合并为一个文件。', features:['PDF 页面拆分提取','多 PDF 合并','页面排序','使用 pdf-lib 本地处理'] },
-  'excel-to-pdf': { icon:'📊', name:'Excel 转 PDF', desc:'上传 Excel (.xlsx) 表格，预览数据后导出为 PDF 文件。支持多个工作表切换查看。', features:['支持 .xlsx 格式','多工作表预览','表格数据展示','导出 PDF 文件'] },
-  'image-compress': { icon:'🗜️', name:'图片压缩', desc:'上传图片，调整质量和格式，实时预览压缩效果，对比前后文件大小。纯浏览器端处理。', features:['支持 JPG/PNG/WebP','质量滑块调节','前后大小对比','浏览器本地处理'] },
-  'gradient-generator': { icon:'🎨', name:'CSS 渐变生成器', desc:'可视化选择颜色和角度，实时预览渐变效果，一键复制 CSS 代码。包含预设渐变色方案。', features:['线性/径向渐变','角度调节','预设配色方案','一键复制 CSS'] },
-  'markdown-editor': { icon:'📝', name:'Markdown 编辑器', desc:'左侧编写右侧实时预览，支持 GitHub 风格 Markdown 语法。可导出为 HTML 文件。', features:['实时预览','GFM语法支持','代码高亮','导出HTML'] },
-  'ambient-sound': { icon:'🎵', name:'白噪音 / 环境音', desc:'雨声、海浪、篝火、咖啡馆等自然白噪音，Web Audio 生成无需下载音频，帮助专注和放松。', features:['9种自然音效','定时关闭','音量调节','Web Audio 生成'] },
-  'cat-meme':     { icon:'🐱', name:'随机猫 Meme', desc:'每次加载/点击随机展示一张猫咪图片。来自 Cataas API，可爱治愈。', features:['随机猫咪图片','一键刷新','支持下载','轻松有趣'] }
-};
-
-function previewTool(el) {
-  var key = el.getAttribute('data-tool');
-  var t = TOOLS[key];
-  if (!t) return;
-  // Update active state
-  document.querySelectorAll('.tool-sidebar-item').forEach(function(item){ item.classList.remove('active'); });
-  el.classList.add('active');
-  // Render preview
-  var card = document.getElementById('previewCard');
-  card.innerHTML =
-    '<div class="tp-icon">' + t.icon + '</div>' +
-    '<div class="tp-name">' + t.name + '</div>' +
-    '<div class="tp-desc">' + t.desc + '</div>' +
-    '<ul class="tp-features">' +
-      t.features.map(function(f){ return '<li>✅ ' + f + '</li>'; }).join('') +
-    '</ul>' +
-    '<a href="' + el.getAttribute('href') + '" class="tp-btn">开始使用</a>';
-}
-
-// Show first tool preview by default
-(function init(){
-  var first = document.querySelector('.tool-sidebar-item');
-  if (first) previewTool(first);
-})();
-</script>
-
 </body>
 </html>
