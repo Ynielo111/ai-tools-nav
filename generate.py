@@ -115,6 +115,7 @@ ARTICLES = [
     {"id":"ai-side-hustle-tools","title":"如何用AI工具做副业赚钱？2026年普通人也能上手的6条路径","type":"recommendation"},
     {"id":"deepseek-complete-guide","title":"DeepSeek完全使用指南 2026：从注册到高级技巧","type":"recommendation"},
     {"id":"chatgpt-prompt-guide","title":"ChatGPT提示词技巧大全 2026：普通人也能写出好Prompt","type":"recommendation"},
+    {"id":"ai-cli-tools-setup-guide","title":"AI 命令行工具安装指南：Claude Code / Codex / Gemini CLI 上手教程 2026","type":"guide"},
 ]
 
 

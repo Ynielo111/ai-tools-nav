@@ -1,5 +1,144 @@
 [
   {
+    "id": "ai-cli-tools-setup-guide",
+    "type": "guide",
+    "title": "AI 命令行工具安装指南：Claude Code / Codex / Gemini CLI 上手教程 2026",
+    "meta_description": "三大 AI CLI 工具（Claude Code、Codex CLI、Gemini CLI）的安装配置完全指南，覆盖 Windows、macOS、Linux 三平台，含常见问题排障。",
+    "keywords": [
+      "Claude Code安装",
+      "Codex CLI教程",
+      "Gemini CLI配置",
+      "AI命令行工具",
+      "AI编程助手"
+    ],
+    "published": "2026-05-24",
+    "reading_time": "8分钟",
+    "summary": "2026年AI命令行工具已非常成熟。Claude Code擅长大型项目重构，Codex CLI适合快速脚本开发，Gemini CLI支持多模态图像分析。本文手把手教你三款工具的安装与使用，覆盖Windows、macOS、Linux全平台。",
+    "toc": [
+      "三大AI CLI工具速览",
+      "安装前的准备工作",
+      "Claude Code安装",
+      "OpenAI Codex CLI安装",
+      "Google Gemini CLI安装",
+      "三款工具对比",
+      "常见问题与排障"
+    ],
+    "tools_featured": [],
+    "sections": [
+      {
+        "heading": "三大AI CLI工具速览",
+        "content": "<p>2026年，AI编程助手已经不再是IDE插件的天下——命令行里的AI Agent正在成为开发者的主力工具。目前市面上一共有三款主流选择：<strong>Claude Code</strong>（Anthropic）擅长架构级任务和多文件修改，<strong>Codex CLI</strong>（OpenAI）适合快速原型和脚本编写，<strong>Gemini CLI</strong>（Google）支持多模态图像分析。</p>",
+        "tool_cards": [],
+        "comparison_table": {
+          "dimensions": [
+            "Claude Code",
+            "Codex CLI",
+            "Gemini CLI"
+          ],
+          "rows": [
+            {
+              "label": "开发商",
+              "values": [
+                "Anthropic",
+                "OpenAI",
+                "Google"
+              ]
+            },
+            {
+              "label": "核心定位",
+              "values": [
+                "终端AI Agent",
+                "终端编码助手",
+                "终端AI助手"
+              ]
+            },
+            {
+              "label": "大型项目",
+              "values": [
+                "⭐⭐⭐ 最强",
+                "⭐⭐ 中等",
+                "⭐⭐ 中等"
+              ]
+            },
+            {
+              "label": "快速脚本",
+              "values": [
+                "⭐⭐ 还行",
+                "⭐⭐⭐ 优势领域",
+                "⭐⭐ 还行"
+              ]
+            },
+            {
+              "label": "多模态",
+              "values": [
+                "不支持",
+                "不支持",
+                "⭐⭐⭐ 独有优势"
+              ]
+            },
+            {
+              "label": "最适合",
+              "values": [
+                "大型重构",
+                "脚本/原型",
+                "图像分析/Google生态"
+              ]
+            }
+          ]
+        },
+        "pros_cons": null
+      },
+      {
+        "heading": "安装前的准备工作",
+        "content": "<p>在安装之前，请确认系统满足以下基础条件：<strong>Node.js 18+</strong>（Claude Code和Gemini CLI依赖）、<strong>Python 3.8+</strong>（Codex CLI依赖）、<strong>稳定的网络连接</strong>。Windows用户如果遇到兼容性问题，推荐安装WSL2获取完整Linux环境。</p>",
+        "tool_cards": [],
+        "comparison_table": null,
+        "pros_cons": null
+      },
+      {
+        "heading": "Claude Code安装",
+        "content": "<p><strong>Claude Code</strong>是Anthropic推出的终端AI Agent，能理解大型项目的完整上下文。安装非常简单——Windows/macOS/Linux都可以通过<code>npm install -g @anthropic-ai/claude-code</code>一行命令完成。macOS用户还可以用Homebrew：<code>brew install claude-code</code>。安装后在项目目录运行<code>claude</code>即可启动交互会话。Windows用户推荐优先用WSL2方案，稳定性更好。</p>",
+        "tool_cards": [],
+        "comparison_table": null,
+        "pros_cons": null
+      },
+      {
+        "heading": "OpenAI Codex CLI安装",
+        "content": "<p><strong>Codex CLI</strong>是OpenAI推出的命令行编码助手，基于GPT-5系列模型。安装同样简单：<code>npm install -g @openai/codex</code>。Codex CLI支持用<code>codex \"一句话任务\"</code>的方式直接执行单次命令，非常适合脚本化场景。如果Windows原生安装后<code>codex -V</code>无输出，建议切换到WSL2方案。</p>",
+        "tool_cards": [],
+        "comparison_table": null,
+        "pros_cons": null
+      },
+      {
+        "heading": "Google Gemini CLI安装",
+        "content": "<p><strong>Gemini CLI</strong>是Google推出的命令行AI工具，核心优势是支持图像等多模态输入，并深度集成Google Cloud生态。安装：<code>npm install -g @google/gemini-cli</code>。你可以直接给它截图让它分析UI布局，或从设计稿生成前端代码，这是另外两款做不到的。</p>",
+        "tool_cards": [],
+        "comparison_table": null,
+        "pros_cons": null
+      },
+      {
+        "heading": "三款工具对比",
+        "content": "<p><strong>选择建议：</strong>做大型项目重构、多文件修改选Claude Code；写脚本、做快速原型、习惯OpenAI生态选Codex CLI；需要图像分析、用Google Cloud选Gemini CLI。三款工具可以同时安装互不冲突，根据任务灵活切换。</p>",
+        "tool_cards": [],
+        "comparison_table": null,
+        "pros_cons": null
+      },
+      {
+        "heading": "常见问题与排障",
+        "content": "<p>常见问题包括：安装后命令不识别（检查PATH环境变量）、Windows原生安装无反应（切换WSL2）、网络401/403错误（检查API Key）、402/429（额度耗尽）、长时间无响应（检查代理）。卸载方式相同：<code>npm uninstall -g</code> 加对应的包名即可。</p>",
+        "tool_cards": [],
+        "comparison_table": null,
+        "pros_cons": null
+      }
+    ],
+    "related": [
+      "claude-code-vs-cursor",
+      "best-ai-coding-tools",
+      "free-ai-coding-tools",
+      "ai-tools-beginner-guide"
+    ]
+  },
+  {
     "id": "chatgpt-vs-claude-vs-gemini",
     "type": "comparison",
     "title": "ChatGPT vs Claude vs Gemini 2026全面对比：三大AI助手谁更强",
