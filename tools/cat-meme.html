@@ -87,39 +87,87 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;bac
   </div>
 
   <div class="privacy-note">
-    <p>🐱 图片来自 Cataas API，每天都有新猫咪</p>
+    <p>🐱 图片来自 Cataas / PlaceKitten，智能切换可用源</p>
   </div>
 </main>
 
 <script>
 var catCount = 0;
 var currentImageUrl = '';
+var apiIndex = 0;
+var TIMEOUT = 6000;
 
 var loading = document.getElementById('loadingState');
 var image = document.getElementById('catImage');
 var errorEl = document.getElementById('errorState');
 
+var FALLBACK_IMAGES = [
+  'https://placekitten.com/600/500',
+  'https://placekitten.com/500/600',
+  'https://placekitten.com/550/500',
+  'https://placekitten.com/500/550',
+  'https://placekitten.com/600/450',
+  'https://placekitten.com/500/500',
+  'https://placekitten.com/450/600',
+  'https://placekitten.com/550/550'
+];
+
+function buildSources() {
+  var sources = [];
+  sources.push('https://cataas.com/cat?t=' + Date.now());
+  // Shuffle fallback images and pick a few
+  var shuffled = FALLBACK_IMAGES.slice().sort(function(){ return Math.random() - 0.5; });
+  for (var i = 0; i < shuffled.length; i++) {
+    sources.push(shuffled[i]);
+  }
+  return sources;
+}
+
+var sources = [];
+var timer = null;
+
+function tryNextSource() {
+  if (apiIndex >= sources.length) {
+    // All sources failed
+    loading.style.display = 'none';
+    errorEl.style.display = 'block';
+    return;
+  }
+  var url = sources[apiIndex];
+  image.src = url;
+}
+
 function loadCat() {
+  if (timer) clearTimeout(timer);
+  sources = buildSources();
+  apiIndex = 0;
+
   loading.style.display = 'block';
   image.style.display = 'none';
   errorEl.style.display = 'none';
 
-  var url = 'https://cataas.com/cat?t=' + Date.now();
-
   image.onload = function() {
+    if (timer) clearTimeout(timer);
     loading.style.display = 'none';
     image.style.display = 'block';
-    currentImageUrl = url;
+    currentImageUrl = sources[apiIndex];
     catCount++;
     document.getElementById('counter').textContent = '已展示 ' + catCount + ' 只猫咪';
   };
 
   image.onerror = function() {
-    loading.style.display = 'none';
-    errorEl.style.display = 'block';
+    apiIndex++;
+    tryNextSource();
   };
 
-  image.src = url;
+  tryNextSource();
+
+  timer = setTimeout(function() {
+    if (image.style.display === 'none' || loading.style.display !== 'none') {
+      apiIndex++;
+      tryNextSource();
+    }
+  }, TIMEOUT);
 }
 
 document.getElementById('btnNewCat').addEventListener('click', loadCat);
