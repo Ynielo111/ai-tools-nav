@@ -97,6 +97,24 @@ body::before { content:''; position:fixed; inset:0; z-index:0; pointer-events:no
   </div>
 
   <div id="toolSections"></div>
+
+  <!-- 静态默认内容：JS未加载时的可读内容，也让爬虫有东西可抓 -->
+  <noscript>
+    <div style="margin-top:32px;padding:24px;background:var(--card-bg);border:1px solid var(--card-border);border-radius:14px;">
+      <h2 style="font-size:18px;margin-bottom:14px;">热门 AI 工具对比</h2>
+      <p style="font-size:13px;color:var(--text-secondary);margin-bottom:16px;">以下是我们精选的横向对比文章，帮助你在相似AI工具之间做出选择：</p>
+      <ul style="list-style:none;font-size:13px;color:var(--text-secondary);line-height:2.2;">
+        <li>→ <a href="/articles/chatgpt-vs-claude-vs-gemini.html" style="color:var(--accent-start);">ChatGPT vs Claude vs Gemini 2026 全面对比</a></li>
+        <li>→ <a href="/articles/deepseek-vs-chatgpt.html" style="color:var(--accent-start);">DeepSeek vs ChatGPT：国产大模型能替代吗？</a></li>
+        <li>→ <a href="/articles/github-copilot-vs-cursor-vs-windsurf.html" style="color:var(--accent-start);">GitHub Copilot vs Cursor vs Windsurf：AI编程工具对比</a></li>
+        <li>→ <a href="/articles/midjourney-vs-dalle-vs-sd.html" style="color:var(--accent-start);">Midjourney vs DALL·E 3 vs Stable Diffusion：AI绘画对比</a></li>
+        <li>→ <a href="/articles/sora-vs-runway-vs-pika.html" style="color:var(--accent-start);">Sora vs Runway vs Pika：AI视频工具对比</a></li>
+        <li>→ <a href="/articles/suno-vs-elevenlabs.html" style="color:var(--accent-start);">Suno vs ElevenLabs：AI音频工具对比</a></li>
+        <li>→ <a href="/articles/codex-vs-claude-code-vs-gemini-cli.html" style="color:var(--accent-start);">Codex vs Claude Code vs Gemini CLI：AI编程命令行对比</a></li>
+        <li>→ <a href="/articles/kimi-vs-deepseek.html" style="color:var(--accent-start);">Kimi vs DeepSeek：国产大模型深度对比</a></li>
+      </ul>
+    </div>
+  </noscript>
 </main>
 <footer class="footer">
   <p>&copy; 2026 AI ToolNav &middot; <a href="/privacy.html" style="color:var(--accent-start);text-decoration:none;">隐私政策</a> &middot; <a href="/terms.html" style="color:var(--accent-start);text-decoration:none;">服务条款</a> &middot; <a href="/about.html" style="color:var(--accent-start);text-decoration:none;">关于我们</a></p>
