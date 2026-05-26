@@ -24,6 +24,7 @@
   --accent-start: #818cf8; --accent-end: #a78bfa;
   --glow-1: rgba(168,85,247,0.30); --glow-2: rgba(59,130,246,0.25); --glow-3: rgba(6,182,212,0.20);
   --radius: 14px;
+}
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif; background: var(--bg); color: var(--text-primary); position:relative; z-index:0; line-height: 1.8; }body::before { content:''; position:fixed; inset:0; z-index:0; pointer-events:none; background:radial-gradient(circle at 20% 40%, var(--glow-1) 0%, transparent 50%), radial-gradient(circle at 70% 15%, var(--glow-2) 0%, transparent 50%), radial-gradient(circle at 85% 80%, var(--glow-3) 0%, transparent 50%); filter:blur(60px); animation:meshDrift 16s ease-in-out infinite alternate; }
 @media (prefers-reduced-motion:reduce) { body::before { animation:none; } }
@@ -111,7 +112,7 @@ ul { padding-left:24px; margin-bottom:12px; }
   <p style="text-align:center;font-size:12px;color:var(--text-muted);margin-top:16px;">AI ToolNav 独立运营 | 网站内容持续更新中</p>
 </main>
 <footer class="footer">
-  <p>&copy; 2026 AI ToolNav · <a href="/privacy.html">隐私政策</a> · <a href="/about.html">关于我们</a></p>
+  <p>&copy; 2026 AI ToolNav · <a href="/privacy.html">隐私政策</a> · <a href="/terms.html">服务条款</a> · <a href="/about.html">关于我们</a></p>
 </footer>
 <script src="/js/affiliate.js"></script>
 </body>

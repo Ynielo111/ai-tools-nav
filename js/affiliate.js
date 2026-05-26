@@ -23,64 +23,11 @@
 
     // ── AI 编程工具 ──────────────────────────────
 
-    'cursor.sh': {
-      url: 'https://cursor.sh/referral?ref=YOUR_CURSOR_CODE',
-      note: 'Cursor 官方推荐计划 → cursor.sh/referral 注册获取你的 ref 码'
-    },
-
-    'codeium.com': {
-      url: 'https://codeium.com?referrer=YOUR_CODEIUM_CODE',
-      note: 'Windsurf/Codeium 推荐 → 联系 support@codeium.com 申请'
-    },
-
-    // ── AI 办公 / 写作 ─────────────────────────
-
-    'notion.so': {
-      url: 'https://affiliate.notion.so/YOUR_CODE',
-      note: 'Notion Ambassador → notion.so/partners 申请（需审核）'
-    },
-
-    'grammarly.com': {
-      url: 'https://grammarly.com/affiliates?ref=YOUR_CODE',
-      note: 'Grammarly Affiliate → grammarly.com/affiliates 注册'
-    },
-
-    'canva.com': {
-      url: 'https://partner.canva.com/YOUR_CODE',
-      note: 'Canva 联盟 → ShareASale 搜索 Canva 注册（佣金 $5-36/单）'
-    },
-
-    // ── AI 设计 / 视频 ─────────────────────────
-
-    'gamma.app': {
-      url: 'https://gamma.app/?via=YOUR_CODE',
-      note: 'Gamma 推荐 → gamma.app/partners'
-    },
-
-    'beautiful.ai': {
-      url: 'https://www.beautiful.ai/?ref=YOUR_CODE',
-      note: 'Beautiful.ai 推荐 → 联系官方申请'
-    },
-
     // ── AI 聊天机器人 ─────────────────────────
 
     'robofy.ai': {
       url: 'https://www.robofy.ai/?ref=yang',
       note: 'Robofy AI 聊天机器人 → 30% 长期分成'
-    },
-
-    // ── 国内 API 代理 / 支付方案 ────────────────
-    // 你的读者多数是国内用户，Claude/ChatGPT 等需要外币卡，
-    // 推荐 API 代理服务或代付渠道能带来最高的转化率
-
-    'apiyi.com': {
-      url: 'https://apiyi.com?aff=YOUR_CODE',
-      note: 'API易 — 国内 API 代理，支持支付宝/微信。联系客服谈 affiliate 分成'
-    },
-
-    'openai-hub.com': {
-      url: 'https://openai-hub.com?ref=YOUR_CODE',
-      note: '国内 OpenAI API 代理。搜索类似服务，主动联系谈推荐佣金'
     }
 
     // ── 暂时无法 Affiliate 的工具（保留以备将来） ──
