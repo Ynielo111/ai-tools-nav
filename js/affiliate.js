@@ -62,6 +62,13 @@
       note: 'Beautiful.ai 推荐 → 联系官方申请'
     },
 
+    // ── AI 聊天机器人 ─────────────────────────
+
+    'robofy.ai': {
+      url: 'https://www.robofy.ai/?ref=yang',
+      note: 'Robofy AI 聊天机器人 → 30% 长期分成'
+    },
+
     // ── 国内 API 代理 / 支付方案 ────────────────
     // 你的读者多数是国内用户，Claude/ChatGPT 等需要外币卡，
     // 推荐 API 代理服务或代付渠道能带来最高的转化率
