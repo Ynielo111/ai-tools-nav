@@ -101,7 +101,8 @@ var sample = '# Markdown 快速入门\n\n## 文本格式\n**粗体** *斜体* ~~
 function insertSample(){ editor.value = sample; preview.innerHTML = marked.parse(sample); }
 function clearAll(){ editor.value = ''; preview.innerHTML = ''; }
 function exportHTML(){
-  var html = '<!DOCTYPE html><html><head><meta charset="UTF-8"><style>body{max-width:800px;margin:40px auto;padding:0 20px;font-family:-apple-system,sans-serif;line-height:1.8;color:#333;}pre{background:#f5f5f5;padding:16px;border-radius:8px;overflow-x:auto;}code{background:#f0f0f0;padding:2px 6px;border-radius:3px;}pre code{background:transparent;padding:0;}blockquote{border-left:3px solid #6366f1;padding-left:16px;color:#666;}table{border-collapse:collapse;}td,th{border:1px solid #ddd;padding:8px 12px;}img{max-width:100%;}</style></head><body>' + preview.innerHTML + '</body></html>';
+  var html = '<!DOCTYPE html><html><head><meta charset="UTF-8"><style>body{max-width:800px;margin:40px auto;padding:0 20px;font-family:-apple-system,sans-serif;line-height:1.8;color:#333;}pre{background:#f5f5f5;padding:16px;border-radius:8px;overflow-x:auto;}code{background:#f0f0f0;padding:2px 6px;border-radius:3px;}pre code{background:transparent;padding:0;}blockquote{border-left:3px solid #6366f1;padding-left:16px;color:#666;}table{border-collapse:collapse;}td,th{border:1px solid #ddd;padding:8px 12px;}img{max-width:100%;}</style></head><body>' + preview.innerHTML + '<script src="/js/affiliate.js"></script>
+</body></html>';
   var blob = new Blob([html],{type:'text/html'});
   var a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
@@ -112,5 +113,6 @@ function exportHTML(){
 
 insertSample();
 </script>
+<script src="/js/affiliate.js"></script>
 </body>
 </html>
