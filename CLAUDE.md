@@ -16,7 +16,7 @@
 - categories/ — 8个分类页
 - js/affiliate.js — 集中式推广链接管理
 - template/article.html — 文章模板
-- build.py — 静态页面生成器
+- scripts/build.py — 静态页面生成器
 
 ## 注意事项
 - 文章日期不能全部集中同一天，需要分散到不同日期
