@@ -3,7 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6233913596766498" crossorigin="anonymous"></script>
 <title>Markdown 编辑器 — AI ToolNav</title>
+<link rel="canonical" href="https://www.aitnav.com/tools/markdown-editor.html">
+<meta name="robots" content="noindex, follow">
 <meta name="description" content="在线Markdown编辑器，左边编写右边实时预览，支持GitHub风格语法，一键导出HTML。">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.0/marked.min.js"></script>
 <style>
@@ -96,7 +99,7 @@ editor.addEventListener('input', function(){
   preview.innerHTML = marked.parse(editor.value);
 });
 
-var sample = '# Markdown 快速入门\n\n## 文本格式\n**粗体** *斜体* ~~删除线~~ `代码`\n\n## 列表\n- 无序列表\n- 第二项\n  - 嵌套\n\n1. 有序列表\n2. 第二项\n\n## 代码块\n```python\nprint("Hello, World!")\n```\n\n## 引用\n> 这是一段引用文字\n\n## 表格\n| 工具 | 评分 |\n|------|------|\n| ChatGPT | ⭐⭐⭐⭐⭐ |\n| Claude | ⭐⭐⭐⭐⭐ |\n\n## 链接\n[AI ToolNav](https://aitnav.com)\n\n---\n*开始编辑吧！*';
+var sample = '# Markdown 快速入门\n\n## 文本格式\n**粗体** *斜体* ~~删除线~~ `代码`\n\n## 列表\n- 无序列表\n- 第二项\n  - 嵌套\n\n1. 有序列表\n2. 第二项\n\n## 代码块\n```python\nprint("Hello, World!")\n```\n\n## 引用\n> 这是一段引用文字\n\n## 表格\n| 工具 | 评分 |\n|------|------|\n| ChatGPT | ⭐⭐⭐⭐⭐ |\n| Claude | ⭐⭐⭐⭐⭐ |\n\n## 链接\n[AI ToolNav](https://www.aitnav.com)\n\n---\n*开始编辑吧！*';
 
 function insertSample(){ editor.value = sample; preview.innerHTML = marked.parse(sample); }
 function clearAll(){ editor.value = ''; preview.innerHTML = ''; }

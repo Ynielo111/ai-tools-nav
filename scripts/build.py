@@ -2,8 +2,9 @@
 """AI ToolNav 静态页面生成器 — 从 JSON 数据 + HTML 模板批量生成文章页面"""
 import json, os
 
-BASE = os.path.dirname(os.path.abspath(__file__))
-DOMAIN = "https://aitnav.com"
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE = os.path.dirname(SCRIPT_DIR)
+DOMAIN = "https://www.aitnav.com"
 
 def load_json(path):
     with open(os.path.join(BASE, path), 'r', encoding='utf-8') as f:
@@ -180,9 +181,6 @@ def build_article_index(articles, tools_map):
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
 <meta name="google-site-verification" content="VpHmBjp4J_z2x-rAtb7swV1jeCyoCpOuCQbC9Yfrkgw" />
 <link rel="icon" type="image/svg+xml" href="/logo.svg">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6233913596766498" crossorigin="anonymous"></script>
@@ -259,7 +257,7 @@ body::before {{ content:''; position:fixed; inset:0; z-index:0; pointer-events:n
     return html
 
 def build_sitemap(articles):
-    urls = [f'{DOMAIN}/', f'{DOMAIN}/articles/', f'{DOMAIN}/compare/', f'{DOMAIN}/privacy.html', f'{DOMAIN}/terms.html', f'{DOMAIN}/about.html', f'{DOMAIN}/tools/', f'{DOMAIN}/tools/word-to-pdf.html', f'{DOMAIN}/tools/pdf-tools.html', f'{DOMAIN}/tools/excel-to-pdf.html', f'{DOMAIN}/tools/cat-meme.html', f'{DOMAIN}/tools/image-compress.html', f'{DOMAIN}/tools/gradient-generator.html', f'{DOMAIN}/tools/markdown-editor.html', f'{DOMAIN}/tools/ambient-sound.html']
+    urls = [f'{DOMAIN}/', f'{DOMAIN}/articles/', f'{DOMAIN}/privacy.html', f'{DOMAIN}/terms.html', f'{DOMAIN}/about.html', f'{DOMAIN}/tools/', f'{DOMAIN}/categories/llm.html', f'{DOMAIN}/categories/image.html', f'{DOMAIN}/categories/code.html', f'{DOMAIN}/categories/video.html', f'{DOMAIN}/categories/writing.html', f'{DOMAIN}/categories/audio.html', f'{DOMAIN}/categories/office.html', f'{DOMAIN}/categories/platform.html', f'{DOMAIN}/tools/chatgpt.html', f'{DOMAIN}/tools/claude.html', f'{DOMAIN}/tools/cursor.html', f'{DOMAIN}/tools/midjourney.html', f'{DOMAIN}/tools/deepseek.html']
     for a in articles:
         urls.append(f'{DOMAIN}/articles/{a["id"]}.html')
     xml = '<?xml version="1.0" encoding="UTF-8"?>\n'
@@ -278,9 +276,6 @@ def build_compare_page(tools_data):
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
 <meta name="google-site-verification" content="VpHmBjp4J_z2x-rAtb7swV1jeCyoCpOuCQbC9Yfrkgw" />
 <link rel="icon" type="image/svg+xml" href="/logo.svg">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6233913596766498" crossorigin="anonymous"></script>
@@ -294,7 +289,7 @@ def build_compare_page(tools_data):
 <title>AI工具对比 | AI ToolNav</title>
 <meta name="description" content="选择2-4个AI工具进行横向对比，涵盖评分、价格、功能、优缺点等维度，帮你做出最佳选择。">
 <link rel="canonical" href="{DOMAIN}/compare/">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="noindex, follow">
 <style>
 :root {{
   --bg: #0a0a1a; --card-bg: rgba(255,255,255,0.06); --card-border: rgba(255,255,255,0.10);

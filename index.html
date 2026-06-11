@@ -19,35 +19,27 @@
 <meta property="og:title" content="AI ToolNav — AI工具导航与排行榜">
 <meta property="og:description" content="最全面的AI工具导航站，提供真实评分与横向对比，帮你找到最好用的AI工具。">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://aitnav.com">
+<meta property="og:url" content="https://www.aitnav.com">
 <link rel="icon" type="image/svg+xml" href="/logo.svg">
-<link rel="canonical" href="https://aitnav.com">
+<link rel="canonical" href="https://www.aitnav.com/">
 <meta name="robots" content="index, follow">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebSite",
   "name": "AI ToolNav",
-  "url": "https://aitnav.com",
+  "url": "https://www.aitnav.com",
   "description": "AI工具导航与排行榜，提供真实评分、专业测评与横向对比",
   "potentialAction": {
     "@type": "SearchAction",
-    "target": "https://aitnav.com#search={search_term_string}",
+    "target": "https://www.aitnav.com#search={search_term_string}",
     "query-input": "required name=search_term_string"
   }
 }
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-
-<!-- Splash Screen -->
-<div id="splash">
-  <h1>AI ToolNav</h1>
-  <span class="hint">轻触进入 AI ToolNav</span>
-</div>
-
 <!-- Header -->
 <header class="header">
   <div class="header-inner">
@@ -364,82 +356,6 @@
 </footer>
 
 <script>
-// Splash: click to enter
-(function(){
-  var splash = document.getElementById('splash');
-  splash.addEventListener('click', function(){
-    splash.classList.add('hide');
-  });
-})();
-
-// THREE.js shader background for splash
-(function(){
-  var container = document.createElement('div');
-  container.id = 'shader-bg';
-  container.style.cssText = 'position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;';
-  document.getElementById('splash').insertBefore(container, document.getElementById('splash').firstChild);
-
-  var camera = new THREE.Camera();
-  camera.position.z = 1;
-
-  var scene = new THREE.Scene();
-  var geometry = new THREE.PlaneGeometry(2, 2);
-
-  var uniforms = {
-    time: { value: 1.0 },
-    resolution: { value: new THREE.Vector2() }
-  };
-
-  var material = new THREE.ShaderMaterial({
-    uniforms: uniforms,
-    vertexShader: 'void main(){gl_Position=vec4(position,1.0);}',
-    fragmentShader: [
-      '#define TWO_PI 6.2831853072',
-      '#define PI 3.14159265359',
-      'precision highp float;',
-      'uniform vec2 resolution;',
-      'uniform float time;',
-      'void main(void){',
-      '  vec2 uv=(gl_FragCoord.xy*2.0-resolution.xy)/min(resolution.x,resolution.y);',
-      '  float t=time*0.05;',
-      '  float lineWidth=0.002;',
-      '  vec3 color=vec3(0.0);',
-      '  for(int j=0;j<3;j++){',
-      '    for(int i=0;i<5;i++){',
-      '      color[j]+=lineWidth*float(i*i)/abs(fract(t-0.01*float(j)+float(i)*0.01)*5.0-length(uv)+mod(uv.x+uv.y,0.2));',
-      '    }',
-      '  }',
-      '  gl_FragColor=vec4(color[0],color[1],color[2],1.0);',
-      '}'
-    ].join('\n')
-  });
-
-  var mesh = new THREE.Mesh(geometry, material);
-  scene.add(mesh);
-
-  var renderer = new THREE.WebGLRenderer({ antialias: true });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  container.appendChild(renderer.domElement);
-
-  function resize(){
-    var w = container.clientWidth;
-    var h = container.clientHeight;
-    renderer.setSize(w, h);
-    uniforms.resolution.value.x = renderer.domElement.width;
-    uniforms.resolution.value.y = renderer.domElement.height;
-  }
-
-  resize();
-  window.addEventListener('resize', resize);
-
-  function animate(){
-    requestAnimationFrame(animate);
-    uniforms.time.value += 0.05;
-    renderer.render(scene, camera);
-  }
-  animate();
-})();
-
 // 搜索功能
 (function(){
   var DATA = {

@@ -3,4 +3,4 @@ Allow: /
 Disallow: /data/
 Disallow: /template/
 
-Sitemap: https://aitnav.com/sitemap.xml
+Sitemap: https://www.aitnav.com/sitemap.xml

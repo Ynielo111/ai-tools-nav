@@ -7,9 +7,29 @@ import json
 import html as html_mod
 
 # 输出目录
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.dirname(SCRIPT_DIR)
 TOOLS_DIR = os.path.join(BASE_DIR, 'tools')
 CATS_DIR = os.path.join(BASE_DIR, 'categories')
+DOMAIN = "https://www.aitnav.com"
+
+ADSENSE_SNIPPET = '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6233913596766498" crossorigin="anonymous"></script>'
+ANALYTICS_SNIPPET = '''<script async src="https://www.googletagmanager.com/gtag/js?id=G-NQTV1YBBLK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NQTV1YBBLK');
+</script>'''
+GOOGLE_SITE_VERIFICATION = '<meta name="google-site-verification" content="VpHmBjp4J_z2x-rAtb7swV1jeCyoCpOuCQbC9Yfrkgw" />'
+CORE_INDEXED_TOOL_SLUGS = {"chatgpt", "claude", "cursor", "midjourney", "deepseek"}
+
+def common_head_snippets():
+    return f"{GOOGLE_SITE_VERIFICATION}\n{ADSENSE_SNIPPET}\n{ANALYTICS_SNIPPET}"
+
+def robots_for_tool(tool):
+    slug = tool_slug(tool['name'])
+    return "index, follow" if slug in CORE_INDEXED_TOOL_SLUGS else "noindex, follow"
 
 os.makedirs(TOOLS_DIR, exist_ok=True)
 os.makedirs(CATS_DIR, exist_ok=True)
@@ -182,18 +202,20 @@ def gen_tool_page(tool, all_tools, cats):
         rel_art_html += f'<li style="margin-bottom:6px;"><a href="/articles/{a["id"]}.html" style="color:var(--accent-start);font-size:13px;text-decoration:none;">{a["title"]}</a></li>'
 
     func, prc, ease, eco = tool.get('function', 4), tool.get('price', 3), tool.get('ease', 4), tool.get('ecosystem', 3)
+    robots = robots_for_tool(tool)
 
     return f'''<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{common_head_snippets()}
 <title>{title}</title>
 <meta name="description" content="{desc}">
 <meta name="keywords" content="{tool['name']},{cat['kw'] if cat else ''}">
 <link rel="stylesheet" href="/css/style.css">
-<link rel="canonical" href="https://aitnav.com/tools/{tool_slug(tool['name'])}.html">
-<meta name="robots" content="index, follow">
+<link rel="canonical" href="{DOMAIN}/tools/{tool_slug(tool['name'])}.html">
+<meta name="robots" content="{robots}">
 </head>
 <body class="no-splash">
 <header class="header">
@@ -367,11 +389,12 @@ def gen_category_page(cat, tools, all_tools):
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{common_head_snippets()}
 <title>{title}</title>
 <meta name="description" content="{desc}">
 <meta name="keywords" content="{cat['kw']}">
 <link rel="stylesheet" href="/css/style.css">
-<link rel="canonical" href="https://aitnav.com/categories/{cat['id']}.html">
+<link rel="canonical" href="{DOMAIN}/categories/{cat['id']}.html">
 <meta name="robots" content="index, follow">
 </head>
 <body class="no-splash">
@@ -470,11 +493,12 @@ def gen_tools_index(tools, cats):
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{common_head_snippets()}
 <title>AI工具排行榜 | 完整评分与对比 — AI ToolNav</title>
 <meta name="description" content="完整AI工具排行榜，收录48款精选AI工具，包含评分、价格、适用人群和详细点评。支持按分类筛选和横向对比。">
 <meta name="keywords" content="AI工具排行榜,AI工具排名,AI工具评分,最好用的AI工具">
 <link rel="stylesheet" href="/css/style.css">
-<link rel="canonical" href="https://aitnav.com/tools/">
+<link rel="canonical" href="{DOMAIN}/tools/">
 <meta name="robots" content="index, follow">
 </head>
 <body class="no-splash">
