@@ -22,14 +22,16 @@ ANALYTICS_SNIPPET = '''<script async src="https://www.googletagmanager.com/gtag/
   gtag('config', 'G-NQTV1YBBLK');
 </script>'''
 GOOGLE_SITE_VERIFICATION = '<meta name="google-site-verification" content="VpHmBjp4J_z2x-rAtb7swV1jeCyoCpOuCQbC9Yfrkgw" />'
-CORE_INDEXED_TOOL_SLUGS = {"chatgpt", "claude", "cursor", "midjourney", "deepseek"}
 
-def common_head_snippets():
-    return f"{GOOGLE_SITE_VERIFICATION}\n{ADSENSE_SNIPPET}\n{ANALYTICS_SNIPPET}"
+def common_head_snippets(include_ads=False):
+    parts = [GOOGLE_SITE_VERIFICATION]
+    if include_ads:
+        parts.append(ADSENSE_SNIPPET)
+    parts.append(ANALYTICS_SNIPPET)
+    return "\n".join(parts)
 
 def robots_for_tool(tool):
-    slug = tool_slug(tool['name'])
-    return "index, follow" if slug in CORE_INDEXED_TOOL_SLUGS else "noindex, follow"
+    return "noindex, follow"
 
 os.makedirs(TOOLS_DIR, exist_ok=True)
 os.makedirs(CATS_DIR, exist_ok=True)
@@ -395,7 +397,7 @@ def gen_category_page(cat, tools, all_tools):
 <meta name="keywords" content="{cat['kw']}">
 <link rel="stylesheet" href="/css/style.css">
 <link rel="canonical" href="{DOMAIN}/categories/{cat['id']}.html">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="noindex, follow">
 </head>
 <body class="no-splash">
 <header class="header">
@@ -499,7 +501,7 @@ def gen_tools_index(tools, cats):
 <meta name="keywords" content="AI工具排行榜,AI工具排名,AI工具评分,最好用的AI工具">
 <link rel="stylesheet" href="/css/style.css">
 <link rel="canonical" href="{DOMAIN}/tools/">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="noindex, follow">
 </head>
 <body class="no-splash">
 <header class="header">

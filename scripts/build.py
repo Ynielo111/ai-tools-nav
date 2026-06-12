@@ -5,6 +5,46 @@ import json, os
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 BASE = os.path.dirname(SCRIPT_DIR)
 DOMAIN = "https://www.aitnav.com"
+ADSENSE_SNIPPET = '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6233913596766498" crossorigin="anonymous"></script>'
+REVIEW_INDEXED_ARTICLE_IDS = {
+    "ai-cli-tools-setup-guide",
+    "open-source-ai-coding-assistants",
+    "codex-vs-claude-code-vs-gemini-cli",
+    "chatgpt-vs-claude-vs-gemini",
+    "kimi-vs-deepseek",
+    "chatgpt-prompt-guide",
+    "deepseek-vs-chatgpt",
+    "deepseek-complete-guide",
+    "ai-tools-pricing-2026",
+    "midjourney-vs-dalle-vs-sd",
+    "best-ai-ppt-tools",
+    "best-ai-translation-tools",
+    "notion-vs-feishu-vs-copilot",
+    "ai-side-hustle-tools",
+    "github-copilot-vs-cursor-vs-windsurf",
+    "doubao-vs-tongyi-vs-kimi",
+    "best-ai-coding-tools",
+    "academic-research-ai",
+}
+EXTRA_REVIEW_ARTICLES = [
+    {
+        "id": "codex-vs-claude-code-vs-gemini-cli",
+        "title": "Codex vs Claude Code vs Gemini CLI：三大AI编程命令行工具深度对比 2026",
+        "type": "comparison",
+        "reading_time": "10分钟",
+        "published": "2026-05-16",
+    },
+    {
+        "id": "open-source-ai-coding-assistants",
+        "title": "开源AI编程助手推荐：OpenClaw、OpenCode、Hermes Agent 完全指南 2026",
+        "type": "recommendation",
+        "reading_time": "9分钟",
+        "published": "2026-05-16",
+    },
+]
+STATIC_REVIEW_ARTICLE_IDS = {
+    "ai-cli-tools-setup-guide",
+}
 
 def load_json(path):
     with open(os.path.join(BASE, path), 'r', encoding='utf-8') as f:
@@ -111,6 +151,7 @@ def render_article(article, tools_map, articles_map):
     # Replacements
     title = article['title']
     tid = article['id']
+    is_review_indexed = tid in REVIEW_INDEXED_ARTICLE_IDS
     replacements = {
         '{{TITLE}}': title,
         '{{ID}}': tid,
@@ -124,6 +165,8 @@ def render_article(article, tools_map, articles_map):
         '{{TOC}}': build_toc(article.get('toc', [])),
         '{{CONTENT}}': content_html,
         '{{RELATED}}': build_related(article.get('related', []), articles_map, tools_map),
+        '{{ADSENSE_SNIPPET}}': ADSENSE_SNIPPET if is_review_indexed else '',
+        '{{ROBOTS}}': 'index, follow' if is_review_indexed else 'noindex, follow',
     }
 
     html = template
@@ -134,6 +177,9 @@ def render_article(article, tools_map, articles_map):
 
 def build_article_index(articles, tools_map):
     """Generate articles/index.html — article listing page"""
+    article_ids = {a["id"] for a in articles}
+    articles = [a for a in articles if a["id"] in REVIEW_INDEXED_ARTICLE_IDS]
+    articles += [a for a in EXTRA_REVIEW_ARTICLES if a["id"] not in article_ids]
     type_filter_js = '''
     <div class="article-filter" style="max-width:800px;margin:0 auto 24px;display:flex;gap:8px;flex-wrap:wrap;">
       <button class="af-btn active" data-type="all">全部</button>
@@ -183,7 +229,6 @@ def build_article_index(articles, tools_map):
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="google-site-verification" content="VpHmBjp4J_z2x-rAtb7swV1jeCyoCpOuCQbC9Yfrkgw" />
 <link rel="icon" type="image/svg+xml" href="/logo.svg">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6233913596766498" crossorigin="anonymous"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NQTV1YBBLK"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -257,9 +302,15 @@ body::before {{ content:''; position:fixed; inset:0; z-index:0; pointer-events:n
     return html
 
 def build_sitemap(articles):
-    urls = [f'{DOMAIN}/', f'{DOMAIN}/articles/', f'{DOMAIN}/privacy.html', f'{DOMAIN}/terms.html', f'{DOMAIN}/about.html', f'{DOMAIN}/tools/', f'{DOMAIN}/categories/llm.html', f'{DOMAIN}/categories/image.html', f'{DOMAIN}/categories/code.html', f'{DOMAIN}/categories/video.html', f'{DOMAIN}/categories/writing.html', f'{DOMAIN}/categories/audio.html', f'{DOMAIN}/categories/office.html', f'{DOMAIN}/categories/platform.html', f'{DOMAIN}/tools/chatgpt.html', f'{DOMAIN}/tools/claude.html', f'{DOMAIN}/tools/cursor.html', f'{DOMAIN}/tools/midjourney.html', f'{DOMAIN}/tools/deepseek.html']
+    urls = [f'{DOMAIN}/', f'{DOMAIN}/articles/', f'{DOMAIN}/privacy.html', f'{DOMAIN}/terms.html', f'{DOMAIN}/about.html']
+    article_ids = set()
     for a in articles:
-        urls.append(f'{DOMAIN}/articles/{a["id"]}.html')
+        if a["id"] in REVIEW_INDEXED_ARTICLE_IDS:
+            article_ids.add(a["id"])
+            urls.append(f'{DOMAIN}/articles/{a["id"]}.html')
+    for slug in sorted(REVIEW_INDEXED_ARTICLE_IDS - article_ids):
+        if os.path.exists(os.path.join(BASE, "articles", f"{slug}.html")):
+            urls.append(f"{DOMAIN}/articles/{slug}.html")
     xml = '<?xml version="1.0" encoding="UTF-8"?>\n'
     xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
     for u in urls:
@@ -278,7 +329,6 @@ def build_compare_page(tools_data):
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="google-site-verification" content="VpHmBjp4J_z2x-rAtb7swV1jeCyoCpOuCQbC9Yfrkgw" />
 <link rel="icon" type="image/svg+xml" href="/logo.svg">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6233913596766498" crossorigin="anonymous"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NQTV1YBBLK"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -498,6 +548,9 @@ def main():
 
     # Generate each article
     for article in articles:
+        if article["id"] in STATIC_REVIEW_ARTICLE_IDS:
+            print(f'  SKIP static article articles/{article["id"]}.html')
+            continue
         html = render_article(article, tools_map, articles_map)
         write_html(f'articles/{article["id"]}.html', html)
         print(f'  OK articles/{article["id"]}.html')
