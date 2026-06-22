@@ -299,14 +299,14 @@ body::before {{ content:''; position:fixed; inset:0; z-index:0; pointer-events:n
   <div class="article-list" style="max-width:800px;margin:0 auto;">{cards}</div>
 </main>
 <footer class="footer">
-  <p>&copy; 2026 AI ToolNav &middot; <a href="/privacy.html" style="color:var(--accent-start);text-decoration:none;">隐私政策</a> &middot; <a href="/terms.html" style="color:var(--accent-start);text-decoration:none;">服务条款</a> &middot; <a href="/about.html" style="color:var(--accent-start);text-decoration:none;">关于我们</a></p>
+  <p>&copy; 2026 AI ToolNav &middot; <a href="/privacy.html" style="color:var(--accent-start);text-decoration:none;">隐私政策</a> &middot; <a href="/terms.html" style="color:var(--accent-start);text-decoration:none;">服务条款</a> &middot; <a href="/methodology.html" style="color:var(--accent-start);text-decoration:none;">评测方法</a> &middot; <a href="/about.html" style="color:var(--accent-start);text-decoration:none;">关于我们</a></p>
 </footer>
 </body>
 </html>'''
     return html
 
 def build_sitemap(articles):
-    urls = [f'{DOMAIN}/', f'{DOMAIN}/articles/', f'{DOMAIN}/privacy.html', f'{DOMAIN}/terms.html', f'{DOMAIN}/about.html']
+    urls = [f'{DOMAIN}/', f'{DOMAIN}/articles/', f'{DOMAIN}/privacy.html', f'{DOMAIN}/terms.html', f'{DOMAIN}/methodology.html', f'{DOMAIN}/about.html']
     article_ids = set()
     for a in articles:
         if a["id"] in REVIEW_INDEXED_ARTICLE_IDS:
@@ -426,7 +426,7 @@ body::before {{ content:''; position:fixed; inset:0; z-index:0; pointer-events:n
   <div id="toolSections"></div>
 </main>
 <footer class="footer">
-  <p>&copy; 2026 AI ToolNav &middot; <a href="/privacy.html" style="color:var(--accent-start);text-decoration:none;">隐私政策</a> &middot; <a href="/terms.html" style="color:var(--accent-start);text-decoration:none;">服务条款</a> &middot; <a href="/about.html" style="color:var(--accent-start);text-decoration:none;">关于我们</a></p>
+  <p>&copy; 2026 AI ToolNav &middot; <a href="/privacy.html" style="color:var(--accent-start);text-decoration:none;">隐私政策</a> &middot; <a href="/terms.html" style="color:var(--accent-start);text-decoration:none;">服务条款</a> &middot; <a href="/methodology.html" style="color:var(--accent-start);text-decoration:none;">评测方法</a> &middot; <a href="/about.html" style="color:var(--accent-start);text-decoration:none;">关于我们</a></p>
 </footer>
 
 <script>

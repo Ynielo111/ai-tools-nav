@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="google-site-verification" content="VpHmBjp4J_z2x-rAtb7swV1jeCyoCpOuCQbC9Yfrkgw" />
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NQTV1YBBLK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NQTV1YBBLK');
+</script>
+<title>评测方法与编辑原则 | AI ToolNav</title>
+<meta name="description" content="了解 AI ToolNav 如何选择、测试和更新 AI 工具评测内容，包括评分维度、来源核验、利益声明和纠错机制。">
+<meta name="robots" content="index, follow">
+<link rel="icon" type="image/svg+xml" href="/logo.svg">
+<link rel="canonical" href="https://www.aitnav.com/methodology.html">
+<style>
+:root {
+  --bg: #0a0a1a; --card-bg: rgba(255,255,255,0.06); --card-border: rgba(255,255,255,0.10);
+  --text-primary: #e2e8f0; --text-secondary: #94a3b8; --text-muted: #64748b;
+  --accent-start: #818cf8; --accent-end: #a78bfa;
+  --glow-1: rgba(168,85,247,0.30); --glow-2: rgba(59,130,246,0.25); --glow-3: rgba(6,182,212,0.20);
+  --radius: 14px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif; background: var(--bg); color: var(--text-primary); position:relative; z-index:0; line-height: 1.8; }
+body::before { content:''; position:fixed; inset:0; z-index:0; pointer-events:none; background:radial-gradient(circle at 20% 40%, var(--glow-1) 0%, transparent 50%), radial-gradient(circle at 70% 15%, var(--glow-2) 0%, transparent 50%), radial-gradient(circle at 85% 80%, var(--glow-3) 0%, transparent 50%); filter:blur(60px); animation:meshDrift 16s ease-in-out infinite alternate; }
+@media (prefers-reduced-motion:reduce) { body::before { animation:none; } }
+@keyframes meshDrift { 0% { transform:translate(0,0) scale(1); } 50% { opacity:0.8; } 100% { transform:translate(-3%,2%) scale(1.08); } }
+.header { background:rgba(10,10,26,0.85); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); border-bottom:1px solid var(--card-border); position:sticky; top:0; z-index:100; }
+.header-inner { max-width:1200px; margin:0 auto; padding:0 24px; height:56px; display:flex; align-items:center; justify-content:space-between; }
+.logo { font-size:20px; font-weight:700; color:var(--text-primary); text-decoration:none; }
+.nav { display:flex; gap:20px; }
+.nav a { font-size:13px; color:var(--text-secondary); text-decoration:none; }
+.nav a:hover { color:var(--accent-start); }
+.main { position:relative; z-index:1; max-width:800px; margin:0 auto; padding:32px 24px; }
+h1 { font-size:28px; font-weight:800; margin-bottom:16px; }
+h2 { font-size:20px; font-weight:700; margin:30px 0 12px; }
+p, li { font-size:14px; color:var(--text-secondary); margin-bottom:8px; }
+ul { padding-left:24px; margin-bottom:12px; }
+.summary { background:rgba(129,140,248,0.08); border:1px solid var(--card-border); border-left:5px solid var(--accent-start); border-radius:var(--radius); padding:22px 24px; margin:20px 0 28px; }
+.summary p { margin-bottom:0; }
+.note { color:var(--text-muted); font-size:12px; margin-top:18px; }
+.footer { position:relative; z-index:1; text-align:center; padding:32px 24px; border-top:1px solid var(--card-border); }
+.footer p { font-size:11px; color:var(--text-muted); }
+.footer a { color:var(--accent-start); text-decoration:none; }
+@media (max-width:768px) {
+  .nav { gap:12px; }
+  .nav a { font-size:12px; }
+  h1 { font-size:24px; }
+}
+</style>
+</head>
+<body>
+<header class="header">
+  <div class="header-inner">
+    <a href="/" class="logo">AI ToolNav</a>
+    <nav class="nav">
+      <a href="/">首页</a>
+      <a href="/articles/">文章</a>
+      <a href="/methodology.html">方法</a>
+      <a href="/about.html">关于</a>
+    </nav>
+  </div>
+</header>
+<main class="main">
+  <h1>评测方法与编辑原则</h1>
+  <p class="note">最后更新日期：2026年6月22日</p>
+
+  <div class="summary">
+    <p>AI ToolNav 的目标不是堆砌工具名称，而是帮助中文用户判断一款 AI 工具是否适合自己的真实场景。我们会优先说明工具的适用人群、使用限制、价格变化风险和信息来源，避免把广告话术包装成评测结论。</p>
+  </div>
+
+  <h2>1. 我们如何选择工具</h2>
+  <p>进入评测范围的工具通常需要满足至少一个条件：在某个 AI 应用场景中有代表性，拥有稳定的公开产品入口，用户可以自行注册或了解价格，或者在开发者、学生、创作者、办公人群中有明确使用需求。我们不会因为某个工具短期热度高就直接推荐，也不会把无法验证来源、没有稳定官网或仅靠营销页面存在的产品放入重点文章。</p>
+  <p>目前网站重点覆盖大语言模型、AI 编程、AI 绘画、AI 办公、AI 写作、AI 音视频和 AI 开发平台。未来新增工具时，会优先补充真实使用流程、价格信息、限制说明和替代方案，而不是只增加一个简单介绍页。</p>
+
+  <h2>2. 我们的评分维度</h2>
+  <ul>
+    <li><strong>功能完整度</strong>：核心功能是否稳定，是否能解决清晰的用户问题。</li>
+    <li><strong>易用性</strong>：新用户是否容易上手，界面、文档、教程是否清楚。</li>
+    <li><strong>价格与免费额度</strong>：免费版是否实用，付费版是否适合目标用户。</li>
+    <li><strong>场景匹配度</strong>：工具是否适合学生、开发者、研究人员、内容创作者或企业团队。</li>
+    <li><strong>风险与限制</strong>：是否存在地区限制、隐私风险、输出不稳定、版权或合规问题。</li>
+  </ul>
+
+  <h2>3. 信息来源与核验方式</h2>
+  <p>我们会优先参考工具官网、官方帮助文档、公开价格页、产品更新记录和实际使用体验。对于价格、免费额度、模型能力、文件上传限制和地区可用性这类容易变化的信息，文章会提醒读者以官网最新说明为准。</p>
+  <p>如果文章中涉及“适合谁”“不适合谁”“推荐组合”等判断，会尽量给出理由，而不是只给结论。例如 AI 编程工具会区分代码补全、项目理解、多文件修改和原型生成；学术工具会区分文献检索、文献阅读、数据分析和论文润色。</p>
+
+  <h2>4. 独立性与利益声明</h2>
+  <p>AI ToolNav 不接受付费改变评分或排名。若未来某篇文章包含合作推广、联盟链接或赞助内容，会在页面中明确标注。即使存在商业合作，也不会影响我们对工具缺点、限制和替代方案的说明。</p>
+  <p>我们更重视长期可信度，而不是短期点击率。带有夸张承诺、无法验证收益、误导用户付费或诱导上传敏感数据的工具，不会进入重点推荐。</p>
+
+  <h2>5. 更新与纠错机制</h2>
+  <p>AI 工具变化很快，模型能力、价格、免费额度和产品入口都可能调整。我们会优先复查已进入 sitemap 的核心文章；旧文章如果模板化明显、正文偏短或缺少实测说明，会暂时设置为 noindex，待重写后再恢复索引。</p>
+  <p>如果你发现文章中的工具价格、链接、功能说明或适用建议已经过时，可以通过关于页面中的邮箱联系我们。收到反馈后，我们会优先核对官网和公开资料，并在必要时更新页面。</p>
+
+  <h2>6. 给读者的使用建议</h2>
+  <p>AI 工具推荐只能作为决策参考，不应替代你自己的试用和判断。涉及学术论文、代码上线、商业采购、法律金融医疗等高风险场景时，请务必回到原始资料、官方文档或专业人士意见进行核验。任何 AI 生成结果都可能出错，工具越强，越需要清楚地知道它的边界。</p>
+</main>
+<footer class="footer">
+  <p>&copy; 2026 AI ToolNav · <a href="/privacy.html">隐私政策</a> · <a href="/terms.html">服务条款</a> · <a href="/methodology.html">评测方法</a> · <a href="/about.html">关于我们</a></p>
+</footer>
+<script src="/js/affiliate.js"></script>
+</body>
+</html>

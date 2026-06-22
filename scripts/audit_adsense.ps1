@@ -18,6 +18,7 @@ $indexedAllowedFiles = @(
   "articles/index.html",
   "privacy.html",
   "terms.html",
+  "methodology.html",
   "about.html"
 ) + $adAllowedFiles
 
