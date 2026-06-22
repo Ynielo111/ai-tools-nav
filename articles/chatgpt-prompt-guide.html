@@ -180,33 +180,33 @@ body::before {
       <span>⏱️ 10分钟</span>
     </div>
   </div>
-  <div class="article-summary">同样用ChatGPT，有的人产出惊艳，有的人觉得不过如此——90%的差距来自提示词。这篇文章从零教你写好Prompt，不需要技术背景，记住几个简单原则就能让AI输出质量翻倍。</div>
+  <div class="article-summary">提示词不是玄学，而是把任务、背景、限制和输出格式说清楚。本文用普通人能理解的方式讲 ChatGPT 提示词：哪些信息必须给、什么时候要分步提问、如何检查AI回答，以及如何把好用的提示词沉淀成自己的模板库。</div>
   <nav class="toc">
     <h3>📑 目录</h3>
-    <ol><li><a href="#sec1">什么是提示词，为什么它重要</a></li><li><a href="#sec2">5个核心原则</a></li><li><a href="#sec3">6个可以直接复制的Prompt模板</a></li><li><a href="#sec4">进阶技巧：思维链与角色扮演</a></li><li><a href="#sec5">不同AI工具的Prompt差异</a></li><li><a href="#sec6">常见错误与纠正</a></li><li><a href="#sec7">总结</a></li><li><a href="#sec8">选购建议与避坑指南</a></li><li><a href="#sec9">实际使用体验与注意事项</a></li></ol>
+    <ol><li><a href="#sec1">什么是提示词，为什么它重要</a></li><li><a href="#sec2">写好提示词的5个核心原则</a></li><li><a href="#sec3">6个可以直接复制的Prompt模板</a></li><li><a href="#sec4">进阶技巧：拆任务、给样例、让AI自检</a></li><li><a href="#sec5">不同AI工具的Prompt差异</a></li><li><a href="#sec6">常见错误与纠正</a></li><li><a href="#sec7">总结</a></li><li><a href="#sec8">提示词使用边界</a></li><li><a href="#sec9">实际使用体验与注意事项</a></li></ol>
   </nav>
   <div class="article-content">
     <h2 id="sec1">什么是提示词，为什么它重要</h2>
 <p><strong>提示词（Prompt）就是你对AI说的话</strong>。同样的问题，不同说法得到的结果可能天差地别。比如"帮我写个方案"vs"帮我写一份面向500人公司的远程办公实施方案，包括背景分析、具体措施（至少5条）、预期效果和落地时间表"，后者得到的答案可能是前者的十倍有用。掌握提示词技巧，是AI时代性价比最高的技能。</p>
 <p><a href="https://chat.openai.com" target="_blank" rel="noopener" class="tool-card-inline"><span class="tci-icon">🤖</span><span class="tci-name">ChatGPT</span><span class="tci-rating">⭐⭐⭐⭐⭐</span></a></p>
-<h2 id="sec2">5个核心原则</h2>
-<p><strong>原则1：给角色</strong>——"你是一个资深产品经理"比直接提问效果好得多。<strong>原则2：给上下文</strong>——告诉AI背景信息，它才能给出针对性回答。<strong>原则3：给格式</strong>——明确要求"用表格""分3点""每段不超过100字"。<strong>原则4：给例子</strong>——提供一个你期望的输出样例，AI会模仿。<strong>原则5：分步来</strong>——复杂任务拆成多步，每步确认后再继续。</p>
+<h2 id="sec2">写好提示词的5个核心原则</h2>
+<p><strong>原则1：说明角色</strong>，例如“你是一名有5年经验的简历顾问”。<strong>原则2：补充背景</strong>，告诉AI你是谁、目标读者是谁、现有材料是什么。<strong>原则3：明确格式</strong>，比如“用表格输出”“分成三部分”“每条不超过40字”。<strong>原则4：提供样例</strong>，把你喜欢的风格或格式给它看。<strong>原则5：分步确认</strong>，复杂任务先让AI列提纲，你确认后再让它写正文。</p><p>这五条的核心不是“咒语”，而是降低AI猜测空间。背景越清楚，输出越稳定。</p>
 <h2 id="sec3">6个可以直接复制的Prompt模板</h2>
 <p><strong>模板1——写作：</strong>"你是一个资深[领域]专家，请以[风格]写一篇关于[主题]的文章。目标读者是[受众]，字数约[X]字，用[正式/口语化]的语气。"</p><p><strong>模板2——学习：</strong>"请用费曼技巧向我解释[概念]，就像我完全不懂这个领域。先用一句话概括，再用一个生活中的类比说明，最后给我3个帮我记住的要点。"</p><p><strong>模板3——编程：</strong>"你是一个资深软件工程师。请用[语言]实现[功能]，要求：1)代码有注释 2)包含错误处理 3)给出使用示例。"</p><p><strong>模板4——决策：</strong>"我正在做[决策描述]，有以下选项：[A/B/C]。请帮我分析每个选项的优缺点，用表格呈现，并给出你的推荐。"</p><p><strong>模板5——润色：</strong>"请帮我润色以下文字，保持原意不变但让表达更[简洁/专业/生动]。原文：[粘贴文字]"</p><p><strong>模板6——翻译：</strong>"请将以下内容翻译成[目标语言]，要求：1)保留原文风格 2)专业术语翻译准确 3)译文自然流畅不机翻。"</p>
-<h2 id="sec4">进阶技巧：思维链与角色扮演</h2>
-<p><strong>思维链（Chain of Thought）</strong>：让AI"一步步思考"。在问题后加上"请先分析问题，再给出答案"或"让我们一步步推理"，对复杂问题效果显著。<strong>角色扮演</strong>：赋予AI一个具体身份，比模糊指令效果好得多。不是"帮我想10个标题"，而是"你是Bloomberg的资深编辑，请帮我想10个关于AI监管的新闻标题"。<strong>反面约束</strong>：告诉AI不要做什么同样重要——"不要使用术语""不要超过200字""不要提供显而易见的基础知识"。</p>
+<h2 id="sec4">进阶技巧：拆任务、给样例、让AI自检</h2>
+<p><strong>拆任务</strong>：不要一次要求AI完成“调研、写作、排版、润色”，先让它列研究框架，再逐段展开。<strong>给样例</strong>：如果你想要某种文风，贴一段样例比反复描述“专业一点”更有效。<strong>让AI自检</strong>：在提示词最后加上“请指出你回答里最不确定的地方”和“请列出需要我核验的信息”。</p><p>对严肃内容尤其建议这样做。AI回答越流畅，越容易让人忽略其中可能存在的事实错误。</p>
 <h2 id="sec5">不同AI工具的Prompt差异</h2>
-<p>ChatGPT偏好结构清晰、角色明确的Prompt，DALLE绘画需要丰富细节的描述，Claude对学术性长文理解最好，DeepSeek对中文和代码类Prompt响应极佳。<strong>一个Prompt在不同工具上的效果可能完全不同</strong>，好的做法是同一主题用2-3个工具对比。</p>
+<p>ChatGPT对结构化指令和格式约束响应比较稳定，适合写作、分析和头脑风暴。Claude在长文档理解和语气控制上更稳，适合改长文和审稿。DeepSeek对中文解释、代码和推理类提示词表现较好。绘画工具则需要更多画面细节，例如主体、构图、光线、风格、尺寸。</p><p>同一个提示词在不同工具上的效果可能不同。重要任务可以让两个模型分别回答，再比较差异，而不是只看第一个流畅答案。</p>
 <p><a href="https://claude.ai" target="_blank" rel="noopener" class="tool-card-inline"><span class="tci-icon">💬</span><span class="tci-name">Claude</span><span class="tci-rating">⭐⭐⭐⭐⭐</span></a><a href="https://chat.deepseek.com" target="_blank" rel="noopener" class="tool-card-inline"><span class="tci-icon">🐋</span><span class="tci-name">DeepSeek</span><span class="tci-rating">⭐⭐⭐⭐⭐</span></a></p>
 <h2 id="sec6">常见错误与纠正</h2>
 <ul><li><strong>错误：</strong>提问太宽泛（"帮我写论文"）→ <strong>纠正：</strong>指定主题、结构、字数、风格</li><li><strong>错误：</strong>一次问太多→ <strong>纠正：</strong>复杂任务拆成多轮对话</li><li><strong>错误：</strong>不满意就放弃→ <strong>纠正：</strong>用追问来逐步逼近想要的答案</li><li><strong>错误：</strong>只用中文→ <strong>纠正：</strong>英文Prompt对某些任务效果更好（编程、学术）</li></ul>
 <h2 id="sec7">总结</h2>
-<p>写好Prompt不需要天赋，记住<strong>"给角色+给上下文+给格式"</strong>三要素就超过了80%的用户。最关键的是养成追问和迭代的习惯：第一次回答不满意？告诉AI哪里需要调整，让它重新来。Prompt是对话的起点，不是终点。</p>
+<p>写好Prompt不需要记复杂公式。先把“角色、背景、任务、格式、限制”说清楚，就能明显提升回答质量。真正决定效果的是迭代：第一次回答不满意，不要直接重开对话，而是指出哪里不对、补充缺失信息、让AI按新要求重写。</p><p>建议把自己常用的高质量提示词保存起来，按写作、学习、编程、翻译、总结等场景分类。时间久了，你会拥有一套自己的AI工作流。</p>
 <p><a href="https://chat.openai.com" target="_blank" rel="noopener" class="tool-card-inline"><span class="tci-icon">🤖</span><span class="tci-name">ChatGPT</span><span class="tci-rating">⭐⭐⭐⭐⭐</span></a><a href="https://chat.deepseek.com" target="_blank" rel="noopener" class="tool-card-inline"><span class="tci-icon">🐋</span><span class="tci-name">DeepSeek</span><span class="tci-rating">⭐⭐⭐⭐⭐</span></a></p>
-<h2 id="sec8">选购建议与避坑指南</h2>
-<p>初学者常犯的错误：<strong>一上来就想用英文写复杂Prompt</strong>——中文Prompt完全OK，不要给自己增加门槛；<strong>追求完美Prompt</strong>——好的Prompt是迭代出来的，不是一次性写出来的；<strong>花太多时间研究Prompt技巧</strong>——会了基础三要素就开始多用，用得越多越熟练。另外，网上那些"Prompt工程师月薪3万"的营销文少看，Prompt本质是沟通能力，不是神秘技术。</p>
+<h2 id="sec8">提示词使用边界</h2>
+<p>提示词能提升输出质量，但不能保证事实正确。涉及论文引用、价格、法律条款、医疗建议、金融投资和实时新闻时，必须核验来源。一个实用习惯是让AI在答案最后列出“需要人工确认的信息”，再逐项检查。</p><p>初学者不需要一上来追求英文复杂Prompt。中文提示词完全可以用，关键是说清楚任务。本文内容参考了ChatGPT、Claude、DeepSeek等工具的官方帮助文档和编辑实际使用记录；模型能力和产品界面可能变化，正式使用前请以官网说明为准。</p>
 <h2 id="sec9">实际使用体验与注意事项</h2>
-<p>实测总结：ChatGPT和DeepSeek对结构化Prompt的响应都很好。Claude在长文写作Prompt上的表现更自然。注意不同模型的"性格"不同——ChatGPT偏热情需要你给明确约束，Claude偏冷静直接，DeepSeek偏务实。<strong>最好的学习方法是保存你的优质Prompt</strong>，积累自己的模板库，每次用的时候复制粘贴稍作调整，效率最高。</p>
+<p>编辑实际使用中，ChatGPT适合把零散想法整理成结构，Claude适合处理长文本和语气调整，DeepSeek适合中文解释和代码类任务。最常见的失败不是模型不够强，而是提示词里缺少背景：目标读者是谁、用于什么场景、希望输出多长、哪些内容不要写。</p><p>一个简单练习：把同一个任务分别写成一句话、三条要求、完整背景三种提示词，对比输出质量。你会很快理解，好的Prompt本质上就是清晰沟通。</p>
   </div>
   <div class="author-box">
     <div class="author-header">

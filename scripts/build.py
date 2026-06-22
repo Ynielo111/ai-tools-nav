@@ -10,19 +10,8 @@ REVIEW_INDEXED_ARTICLE_IDS = {
     "ai-cli-tools-setup-guide",
     "open-source-ai-coding-assistants",
     "codex-vs-claude-code-vs-gemini-cli",
-    "chatgpt-vs-claude-vs-gemini",
-    "kimi-vs-deepseek",
     "chatgpt-prompt-guide",
-    "deepseek-vs-chatgpt",
     "deepseek-complete-guide",
-    "ai-tools-pricing-2026",
-    "midjourney-vs-dalle-vs-sd",
-    "best-ai-ppt-tools",
-    "best-ai-translation-tools",
-    "notion-vs-feishu-vs-copilot",
-    "ai-side-hustle-tools",
-    "github-copilot-vs-cursor-vs-windsurf",
-    "doubao-vs-tongyi-vs-kimi",
     "best-ai-coding-tools",
     "academic-research-ai",
 }
@@ -274,6 +263,11 @@ body::before {{ content:''; position:fixed; inset:0; z-index:0; pointer-events:n
 .article-badge {{ display:inline-block; padding:4px 14px; border-radius:20px; font-size:12px; font-weight:600; margin-bottom:10px; }}
 .article-title {{ font-size:16px; font-weight:600; color:var(--text-primary); margin:8px 0 6px; line-height:1.4; }}
 .article-meta {{ font-size:12px; color:var(--text-muted); }}
+.editor-note {{ max-width:800px; margin:0 auto 28px; background:rgba(129,140,248,0.08); border:1px solid var(--card-border); border-left:5px solid var(--accent-start); border-radius:14px; padding:22px 24px; backdrop-filter:blur(8px); }}
+.editor-note h2 {{ font-size:17px; margin-bottom:10px; color:var(--text-primary); }}
+.editor-note p {{ font-size:14px; color:var(--text-secondary); margin-bottom:12px; line-height:1.8; }}
+.editor-note ul {{ padding-left:20px; margin:8px 0 0; }}
+.editor-note li {{ font-size:13px; color:var(--text-secondary); margin-bottom:6px; }}
 
 </style>
 </head>
@@ -290,7 +284,17 @@ body::before {{ content:''; position:fixed; inset:0; z-index:0; pointer-events:n
 </header>
 <main class="main">
   <h1 class="page-title">📝 AI工具精选文章</h1>
-  <p class="page-desc">深度评测、横向对比、场景推荐 —— 帮你找到最合适的AI工具</p>
+  <p class="page-desc">复审阶段仅展示少量经过整理的深度文章，重点保留有实测、来源和明确适用边界的内容。</p>
+  <section class="editor-note">
+    <h2>为什么这里只保留少数文章</h2>
+    <p>AI ToolNav 过去收录了大量工具清单和横向对比，但 AdSense 审核更看重页面是否有独特价值，而不是数量。当前我们把文章列表收缩为少数更完整的指南，优先展示安装教程、编程工具选择、学术研究流程、提示词方法和 DeepSeek 上手说明。</p>
+    <p>每篇保留文章都会尽量说明三件事：适合什么人、哪些场景不适合、哪些信息需要回到官方文档或实际操作中核验。工具价格、免费额度、模型能力和地区可用性变化很快，文章结论会定期复查，正式订阅或用于工作前请以工具官网说明为准。</p>
+    <ul>
+      <li>保留：有实测流程、限制说明、来源提示的深度文章。</li>
+      <li>暂缓：模板化明显、正文偏短、只做简单罗列的旧文章。</li>
+      <li>后续：旧文章会逐篇重写，达到质量标准后再恢复索引。</li>
+    </ul>
+  </section>
   {type_filter_js}
   <div class="article-list" style="max-width:800px;margin:0 auto;">{cards}</div>
 </main>
